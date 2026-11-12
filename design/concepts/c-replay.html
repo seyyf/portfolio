@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Concept C: Session Replay</title>
+<link rel="stylesheet" href="base.css" />
+<style>
+  body { background: var(--soft); }
+  #hero .nav .mark { background: var(--ink); color: #fff; }
+  #hero .cmdk { box-shadow: inset 0 0 0 1px #ebebeb; background: #fff; }
+  #hero .grid { position: absolute; left: 24px; right: 24px; top: 120px; bottom: 56px; display: grid; grid-template-columns: 7fr 5fr; gap: 48px; align-items: end; }
+  .assemble { position: relative; }
+  .assemble .hero-type { white-space: nowrap; }
+  .assemble .hero-type .g { color: #c9c9c9; font-family: "Geist Mono", monospace; font-weight: 400; letter-spacing: 0; font-size: .7em; display: inline-block; }
+  .stray { position: absolute; font-family: "Geist Mono", monospace; color: #a1a1a1; font-size: 22px; }
+  .mesh.small { width: 520px; height: 360px; left: -120px; top: -150px; opacity: .45; }
+  .term { background: var(--ink); color: #ededed; border-radius: 12px; padding: 20px 20px 16px; font-family: "Geist Mono", monospace; font-size: 13px; line-height: 20px;
+    box-shadow: 0 1px 1px #00000005, 0 8px 16px -4px #0000000a, 0 24px 32px -8px #0000000f; }
+  .term .bar { display: flex; justify-content: space-between; align-items: center; color: #a1a1a1; font-size: 12px; margin-bottom: 14px; }
+  .term .bar .rp { color: #fff; border: 1px solid #4d4d4d; border-radius: 100px; padding: 2px 10px; }
+  .term .u { color: #fff; }
+  .term .t { color: #a1a1a1; }
+  .term .t b { color: #ededed; font-weight: 400; }
+  .term .ok { color: #50e3c2; }
+  .term .cursor { display: inline-block; width: 8px; height: 15px; background: #fff; vertical-align: -2px; }
+  .term .scrub { margin-top: 14px; height: 2px; background: #333; border-radius: 2px; position: relative; }
+  .term .scrub i { position: absolute; left: 0; top: 0; bottom: 0; width: 64%; background: linear-gradient(90deg, var(--g1), var(--g3), var(--g4)); border-radius: 2px; }
+  .sub p { color: var(--body); max-width: 560px; }
+
+  #sig { background: var(--canvas); }
+  #sig .content { position: absolute; left: 24px; right: 24px; top: 104px; bottom: 48px; display: flex; flex-direction: column; }
+  .phases { display: flex; gap: 8px; margin-top: 24px; flex-wrap: wrap; }
+  .phases span { height: 32px; padding: 0 14px; border-radius: 100px; display: inline-flex; align-items: center; font-size: 14px; color: var(--body); box-shadow: inset 0 0 0 1px #ebebeb; background: #fff; }
+  .phases span.on { background: var(--ink); color: #fff; box-shadow: none; }
+  .phases span.done::before { content: "✓"; margin-right: 6px; color: #29bc9b; }
+  .log { margin-top: 32px; display: grid; grid-template-columns: 7fr 5fr; gap: 24px; flex: 1; min-height: 0; }
+  .shot { border-radius: 12px; overflow: hidden; background: #f5f5f5; box-shadow: 0 2px 2px #0000000a, 0 8px 16px -4px #0000000a, 0 0 0 1px #00000014; position: relative; }
+  .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .shot .cap { position: absolute; left: 12px; bottom: 12px; background: #fff; border-radius: 100px; padding: 4px 10px; font-size: 12px; box-shadow: 0 0 0 1px #00000014; }
+  .entries { display: flex; flex-direction: column; gap: 12px; }
+  .entry { border-radius: 12px; background: #fafafa; box-shadow: inset 0 0 0 1px #ebebeb; padding: 16px 18px; }
+  .entry .k { color: var(--body); font-size: 12px; }
+  .entry .v { margin-top: 6px; font-size: 15px; line-height: 22px; }
+  .entry .v .bad { color: #c50000; } .entry .v .good { color: #0761d1; }
+
+  @media (max-width: 599px) {
+    #hero .grid { left: 16px; right: 16px; top: 96px; bottom: 28px; grid-template-columns: 1fr; gap: 24px; align-content: end; }
+    .stray { font-size: 16px; }
+    .term { font-size: 12px; line-height: 18px; padding: 16px; }
+    .term .hide-m { display: none; }
+    #sig .content { left: 16px; right: 16px; top: 80px; bottom: 24px; }
+    .phases { flex-wrap: nowrap; overflow: hidden; }
+    .log { display: flex; flex-direction: column; gap: 16px; }
+    .shot { height: 220px; flex: none; }
+    #sig .h2 { font-size: 28px; line-height: 34px; }
+  }
+</style>
+</head>
+<body>
+  <section class="frame" id="hero">
+    <div class="mesh small"></div>
+    <div class="wrap">
+      <div class="nav">
+        <div class="brand"><span class="mark">SM</span>Seyf Mejri</div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span class="pill sm cmdk"><span class="kbd only-desktop">⌘K</span><span>Menu</span></span>
+          <span class="pill sm only-desktop" style="background:var(--ink);color:#fff">Email me</span>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="assemble">
+          <p class="caption mono" style="color:var(--body);margin-bottom:20px">Fullstack JavaScript Developer, Tunis</p>
+          <h1 class="hero-type">Seyf Mej<span class="g">r</span><span class="g">i</span></h1>
+          <span class="stray" style="right:8%;top:6%">{</span><span class="stray" style="right:22%;top:-4%">/</span>
+          <span class="stray" style="right:2%;top:38%">;</span><span class="stray" style="right:30%;top:20%">&lt;&gt;</span>
+          <div class="sub" style="margin-top:28px">
+            <p class="lead">6 years building React and Next.js frontends and Node.js backends for SaaS, ERP, e-commerce and booking products.</p>
+            <div style="display:flex;gap:12px;margin-top:24px">
+              <span class="pill" style="background:var(--ink);color:#fff">Email me</span>
+              <span class="pill" style="background:#fff;box-shadow:inset 0 0 0 1px #00000014">LinkedIn ↗</span>
+            </div>
+          </div>
+        </div>
+        <div class="term">
+          <div class="bar"><span>session replay · build 1</span><span class="rp">▶ Replay</span></div>
+          <div class="u">&gt; Build my portfolio website using my CV<span class="hide-m"> in cv.md as the only source of content.</span></div>
+          <div class="t hide-m">● Read <b>DESIGN.md</b></div>
+          <div class="t">● Skill <b>image-to-code</b>, <b>design-taste-frontend</b></div>
+          <div class="t hide-m">● Write <b>app/globals.css</b> (DESIGN.md tokens)</div>
+          <div class="t">● Audit: link blue <b>4.36:1</b> → link-deep <b>5.53:1</b></div>
+          <div class="ok">✓ next build · 7 routes prerendered static</div>
+          <div class="u"><span class="cursor"></span></div>
+          <div class="scrub"><i></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="frame" id="sig">
+    <div class="wrap">
+      <div class="content">
+        <p class="caption mono" style="color:var(--body)">How this site was built</p>
+        <h2 class="h2" style="margin-top:12px">Every phase, logged as it happened.</h2>
+        <div class="phases">
+          <span class="done">Concepts</span><span class="done">Spec</span><span class="done">Build</span><span class="done">Audit</span><span class="on">Verify</span><span>Report</span>
+        </div>
+        <div class="log">
+          <div class="shot"><img src="../screenshots/home-1440.png" alt="" /><span class="cap mono">playwright · 1440px · build 1</span></div>
+          <div class="entries">
+            <div class="entry"><div class="k mono">Found</div><div class="v">Mobile menu links updated the URL but the page <span class="bad">did not scroll</span>.</div></div>
+            <div class="entry"><div class="k mono">Fixed</div><div class="v">Scroll after the sheet closes; focus moves to the section. <span class="good">Skills top: 64px</span></div></div>
+            <div class="entry only-desktop"><div class="k mono">Console</div><div class="v">0 errors, 0 warnings in production</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

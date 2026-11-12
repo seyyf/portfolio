@@ -5,6 +5,12 @@ import nextTs from "eslint-config-next/typescript";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
+  // React Three Fiber mutates three.js objects (materials, uniforms, refs) inside useFrame by design;
+  // the React Compiler purity rules do not model that imperative render loop.
+  {
+    files: ["components/city/**/*.{ts,tsx}"],
+    rules: { "react-hooks/immutability": "off", "react-hooks/refs": "off" },
+  },
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:
@@ -12,6 +18,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Archived Build 1 (kept for reference, not part of the app)
+    "design/**",
   ]),
 ]);
 

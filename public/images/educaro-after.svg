@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000">
+<!-- Placeholder illustration of the new CRM. Replace with a real screenshot (same 16:10 ratio). -->
+<defs>
+<g id="card">
+<rect x="0" y="6" width="176" height="96" rx="20" fill="#2b2d42"/>
+<rect width="176" height="96" rx="20" fill="#fffbf5" stroke="#2b2d42" stroke-width="4"/>
+<circle cx="26" cy="26" r="9" fill="currentColor" stroke="#2b2d42" stroke-width="3"/>
+<rect x="44" y="21" width="96" height="10" rx="5" fill="#2b2d42"/>
+<rect x="18" y="50" width="130" height="8" rx="4" fill="#c9c4bd"/>
+<rect x="18" y="68" width="80" height="8" rx="4" fill="#c9c4bd"/>
+<circle cx="150" cy="72" r="10" fill="#f7e4cd" stroke="#2b2d42" stroke-width="3"/>
+</g>
+</defs>
+
+<rect width="1600" height="1000" fill="#fff4e6"/>
+
+<!-- sidebar -->
+<rect x="32" y="40" width="248" height="928" rx="32" fill="#2b2d42"/>
+<rect x="32" y="32" width="248" height="928" rx="32" fill="#fffbf5" stroke="#2b2d42" stroke-width="4"/>
+<circle cx="84" cy="94" r="24" fill="#a8e6cf" stroke="#2b2d42" stroke-width="4"/>
+<text x="122" y="108" font-family="Fredoka, Nunito, 'Segoe UI', sans-serif" font-size="40" font-weight="700" fill="#2b2d42">CRM</text>
+<rect x="56" y="160" width="200" height="56" rx="28" fill="#ffd97d" stroke="#2b2d42" stroke-width="4"/>
+<g stroke="#2b2d42" stroke-width="3">
+<rect x="74" y="174" width="28" height="28" rx="9" fill="#fffbf5"/>
+<rect x="74" y="246" width="28" height="28" rx="9" fill="#a0d2eb"/>
+<rect x="74" y="310" width="28" height="28" rx="9" fill="#ff8b94"/>
+<rect x="74" y="374" width="28" height="28" rx="9" fill="#c3b1e1"/>
+<rect x="74" y="438" width="28" height="28" rx="9" fill="#a8e6cf"/>
+</g>
+<g fill="#2b2d42">
+<rect x="118" y="182" width="96" height="12" rx="6"/>
+</g>
+<g fill="#9c99a6">
+<rect x="118" y="254" width="84" height="12" rx="6"/><rect x="118" y="318" width="104" height="12" rx="6"/>
+<rect x="118" y="382" width="74" height="12" rx="6"/><rect x="118" y="446" width="92" height="12" rx="6"/>
+</g>
+<rect x="56" y="860" width="200" height="72" rx="24" fill="#c3b1e1" stroke="#2b2d42" stroke-width="4"/>
+<circle cx="92" cy="896" r="18" fill="#fffbf5" stroke="#2b2d42" stroke-width="3"/>
+<rect x="122" y="890" width="100" height="12" rx="6" fill="#2b2d42"/>
+
+<!-- top bar -->
+<rect x="312" y="32" width="1256" height="96" rx="28" fill="#fffbf5" stroke="#2b2d42" stroke-width="4"/>
+<rect x="340" y="56" width="420" height="48" rx="24" fill="#f7e4cd"/>
+<circle cx="370" cy="80" r="10" fill="none" stroke="#9c99a6" stroke-width="4"/>
+<rect x="394" y="74" width="160" height="12" rx="6" fill="#c9c4bd"/>
+<circle cx="1440" cy="80" r="24" fill="#a0d2eb" stroke="#2b2d42" stroke-width="4"/>
+<circle cx="1510" cy="80" r="26" fill="#ff8b94" stroke="#2b2d42" stroke-width="4"/>
+
+<!-- stat cards -->
+<g stroke="#2b2d42" stroke-width="4">
+<rect x="312" y="166" width="296" height="168" rx="28" fill="#2b2d42"/>
+<rect x="312" y="158" width="296" height="168" rx="28" fill="#a8e6cf"/>
+<rect x="636" y="166" width="296" height="168" rx="28" fill="#2b2d42"/>
+<rect x="636" y="158" width="296" height="168" rx="28" fill="#a0d2eb"/>
+<rect x="960" y="166" width="296" height="168" rx="28" fill="#2b2d42"/>
+<rect x="960" y="158" width="296" height="168" rx="28" fill="#ffd97d"/>
+</g>
+<g fill="#2b2d42">
+<rect x="340" y="190" width="90" height="12" rx="6" opacity=".55"/><rect x="340" y="216" width="130" height="34" rx="12"/>
+<rect x="664" y="190" width="110" height="12" rx="6" opacity=".55"/><rect x="664" y="216" width="100" height="34" rx="12"/>
+<rect x="988" y="190" width="80" height="12" rx="6" opacity=".55"/><rect x="988" y="216" width="150" height="34" rx="12"/>
+</g>
+<g fill="none" stroke="#2b2d42" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M340 300 l40 -16 40 8 40 -26 40 10 40 -30 40 -6"/>
+<path d="M664 296 l40 -6 40 -20 40 12 40 -24 40 4 40 -22"/>
+<path d="M988 302 l40 -22 40 6 40 -14 40 -20 40 8 40 -28"/>
+</g>
+
+<!-- pipeline / kanban -->
+<rect x="312" y="368" width="944" height="600" rx="32" fill="#2b2d42"/>
+<rect x="312" y="360" width="944" height="600" rx="32" fill="#fffbf5" stroke="#2b2d42" stroke-width="4"/>
+<g stroke="#2b2d42" stroke-width="3">
+<rect x="340" y="386" width="140" height="40" rx="20" fill="#c3b1e1"/>
+<rect x="568" y="386" width="120" height="40" rx="20" fill="#a0d2eb"/>
+<rect x="796" y="386" width="150" height="40" rx="20" fill="#ffd97d"/>
+<rect x="1024" y="386" width="110" height="40" rx="20" fill="#a8e6cf"/>
+</g>
+<g fill="#2b2d42">
+<rect x="362" y="400" width="70" height="12" rx="6"/><rect x="590" y="400" width="60" height="12" rx="6"/>
+<rect x="818" y="400" width="90" height="12" rx="6"/><rect x="1046" y="400" width="52" height="12" rx="6"/>
+</g>
+<g fill="#f7e4cd">
+<rect x="336" y="440" width="208" height="500" rx="24"/><rect x="564" y="440" width="208" height="500" rx="24"/>
+<rect x="792" y="440" width="208" height="500" rx="24"/><rect x="1020" y="440" width="212" height="500" rx="24"/>
+</g>
+<use href="#card" x="352" y="456" color="#c3b1e1"/>
+<use href="#card" x="352" y="576" color="#ff8b94"/>
+<use href="#card" x="352" y="696" color="#c3b1e1"/>
+<use href="#card" x="580" y="456" color="#a0d2eb"/>
+<use href="#card" x="580" y="576" color="#a0d2eb"/>
+<use href="#card" x="808" y="456" color="#ffd97d"/>
+<use href="#card" x="808" y="576" color="#ff8b94"/>
+<use href="#card" x="808" y="696" color="#ffd97d"/>
+<use href="#card" x="1038" y="456" color="#a8e6cf"/>
+<rect x="1038" y="576" width="176" height="96" rx="20" fill="none" stroke="#9c99a6" stroke-width="4" stroke-dasharray="12 10"/>
+<path d="M1126 608v32M1110 624h32" stroke="#9c99a6" stroke-width="5" stroke-linecap="round"/>
+
+<!-- phone: the same CRM, mobile-first -->
+<rect x="1296" y="168" width="272" height="800" rx="48" fill="#2b2d42"/>
+<rect x="1296" y="158" width="272" height="800" rx="48" fill="#2b2d42"/>
+<rect x="1312" y="174" width="240" height="768" rx="36" fill="#fff4e6"/>
+<rect x="1392" y="186" width="80" height="18" rx="9" fill="#2b2d42"/>
+<rect x="1332" y="226" width="110" height="16" rx="8" fill="#2b2d42"/>
+<circle cx="1522" cy="234" r="14" fill="#ff8b94" stroke="#2b2d42" stroke-width="3"/>
+<g stroke="#2b2d42" stroke-width="3">
+<rect x="1330" y="264" width="204" height="110" rx="22" fill="#a8e6cf"/>
+<rect x="1330" y="390" width="204" height="88" rx="22" fill="#fffbf5"/>
+<rect x="1330" y="494" width="204" height="88" rx="22" fill="#fffbf5"/>
+<rect x="1330" y="598" width="204" height="88" rx="22" fill="#fffbf5"/>
+<circle cx="1358" cy="434" r="12" fill="#a0d2eb"/>
+<circle cx="1358" cy="538" r="12" fill="#ffd97d"/>
+<circle cx="1358" cy="642" r="12" fill="#c3b1e1"/>
+</g>
+<g fill="#2b2d42">
+<rect x="1350" y="290" width="70" height="10" rx="5" opacity=".55"/><rect x="1350" y="314" width="120" height="30" rx="12"/>
+<rect x="1382" y="426" width="110" height="10" rx="5"/><rect x="1382" y="530" width="90" height="10" rx="5"/><rect x="1382" y="634" width="120" height="10" rx="5"/>
+</g>
+<g fill="#c9c4bd">
+<rect x="1382" y="446" width="70" height="8" rx="4"/><rect x="1382" y="550" width="96" height="8" rx="4"/><rect x="1382" y="654" width="60" height="8" rx="4"/>
+</g>
+<rect x="1330" y="860" width="204" height="62" rx="31" fill="#fffbf5" stroke="#2b2d42" stroke-width="3"/>
+<circle cx="1372" cy="891" r="12" fill="#ffd97d" stroke="#2b2d42" stroke-width="3"/>
+<circle cx="1432" cy="891" r="8" fill="#c9c4bd"/><circle cx="1478" cy="891" r="8" fill="#c9c4bd"/><circle cx="1514" cy="891" r="8" fill="#c9c4bd"/>
+</svg>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 3600" width="1200" height="3600">
+<!-- Placeholder for a full-page screenshot of the Weedy store. Replace with a real one (same 1:3 ratio). -->
+<defs>
+<linearGradient id="hero" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e3f3e7"/><stop offset="1" stop-color="#cfe9d6"/></linearGradient>
+<g id="leaf"><path d="M0 0C60-40 140-40 200 0 140 40 60 40 0 0z"/><path d="M10 0h180" stroke="#fff" stroke-opacity=".5" stroke-width="5" fill="none"/></g>
+<g id="bottle"><rect x="-20" y="-150" width="40" height="40" rx="10" fill="#2f6b45"/><rect x="-10" y="-190" width="20" height="44" rx="8" fill="#1f2a22"/><rect x="-60" y="-110" width="120" height="200" rx="26" fill="#9bc9a6"/><rect x="-44" y="-50" width="88" height="80" rx="10" fill="#fff" opacity=".85"/></g>
+<g id="card"><rect width="340" height="440" rx="28" fill="#f2f8f3"/><rect x="30" y="340" width="190" height="20" rx="10" fill="#1f2a22" opacity=".6"/><rect x="30" y="376" width="110" height="18" rx="9" fill="#2f6b45" opacity=".7"/><circle cx="290" cy="380" r="28" fill="#2f6b45"/></g>
+</defs>
+<rect width="1200" height="3600" fill="#fbfdfb"/>
+<g font-family="system-ui, sans-serif">
+<text x="60" y="80" font-size="46" font-weight="800" fill="#2f6b45">Weedy</text>
+<g fill="#1f2a22" opacity=".45"><rect x="600" y="56" width="110" height="16" rx="8"/><rect x="740" y="56" width="110" height="16" rx="8"/><rect x="880" y="56" width="90" height="16" rx="8"/></g>
+<circle cx="1110" cy="64" r="30" fill="#2f6b45"/>
+<rect y="130" width="1200" height="1170" fill="url(#hero)"/>
+<circle cx="860" cy="720" r="330" fill="#fff" opacity=".6"/>
+<g fill="#7fbf8e"><use href="#leaf" transform="translate(700 760) rotate(-50) scale(1.6)"/><use href="#leaf" transform="translate(720 780) rotate(-10) scale(1.4)"/><use href="#leaf" transform="translate(690 760) rotate(-95) scale(1.3)"/></g>
+<g fill="#2f6b45" opacity=".75"><use href="#leaf" transform="translate(940 900) rotate(-140) scale(1.2)"/></g>
+<use href="#bottle" x="900" y="980"/>
+<text x="60" y="420" font-size="76" font-weight="800" fill="#1f2a22">Naturally</text>
+<text x="60" y="510" font-size="76" font-weight="800" fill="#2f6b45">calm.</text>
+<g fill="#1f2a22" opacity=".35"><rect x="60" y="570" width="400" height="20" rx="10"/><rect x="60" y="610" width="320" height="20" rx="10"/></g>
+<rect x="60" y="680" width="260" height="76" rx="38" fill="#2f6b45"/>
+<g transform="translate(60 1380)"><rect width="1080" height="110" rx="55" fill="#e3f3e7"/><g fill="#2f6b45" opacity=".6"><rect x="60" y="46" width="200" height="18" rx="9"/><rect x="440" y="46" width="200" height="18" rx="9"/><rect x="820" y="46" width="200" height="18" rx="9"/></g></g>
+<text x="60" y="1620" font-size="52" font-weight="800" fill="#1f2a22">Best sellers</text>
+<g transform="translate(60 1680)"><use href="#card"/><use href="#bottle" x="170" y="190"/></g>
+<g transform="translate(430 1680)"><use href="#card"/><rect x="100" y="110" width="140" height="150" rx="30" fill="#c9e4cf"/><rect x="90" y="90" width="160" height="44" rx="14" fill="#2f6b45"/><g fill="#7fbf8e"><use href="#leaf" transform="translate(130 200) scale(.4)"/></g></g>
+<g transform="translate(800 1680)"><use href="#card"/><use href="#bottle" x="170" y="190"/><g fill="#2f6b45"><use href="#leaf" transform="translate(110 200) rotate(-30) scale(.3)"/></g></g>
+<g transform="translate(60 2160)"><use href="#card"/><rect x="80" y="120" width="180" height="120" rx="20" fill="#c9e4cf"/></g>
+<g transform="translate(430 2160)"><use href="#card"/><use href="#bottle" x="170" y="190"/></g>
+<g transform="translate(800 2160)"><use href="#card"/><rect x="100" y="110" width="140" height="150" rx="30" fill="#c9e4cf"/><rect x="90" y="90" width="160" height="44" rx="14" fill="#2f6b45"/></g>
+<rect x="60" y="2700" width="1080" height="380" rx="36" fill="#2f6b45"/>
+<g fill="#7fbf8e" opacity=".5"><use href="#leaf" transform="translate(860 2900) rotate(-30) scale(1.4)"/><use href="#leaf" transform="translate(880 2920) rotate(20) scale(1.1)"/></g>
+<rect x="120" y="2800" width="480" height="40" rx="20" fill="#fff"/><rect x="120" y="2870" width="380" height="20" rx="10" fill="#fff" opacity=".5"/><rect x="120" y="2950" width="220" height="70" rx="35" fill="#fff"/>
+<rect y="3200" width="1200" height="400" fill="#1f2a22"/>
+<text x="60" y="3300" font-size="40" font-weight="800" fill="#cfe9d6">Weedy</text>
+<g fill="#fff" opacity=".3"><rect x="60" y="3350" width="220" height="14" rx="7"/><rect x="60" y="3385" width="160" height="14" rx="7"/><rect x="480" y="3290" width="160" height="14" rx="7"/><rect x="480" y="3325" width="200" height="14" rx="7"/></g>
+<text x="600" y="3540" text-anchor="middle" font-size="30" fill="#fff" opacity=".6">Placeholder</text>
+</g>
+</svg>

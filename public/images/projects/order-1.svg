@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 2400" width="1200" height="2400">
+<!-- Placeholder for an Order screenshot. Replace with a real one (same 1:2 ratio). -->
+<defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff4d6"/><stop offset="1" stop-color="#fffaf0"/></linearGradient></defs>
+<rect width="1200" height="2400" fill="url(#bg)"/>
+<circle cx="1100" cy="120" r="280" fill="#ffd97d" opacity=".5"/>
+<circle cx="60" cy="2300" r="260" fill="#ffc1b6" opacity=".4"/>
+<g font-family="system-ui, sans-serif">
+<text x="100" y="250" font-family="Fredoka, ui-rounded, system-ui, sans-serif" font-size="110" font-weight="600" fill="#1f2233">Order</text>
+<text x="100" y="330" font-size="40" fill="#5c6079">Table 4, coffee menu</text>
+<circle cx="1010" cy="250" r="80" fill="#fff"/>
+<path d="M970 225h80l-10 80h-60z" fill="none" stroke="#1f2233" stroke-width="10" stroke-linejoin="round"/><path d="M990 225a20 20 0 0 1 40 0" fill="none" stroke="#1f2233" stroke-width="10"/>
+<circle cx="1062" cy="190" r="34" fill="#ff8b94"/><text x="1062" y="203" text-anchor="middle" font-size="36" font-weight="700" fill="#1f2233">2</text>
+</g>
+<defs><g id="item"><rect width="1000" height="260" rx="48" fill="#fff"/><rect x="40" y="50" width="160" height="160" rx="40" fill="#ffd97d" opacity=".6"/><path d="M80 105h80v50a40 40 0 0 1-80 0z" fill="#8a5a3b"/><path d="M160 115a22 22 0 0 1 0 40" fill="none" stroke="#8a5a3b" stroke-width="10"/><circle cx="890" cy="130" r="56" fill="#1f2233"/><path d="M890 105v50M865 130h50" stroke="#fff" stroke-width="10" stroke-linecap="round"/></g></defs>
+<g font-family="system-ui, sans-serif">
+<use href="#item" x="100" y="450"/>
+<text x="350" y="565" font-size="52" font-weight="700" fill="#1f2233">Espresso</text><text x="350" y="625" font-size="36" fill="#5c6079">3.5 TND</text>
+<use href="#item" x="100" y="750"/>
+<text x="350" y="865" font-size="52" font-weight="700" fill="#1f2233">Cappuccino</text><text x="350" y="925" font-size="36" fill="#5c6079">5.0 TND</text>
+<use href="#item" x="100" y="1050"/>
+<text x="350" y="1165" font-size="52" font-weight="700" fill="#1f2233">Iced latte</text><text x="350" y="1225" font-size="36" fill="#5c6079">6.5 TND</text>
+<rect x="100" y="1430" width="1000" height="380" rx="48" fill="#fff"/>
+<text x="160" y="1530" font-size="40" font-weight="700" fill="#1f2233">Preparing your coffee</text>
+<rect x="160" y="1590" width="880" height="24" rx="12" fill="#f3f1f8"/><rect x="160" y="1590" width="520" height="24" rx="12" fill="#a8e6cf"/>
+<text x="160" y="1700" font-size="32" fill="#5c6079">Received</text><text x="600" y="1700" text-anchor="middle" font-size="32" font-weight="700" fill="#1f2233">Preparing</text><text x="1040" y="1700" text-anchor="end" font-size="32" fill="#5c6079">On its way</text>
+<rect x="100" y="1950" width="1000" height="160" rx="80" fill="#1f2233"/><text x="600" y="2047" text-anchor="middle" font-size="48" font-weight="700" fill="#fff">Place order</text>
+<text x="600" y="2300" text-anchor="middle" font-size="34" fill="#5c6079">Placeholder</text>
+</g>
+</svg>

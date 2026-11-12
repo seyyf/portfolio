@@ -1,0 +1,321 @@
+@import "tailwindcss";
+
+/*
+ * Seyf City design tokens.
+ * Day palette: cream, mint, coral, sky, butter, lavender on ink text.
+ * Night palette: deep blue to purple with a warm window glow.
+ */
+@theme {
+  --color-cream: #fff4e6;
+  --color-cream-deep: #f7e4cd;
+  --color-mint: #a8e6cf;
+  --color-coral: #ff8b94;
+  --color-sky: #a0d2eb;
+  --color-butter: #ffd97d;
+  --color-lavender: #c3b1e1;
+  --color-ink: #2b2d42;
+  --color-ink-soft: #55576e;
+  --color-night: #1b1f3b;
+  --color-dusk: #3a2e5c;
+  --color-glow: #ffc46b;
+
+  --font-display: var(--font-fredoka), ui-rounded, "Segoe UI", system-ui, sans-serif;
+  --font-sans: var(--font-nunito), ui-rounded, "Segoe UI", system-ui, sans-serif;
+
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Theme-aware surfaces (switch with the city's day/night state) */
+@theme inline {
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-text: var(--text);
+  --color-text-soft: var(--text-soft);
+  --color-line: var(--line);
+}
+
+:root {
+  --surface: #fff4e6;
+  --surface-2: #fffbf5;
+  --text: #2b2d42;
+  --text-soft: #55576e;
+  --line: #2b2d42;
+  --focus: #2b2d42;
+  --card-shadow: 0 6px 0 rgba(43, 45, 66, 0.9), 0 18px 40px -12px rgba(43, 45, 66, 0.35);
+  --sky-top: #a9c8e8;
+  --sky-bottom: #ffcba8;
+  color-scheme: light;
+}
+
+:root[data-night="true"] {
+  --surface: #262a52;
+  --surface-2: #2f3463;
+  --text: #fff4e6;
+  --text-soft: #d9d1ee;
+  --line: #0e1028;
+  --focus: #ffc46b;
+  --card-shadow: 0 6px 0 #0e1028, 0 18px 40px -12px rgba(0, 0, 0, 0.6);
+  --sky-top: #1b1f3b;
+  --sky-bottom: #3a2e5c;
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    background: var(--sky-bottom);
+  }
+  body {
+    background: linear-gradient(180deg, var(--sky-top), var(--sky-bottom)) fixed;
+    color: var(--text);
+    font-family: var(--font-sans);
+    -webkit-tap-highlight-color: transparent;
+    min-height: 100dvh;
+    overflow-x: clip;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+  p,
+  li {
+    text-wrap: pretty;
+  }
+  a,
+  button {
+    touch-action: manipulation;
+  }
+  button {
+    cursor: pointer;
+  }
+  ::selection {
+    background: var(--color-butter);
+    color: var(--color-ink);
+  }
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+    border-radius: 12px;
+  }
+}
+
+html.scroll-locked {
+  overflow: hidden;
+}
+
+/* Custom cursor: only for fine pointers, and the native cursor comes back over text fields. */
+@media (pointer: fine) {
+  html.has-custom-cursor,
+  html.has-custom-cursor a,
+  html.has-custom-cursor button,
+  html.has-custom-cursor canvas {
+    cursor: none;
+  }
+  html.has-custom-cursor input,
+  html.has-custom-cursor textarea {
+    cursor: text;
+  }
+}
+
+@layer components {
+  /* Chunky friendly button with a pressable 3D edge. */
+  .btn {
+    --btn-bg: var(--color-butter);
+    --btn-fg: var(--color-ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0.6rem 1.15rem;
+    border-radius: 999px;
+    border: 2px solid var(--color-ink);
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.975rem;
+    line-height: 1.1;
+    white-space: nowrap;
+    box-shadow: 0 4px 0 var(--color-ink);
+    transform: translateY(0);
+    transition:
+      transform 120ms var(--ease-out-soft),
+      box-shadow 120ms var(--ease-out-soft),
+      background-color 200ms;
+    user-select: none;
+  }
+  .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 0 var(--color-ink);
+  }
+  .btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 var(--color-ink);
+  }
+  .btn-coral {
+    --btn-bg: var(--color-coral);
+  }
+  .btn-mint {
+    --btn-bg: var(--color-mint);
+  }
+  .btn-sky {
+    --btn-bg: var(--color-sky);
+  }
+  .btn-lavender {
+    --btn-bg: var(--color-lavender);
+  }
+  .btn-plain {
+    --btn-bg: var(--surface-2);
+    --btn-fg: var(--text);
+  }
+  .btn-icon {
+    padding: 0;
+    width: 44px;
+    min-width: 44px;
+  }
+  @media (max-width: 420px) {
+    .btn-icon {
+      width: 40px;
+      min-width: 40px;
+      min-height: 40px;
+    }
+  }
+  .btn-sm {
+    min-height: 36px;
+    padding: 0.4rem 0.85rem;
+    font-size: 0.875rem;
+  }
+
+  .card {
+    background: var(--surface-2);
+    color: var(--text);
+    border: 2px solid var(--line);
+    border-radius: 28px;
+    box-shadow: var(--card-shadow);
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-radius: 999px;
+    padding: 0.2rem 0.65rem;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    background: color-mix(in srgb, var(--color-sky) 45%, var(--surface-2));
+    color: var(--text);
+    border: 1.5px solid color-mix(in srgb, var(--line) 35%, transparent);
+  }
+}
+
+/* Floating building labels rendered by drei <Html>. */
+.city-label {
+  pointer-events: auto;
+  transform: translate(-50%, -100%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.7rem 0.3rem 0.45rem;
+  border-radius: 999px;
+  border: 2px solid var(--color-ink);
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  white-space: nowrap;
+  box-shadow: 0 3px 0 var(--color-ink);
+  transition:
+    transform 180ms var(--ease-bounce),
+    background-color 300ms,
+    box-shadow 300ms;
+}
+.city-label[data-active="true"] {
+  background: var(--color-butter);
+  transform: translate(-50%, -100%) scale(1.08) translateY(-3px);
+}
+:root[data-night="true"] .city-label {
+  background: #fff1d8;
+  box-shadow:
+    0 3px 0 var(--color-ink),
+    0 0 18px rgba(255, 196, 107, 0.55);
+}
+.city-label .label-emoji {
+  display: grid;
+  place-items: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-sky) 60%, white);
+  font-size: 0.8rem;
+}
+
+/* Recruiter mode prints as a clean one-page CV. */
+@media print {
+  @page {
+    margin: 14mm 14mm 16mm;
+  }
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-plain {
+    box-shadow: none !important;
+    border-color: #999 !important;
+    background: #fff !important;
+  }
+  a {
+    color: #000 !important;
+    text-decoration: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+/* Intro sea of clouds */
+:root {
+  --cloud: #ffffff;
+  --cloud-shade: #ece4f6;
+}
+:root[data-night="true"] {
+  --cloud: #4a4f86;
+  --cloud-shade: #3a3f72;
+}
+@keyframes drift {
+  from {
+    transform: translateX(-2%);
+  }
+  to {
+    transform: translateX(2%);
+  }
+}
+
+/* Text that sits directly on the 3D city gets a soft halo in the sky's colour. */
+.legible {
+  text-shadow:
+    0 0 18px var(--legible-halo),
+    0 2px 4px var(--legible-halo);
+}
+:root {
+  --legible-halo: rgba(255, 244, 230, 0.85);
+}
+:root[data-night="true"] {
+  --legible-halo: rgba(27, 31, 59, 0.85);
+}

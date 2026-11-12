@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Concept A: Signal</title>
+<link rel="stylesheet" href="base.css" />
+<style>
+  body { background: var(--ink); color: #fff; }
+  /* hero */
+  #hero .field { width: 1500px; height: 1000px; right: -420px; top: -160px; opacity: .95; filter: blur(70px) saturate(1.25); }
+  #hero .field.b { width: 900px; height: 600px; right: 80px; top: 380px; opacity: .5; transform: rotate(-18deg); }
+  #hero .veil { position: absolute; inset: 0; background: linear-gradient(90deg, #171717 0%, rgba(23,23,23,.85) 30%, rgba(23,23,23,0) 62%), linear-gradient(0deg, #171717 0%, rgba(23,23,23,0) 40%); }
+  #hero .nav .mark { background: #fff; color: var(--ink); }
+  #hero .cmdk { color: #fff; border: 1px solid #4d4d4d; }
+  #hero .bottom { position: absolute; left: 24px; right: 24px; bottom: 56px; display: grid; grid-template-columns: 1fr 360px; align-items: end; gap: 48px; }
+  #hero .eyebrow { color: var(--hair-s); margin-bottom: 20px; }
+  #hero .name .ghost { color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.35); }
+  #hero .side p { color: var(--hair-s); }
+  #hero .ctas { display: flex; gap: 12px; margin-top: 24px; }
+  #hero .tilt { position: absolute; right: 24px; top: 96px; color: var(--hair-s); text-align: right; }
+  .meter { display: inline-flex; gap: 3px; margin-left: 6px; vertical-align: middle; }
+  .meter i { width: 3px; height: 10px; background: #4d4d4d; display: block; border-radius: 1px; }
+  .meter i.on { background: #fff; }
+
+  /* signature: case study dissolve */
+  #sig { background: var(--ink); }
+  #sig .grid { display: grid; grid-template-columns: 5fr 7fr; gap: 48px; height: 100%; align-items: center; }
+  #sig .rail { display: flex; flex-direction: column; gap: 14px; margin-top: 40px; }
+  #sig .rail div { display: flex; align-items: center; gap: 12px; color: #4d4d4d; font-size: 14px; }
+  #sig .rail div b { width: 32px; height: 2px; background: #333; display: block; border-radius: 2px; }
+  #sig .rail div.on { color: #fff; }
+  #sig .rail div.on b { background: linear-gradient(90deg, var(--g1), var(--g4), var(--g6)); width: 56px; }
+  #sig .stats { display: flex; gap: 48px; margin-top: 40px; }
+  #sig .stats .n { font-size: 72px; font-weight: 600; letter-spacing: -3.6px; line-height: 1; font-variant-numeric: tabular-nums; }
+  #sig .stats .l { color: var(--hair-s); font-size: 14px; margin-top: 8px; }
+  #sig .stage { position: relative; aspect-ratio: 1 / 1; max-height: 640px; width: 100%; border-radius: 16px; background: #111; box-shadow: 0 0 0 1px #262626; overflow: hidden; }
+  .old, .new { position: absolute; top: 12%; bottom: 12%; display: grid; gap: 6px; }
+  .old { left: 7%; width: 40%; grid-template-columns: repeat(6, 1fr); grid-auto-rows: 1fr; }
+  .old span { background: #2a2a2a; border: 1px solid #3a3a3a; }
+  .new { right: 7%; width: 40%; grid-template-columns: 1fr 2fr; grid-template-rows: 40px 1fr 1fr 64px; gap: 10px; }
+  .new span { border-radius: 8px; background: #1f1f1f; box-shadow: inset 0 0 0 1px #333; }
+  .new span:nth-child(1) { grid-column: 1 / -1; }
+  .new span:nth-child(2) { grid-row: 2 / 5; }
+  .new span:nth-child(5) { background: linear-gradient(120deg, var(--g1), var(--g3) 55%, var(--g4)); box-shadow: none; opacity: .9; }
+  .particles i { position: absolute; width: 7px; height: 7px; border-radius: 1px; background: #888; }
+  .stage .lbl { position: absolute; bottom: 20px; color: var(--hair-s); }
+
+  @media (max-width: 599px) {
+    #hero .field { width: 760px; height: 760px; right: -330px; top: -150px; }
+    #hero .field.b { display: none; }
+    #hero .veil { background: linear-gradient(0deg, #171717 30%, rgba(23,23,23,.6) 55%, rgba(23,23,23,0) 75%); }
+    #hero .bottom { left: 16px; right: 16px; bottom: 32px; grid-template-columns: 1fr; gap: 20px; }
+    #hero .tilt { right: 16px; }
+    #hero .ctas .pill { flex: 1; justify-content: center; }
+    #sig .grid { grid-template-columns: 1fr; gap: 24px; align-content: start; padding-top: 72px; }
+    #sig .stage { max-height: 340px; }
+    #sig .stats { gap: 32px; margin-top: 20px; }
+    #sig .stats .n { font-size: 56px; letter-spacing: -2.8px; }
+    #sig .rail { flex-direction: row; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+    #sig .rail div b { width: 16px; }
+    #sig .rail div.on b { width: 28px; }
+    #sig .h2 { font-size: 28px; line-height: 34px; }
+  }
+</style>
+</head>
+<body>
+  <section class="frame grain" id="hero">
+    <div class="mesh field"></div><div class="mesh field b"></div><div class="veil"></div>
+    <div class="wrap">
+      <div class="nav">
+        <div class="brand"><span class="mark">SM</span>Seyf Mejri</div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span class="pill sm cmdk"><span class="kbd only-desktop">⌘K</span><span>Menu</span></span>
+          <span class="pill sm only-desktop" style="background:#fff;color:var(--ink)">Email me</span>
+        </div>
+      </div>
+      <div class="bottom">
+        <div>
+          <p class="caption mono eyebrow">Fullstack JavaScript Developer, Tunis</p>
+          <h1 class="hero-type name">Seyf<br/><span class="ghost">Mejri</span></h1>
+        </div>
+        <div class="side">
+          <p class="lead">6 years building React and Next.js frontends and Node.js backends for SaaS, ERP, e-commerce and booking products.</p>
+          <div class="ctas">
+            <span class="pill" style="background:#fff;color:var(--ink)">Email me</span>
+            <span class="pill" style="color:#fff;box-shadow:inset 0 0 0 1px #4d4d4d">LinkedIn ↗</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="frame" id="sig">
+    <div class="wrap">
+      <div class="grid">
+        <div>
+          <p class="caption mono" style="color:var(--hair-s);margin-bottom:16px">Case study · Educaro</p>
+          <h2 class="h2">The AngularJS CRM dissolves.<br/>React rebuilds it.</h2>
+          <div class="stats">
+            <div><div class="n">70</div><div class="l">staff use it daily</div></div>
+            <div><div class="n">6</div><div class="l">departments</div></div>
+          </div>
+          <div class="rail">
+            <div><b></b>Problem</div>
+            <div class="on"><b></b>What I did</div>
+            <div><b></b>Result</div>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="old" id="old"></div>
+          <div class="particles" id="p"></div>
+          <div class="new"><span></span><span></span><span></span><span></span><span></span></div>
+          <span class="lbl caption mono" style="left:7%">AngularJS</span>
+          <span class="lbl caption mono" style="right:7%;color:#fff">React + TypeScript</span>
+        </div>
+      </div>
+    </div>
+  </section>
+<script>
+  // static scatter for the mockup: old grid cells breaking apart toward the new layout
+  const old = document.getElementById("old");
+  for (let i = 0; i < 36; i++) { const s = document.createElement("span"); if (i % 7 === 3 || i % 5 === 1) s.style.opacity = .15; old.appendChild(s); }
+  const p = document.getElementById("p"); let seed = 7;
+  const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+  for (let i = 0; i < 70; i++) {
+    const t = rnd(); const i2 = document.createElement("i");
+    i2.style.left = (40 + t * 22) + "%"; i2.style.top = (14 + rnd() * 72) + "%";
+    i2.style.opacity = (1 - Math.abs(t - .5) * 1.4).toFixed(2);
+    const c = ["#888", "#007cf0", "#7928ca", "#ff0080", "#888", "#f9cb28"][Math.floor(rnd() * 6)];
+    i2.style.background = c; i2.style.transform = `rotate(${rnd() * 90}deg) scale(${.6 + rnd()})`;
+    p.appendChild(i2);
+  }
+</script>
+</body>
+</html>

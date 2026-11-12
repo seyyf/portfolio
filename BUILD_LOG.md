@@ -184,3 +184,13 @@ Seyf shared his real CV (PDF) and asked to make the contact form work. He chose:
 - Tested end to end against a local mock of Formspree's JSON API: the route sent `{name, email, _replyto, _subject, subject, message}` with `Accept: application/json`, and Mail showed "Sent ✅". With the mock answering 403 like a reCAPTCHA block, the visitor got the "send it from your email app" fallback and the server logged `Formspree answered 403 [CAPTCHA_FAILED] (turn reCAPTCHA off in the form settings)`. Not tested against the real Formspree service (needs Seyf's account).
 
 **Also fixed**: in apps, content scrolled up under the status bar and showed through the clock and pill (visible in Seyf's screenshot). Apps now have a frosted strip behind the status bar.
+
+### Phase 3 follow-up: rearranging the home screen (2026-11-12)
+
+Seyf asked for edit mode to work like a phone: move apps wherever he wants.
+
+**Change**: `lib/homeLayout.ts` (arrangement model, capacity rules, validated localStorage), `components/os/useIconDrag.ts` (drag engine), HomeScreen and AppIcon updates. A floating copy of the icon follows the pointer while the real slots reorder live (Framer layout animations slide the others aside); holding at a screen edge flips the page; the dock accepts icons until full. Long-press then drag works in one motion. Page swipes now start from horizontal movement instead of the press, so a long-press can become an icon drag. Keyboard alternative: Move left / right / to the other page / to the dock in each icon's "⋯" menu, with focus returned to the moved icon. "Reset" restores the default.
+
+**Verified** with real pointer drags on a production build (1440x900): reorder within a page; dock to page; edge-hold to the other page; page to dock; drop into a full page refused; long-press then drag without edit mode; arrangement survives reload; menu move actions (disabled with a reason when the target is full); Reset clears the saved layout. Console: 0 errors.
+
+**Not tested**: touch drags on a physical phone (icons use `touch-action: none` and pointer capture so the browser doesn't take over the gesture, but this was only exercised with a mouse).

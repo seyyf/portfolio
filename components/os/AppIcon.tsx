@@ -20,14 +20,17 @@ type Props = {
   index: number
   showLabel?: boolean
   onMenu: (icon: HomeIcon) => void
+  /** Starts dragging this icon to rearrange the home screen (edit mode, or straight out of a long-press). */
+  onDragStart?: (icon: HomeIcon, e: PointerEvent, el: HTMLElement) => void
 }
 
 /**
  * A home-screen icon. Press: springs down to 0.9 and opens the app. Long-press (or right-click):
  * enters edit mode (wiggle) and opens its context menu. In edit mode a "⋯" button opens the menu,
- * so the gesture always has a tap alternative.
+ * so the gesture always has a tap alternative. In edit mode (or right after a long-press), moving
+ * the pointer picks the icon up so it can be dropped somewhere else, like on a phone.
  */
-export function AppIcon({ icon, index, showLabel = true, onMenu }: Props) {
+export function AppIcon({ icon, index, showLabel = true, onMenu, onDragStart }: Props) {
   const { open, prefetch } = useOSNav()
   const editMode = useOS((s) => s.editMode)
   const setEditMode = useOS((s) => s.setEditMode)
@@ -61,7 +64,7 @@ export function AppIcon({ icon, index, showLabel = true, onMenu }: Props) {
         data-icon-key={icon.key}
         data-icon-app={icon.app}
         aria-label={label}
-        className={cn("relative w-[62px] touch-manipulation rounded-[24%] select-none [-webkit-touch-callout:none]", editMode && !reduced && "wiggle")}
+        className={cn("relative w-[62px] touch-none rounded-[24%] select-none [-webkit-touch-callout:none]", editMode && !reduced && "wiggle")}
         style={editMode ? { animationDelay: `${-(index % 4) * 0.07}s` } : undefined}
         whileTap={reduced ? undefined : { scale: 0.9 }}
         transition={springs.snappy}
@@ -69,6 +72,8 @@ export function AppIcon({ icon, index, showLabel = true, onMenu }: Props) {
         onFocus={preload}
         onPointerDown={(e) => {
           preload()
+          // Keep receiving moves even if the finger slides off the icon before a drag starts.
+          e.currentTarget.setPointerCapture?.(e.pointerId)
           longPressed.current = false
           moved.current = false
           start.current = { x: e.clientX, y: e.clientY }
@@ -83,7 +88,9 @@ export function AppIcon({ icon, index, showLabel = true, onMenu }: Props) {
         onPointerMove={(e) => {
           if (start.current && Math.hypot(e.clientX - start.current.x, e.clientY - start.current.y) > 8) {
             moved.current = true
+            const pickUp = (useOS.getState().editMode || longPressed.current) && onDragStart
             cancel()
+            if (pickUp) onDragStart(icon, e.nativeEvent, e.currentTarget)
           }
         }}
         onPointerUp={cancel}

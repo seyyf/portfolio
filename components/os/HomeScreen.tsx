@@ -1,14 +1,17 @@
 "use client"
 
-import { animate, motion, useMotionValue } from "framer-motion"
-import { ArrowUpRight, Briefcase, Check, ExternalLink, Info, MoreHorizontal } from "lucide-react"
+import { animate, motion, useDragControls, useMotionValue, type MotionValue } from "framer-motion"
+import { ArrowDownToLine, ArrowLeft, ArrowLeftRight, ArrowRight, ArrowUpRight, Briefcase, Check, ExternalLink, Info, MoreHorizontal } from "lucide-react"
 import { useEffect, useLayoutEffect, useRef, useState } from "react"
 
 import { AppIcon } from "@/components/os/AppIcon"
+import { AppIconArt } from "@/components/os/icons"
 import { usePhoneScreen } from "@/components/os/phoneScreen"
+import { useIconDrag } from "@/components/os/useIconDrag"
 import { AboutSheet } from "@/components/shared/AboutSheet"
 import { Sheet } from "@/components/shared/Sheet"
-import { apps, browserSites, dock, homePage1, homePage2, type HomeIcon } from "@/data/apps"
+import { apps, browserSites, type HomeIcon } from "@/data/apps"
+import { canAccept, iconByKey, locate, type Area } from "@/lib/homeLayout"
 import { profile } from "@/data/profile"
 import { projectById, type ProjectId } from "@/data/projects"
 import { springs } from "@/lib/animations"
@@ -20,41 +23,79 @@ import { formatDate, formatTime, useNow } from "@/lib/time"
 
 const PAGES = 2
 
+type IconHandlers = {
+  onMenu: (i: HomeIcon) => void
+  onDragStart: (icon: HomeIcon, e: PointerEvent, el: HTMLElement) => void
+  /** Key of the icon being dragged: its slot stays in place, empty, while the copy follows the pointer. */
+  dragKey: string | null
+}
+
 export function HomeScreen({ inert }: { inert: boolean }) {
   const editMode = useOS((s) => s.editMode)
   const setEditMode = useOS((s) => s.setEditMode)
   const screen = usePhoneScreen()
   const [menu, setMenuState] = useState<{ icon: HomeIcon; pos: { top: number; left: number } } | null>(null)
   const setMenu = (icon: HomeIcon | null) => setMenuState(icon ? { icon, pos: menuPosition(screen, icon.key) } : null)
+  const drag = useIconDrag(screen)
+  const tap = useRef<{ x: number; y: number } | null>(null)
+
+  const handlers: IconHandlers = {
+    onMenu: setMenu,
+    onDragStart: (icon, e, el) => {
+      setMenuState(null)
+      drag.start(icon, e, el)
+    },
+    dragKey: drag.dragKey,
+  }
 
   return (
     <div
       className="absolute inset-0 z-10 flex flex-col pt-[calc(var(--status-h)+env(safe-area-inset-top)+4px)] pb-[calc(env(safe-area-inset-bottom)+10px)]"
       inert={inert}
       aria-hidden={inert || undefined}
-      onPointerDown={(e) => {
-        // In edit mode, tapping anywhere that isn't an icon stops the wiggle.
-        if (editMode && !(e.target as Element).closest("[data-icon-key], [data-menu], button")) setEditMode(false)
+      onPointerDown={(e) => (tap.current = { x: e.clientX, y: e.clientY })}
+      onPointerUp={(e) => {
+        // In edit mode, a tap (not a swipe) anywhere that isn't an icon or a control stops the wiggle.
+        const t = tap.current
+        tap.current = null
+        if (!editMode || drag.dragKey || !t || Math.hypot(e.clientX - t.x, e.clientY - t.y) > 6) return
+        if (!(e.target as Element).closest("[data-icon-key], [data-menu], button")) setEditMode(false)
       }}
     >
       <h1 className="sr-only">SeyfOS home screen</h1>
-      <Pages onMenu={setMenu} />
-      <Dock onMenu={setMenu} />
+      <Pages {...handlers} />
+      <Dock {...handlers} />
       <IconMenu icon={menu?.icon ?? null} pos={menu?.pos ?? null} onClose={() => setMenu(null)} />
+      {drag.dragKey && <DragGhost iconKey={drag.dragKey} x={drag.x} y={drag.y} />}
     </div>
   )
 }
 
+/** The icon under the finger while rearranging: lifted, slightly bigger, with a soft shadow. */
+function DragGhost({ iconKey, x, y }: { iconKey: string; x: MotionValue<number>; y: MotionValue<number> }) {
+  const icon = iconByKey[iconKey]
+  return (
+    <motion.div aria-hidden="true" className="pointer-events-none absolute top-0 left-0 z-[58] w-[62px]" style={{ x, y }}>
+      <motion.div initial={{ scale: 1 }} animate={{ scale: 1.14 }} transition={springs.snappy} className="drop-shadow-[0_14px_18px_rgba(0,0,0,0.3)]">
+        <AppIconArt app={icon.app} site={icon.site} className="w-full text-[15px]" />
+      </motion.div>
+    </motion.div>
+  )
+}
+
 /** Two home pages side by side, swiped horizontally with a rubber band at the edges. */
-function Pages({ onMenu }: { onMenu: (i: HomeIcon) => void }) {
+function Pages(handlers: IconHandlers) {
   const page = useOS((s) => s.homePage)
   const setPage = useOS((s) => s.setHomePage)
   const editMode = useOS((s) => s.editMode)
   const setEditMode = useOS((s) => s.setEditMode)
+  const resetLayout = useOS((s) => s.resetLayout)
   const reduced = useOS((s) => s.reducedMotion)
   const viewport = useRef<HTMLDivElement>(null)
   const [width, setWidth] = useState(0)
   const x = useMotionValue(0)
+  const controls = useDragControls()
+  const swipe = useRef<{ x: number; y: number; started: boolean } | null>(null)
 
   useLayoutEffect(() => {
     const el = viewport.current
@@ -74,11 +115,30 @@ function Pages({ onMenu }: { onMenu: (i: HomeIcon) => void }) {
   return (
     <div className="relative flex min-h-0 flex-1 flex-col">
       {/* overflow-clip, not hidden: focus() can scroll a hidden container sideways and misalign the pages. */}
-      <div ref={viewport} className="home-viewport relative min-h-0 flex-1 overflow-clip">
+      <div
+        ref={viewport}
+        className="home-viewport relative min-h-0 flex-1 overflow-clip"
+        // Page swipes start once the pointer moves sideways (not on press), so a long-press on an icon
+        // can still turn into an icon drag. In edit mode, dragging an icon moves the icon, not the page.
+        onPointerDown={(e) => (swipe.current = { x: e.clientX, y: e.clientY, started: false })}
+        onPointerMove={(e) => {
+          const s = swipe.current
+          if (!s || s.started || handlers.dragKey) return
+          const dx = e.clientX - s.x
+          if (Math.abs(dx) < 6 || Math.abs(dx) < Math.abs(e.clientY - s.y)) return
+          if (useOS.getState().editMode && (e.target as Element).closest("[data-icon-key]")) return
+          s.started = true
+          controls.start(e)
+        }}
+        onPointerUp={() => (swipe.current = null)}
+        onPointerCancel={() => (swipe.current = null)}
+      >
         <motion.div
           className="flex h-full touch-pan-y"
           style={{ x, width: width ? width * PAGES : "200%" }}
           drag={width ? "x" : false}
+          dragControls={controls}
+          dragListener={false}
           dragConstraints={{ left: -width * (PAGES - 1), right: 0 }}
           dragElastic={0.14}
           dragMomentum={false}
@@ -90,11 +150,11 @@ function Pages({ onMenu }: { onMenu: (i: HomeIcon) => void }) {
             else setPage(clamped)
           }}
         >
-          <section aria-label="Work apps" className="h-full shrink-0 px-5" style={{ width: width || "50%" }} inert={page !== 0}>
-            <WorkPage onMenu={onMenu} />
+          <section aria-label="Home page 1" className="h-full shrink-0 px-5" style={{ width: width || "50%" }} inert={page !== 0}>
+            <WorkPage {...handlers} />
           </section>
-          <section aria-label="System apps" className="h-full shrink-0 px-5" style={{ width: width || "50%" }} inert={page !== 1}>
-            <SystemPage onMenu={onMenu} />
+          <section aria-label="Home page 2" className="h-full shrink-0 px-5" style={{ width: width || "50%" }} inert={page !== 1}>
+            <SystemPage {...handlers} />
           </section>
         </motion.div>
       </div>
@@ -111,6 +171,18 @@ function Pages({ onMenu }: { onMenu: (i: HomeIcon) => void }) {
             <span className={`size-[7px] rounded-full transition-colors ${i === page ? "bg-text" : "bg-text/30"}`} />
           </button>
         ))}
+        {editMode && (
+          <button
+            type="button"
+            onClick={() => {
+              resetLayout()
+              useOS.getState().toast("Home screen reset")
+            }}
+            className="glass absolute left-5 grid h-8 place-items-center rounded-full px-3 text-[12px] font-semibold text-text"
+          >
+            Reset
+          </button>
+        )}
         <button
           type="button"
           onClick={() => setEditMode(!editMode)}
@@ -125,38 +197,55 @@ function Pages({ onMenu }: { onMenu: (i: HomeIcon) => void }) {
   )
 }
 
-function IconGrid({ icons, onMenu, offset = 0 }: { icons: HomeIcon[]; onMenu: (i: HomeIcon) => void; offset?: number }) {
+/** One slot of a page or the dock. `layout` makes the other icons slide when one is moved. */
+function Slot({ icon, area, index, offset, showLabel = true, handlers }: { icon: HomeIcon; area: Area; index: number; offset: number; showLabel?: boolean; handlers: IconHandlers }) {
+  const reduced = useOS((s) => s.reducedMotion)
   return (
-    <ul className="grid grid-cols-4 justify-items-center gap-x-2 gap-y-4">
-      {icons.map((icon, i) => (
-        <li key={icon.key}>
-          <AppIcon icon={icon} index={offset + i} onMenu={onMenu} />
-        </li>
+    <motion.li
+      layout={!reduced}
+      transition={springs.snappy}
+      data-slot
+      data-area={area.kind}
+      data-page={area.kind === "page" ? area.page : undefined}
+      data-index={index}
+      style={{ opacity: handlers.dragKey === icon.key ? 0 : 1 }}
+    >
+      <AppIcon icon={icon} index={offset + index} showLabel={showLabel} onMenu={handlers.onMenu} onDragStart={handlers.onDragStart} />
+    </motion.li>
+  )
+}
+
+function IconGrid({ page, offset = 0, handlers }: { page: number; offset?: number; handlers: IconHandlers }) {
+  const keys = useOS((s) => s.layout.pages[page])
+  return (
+    <ul data-grid-page={page} className="grid min-h-[96px] grid-cols-4 justify-items-center gap-x-2 gap-y-4">
+      {keys.map((key, i) => (
+        <Slot key={key} icon={iconByKey[key]} area={{ kind: "page", page }} index={i} offset={offset} handlers={handlers} />
       ))}
     </ul>
   )
 }
 
-function WorkPage({ onMenu }: { onMenu: (i: HomeIcon) => void }) {
+function WorkPage(handlers: IconHandlers) {
   return (
     <div className="flex h-full flex-col gap-4 pt-2">
       <Greeting />
       <NowWidget />
-      <h2 className="sr-only">Apps I built</h2>
-      <IconGrid icons={homePage1} onMenu={onMenu} offset={2} />
+      <h2 className="sr-only">Apps on page 1</h2>
+      <IconGrid page={0} offset={2} handlers={handlers} />
     </div>
   )
 }
 
-function SystemPage({ onMenu }: { onMenu: (i: HomeIcon) => void }) {
+function SystemPage(handlers: IconHandlers) {
   return (
     <div className="flex h-full flex-col gap-4 pt-2">
       <div className="grid grid-cols-2 gap-3">
         <ClockWidget />
         <FocusWidget />
       </div>
-      <h2 className="sr-only">System apps</h2>
-      <IconGrid icons={homePage2} onMenu={onMenu} />
+      <h2 className="sr-only">Apps on page 2</h2>
+      <IconGrid page={1} handlers={handlers} />
     </div>
   )
 }
@@ -247,14 +336,13 @@ function FocusWidget() {
   )
 }
 
-function Dock({ onMenu }: { onMenu: (i: HomeIcon) => void }) {
+function Dock(handlers: IconHandlers) {
+  const keys = useOS((s) => s.layout.dock)
   return (
-    <nav aria-label="Dock" className="glass mx-3 rounded-[32px] px-3 py-3 shadow-[var(--shadow)]">
-      <ul className="grid grid-cols-4 justify-items-center">
-        {dock.map((icon, i) => (
-          <li key={icon.key}>
-            <AppIcon icon={icon} index={i + 14} showLabel={false} onMenu={onMenu} />
-          </li>
+    <nav aria-label="Dock" data-dock className="glass mx-3 rounded-[32px] px-3 py-3 shadow-[var(--shadow)]">
+      <ul className="grid min-h-[62px] grid-cols-4 justify-items-center">
+        {keys.map((key, i) => (
+          <Slot key={key} icon={iconByKey[key]} area={{ kind: "dock" }} index={i} offset={14} showLabel={false} handlers={handlers} />
         ))}
       </ul>
     </nav>
@@ -269,9 +357,11 @@ function menuPosition(screen: HTMLElement | null, key: string) {
   const s = screen.getBoundingClientRect()
   const r = el.getBoundingClientRect()
   const menuW = 230
+  const menuH = 300 // up to six rows
   const left = Math.min(Math.max(12, r.left - s.left + r.width / 2 - menuW / 2), s.width - menuW - 12)
   const below = r.bottom - s.top + 10
-  const top = below + 170 > s.height ? r.top - s.top - 10 - 160 : below
+  const above = r.top - s.top - 10 - menuH
+  const top = below + menuH <= s.height - 12 ? below : Math.max(56, above)
   return { top, left }
 }
 
@@ -295,6 +385,25 @@ function IconMenu({ icon, pos, onClose }: { icon: HomeIcon | null; pos: { top: n
 
   const project: ProjectId | undefined = icon ? (icon.site ? browserSites[icon.site].project : apps[icon.app].project) : undefined
   const url = project ? projectById[project].url : ""
+
+  // Rearranging without dragging (keyboard, screen readers): move actions for this icon.
+  const screen = usePhoneScreen()
+  const layout = useOS((s) => s.layout)
+  const homePage = useOS((s) => s.homePage)
+  const where = icon ? locate(layout, icon.key) : null
+  const listLength = where ? (where.area.kind === "dock" ? layout.dock.length : layout.pages[where.area.page].length) : 0
+  const moveTo = (area: Area, index: number) => {
+    if (!icon) return
+    const os = useOS.getState()
+    os.moveIcon(icon.key, area, index)
+    if (area.kind === "page") os.setHomePage(area.page)
+    onClose()
+    requestAnimationFrame(() => screen?.querySelector<HTMLElement>(`[data-icon-key="${icon.key}"]`)?.focus())
+  }
+  const otherPage = where?.area.kind === "page" ? 1 - where.area.page : homePage
+  const toOtherPage: Area = { kind: "page", page: otherPage }
+  const pageFull = !!icon && !canAccept(layout, icon.key, toOtherPage)
+  const dockFull = !!icon && !canAccept(layout, icon.key, { kind: "dock" })
 
   return (
     <>
@@ -340,6 +449,25 @@ function IconMenu({ icon, pos, onClose }: { icon: HomeIcon | null; pos: { top: n
               >
                 {url ? "Visit live site" : "Live site coming soon"}
               </MenuItem>
+            )}
+            {where && (
+              <>
+                <div role="none" className="h-1.5 bg-text/5" />
+                <MenuItem icon={<ArrowLeft size={18} />} disabled={where.index === 0} onClick={() => moveTo(where.area, where.index - 1)}>
+                  Move left
+                </MenuItem>
+                <MenuItem icon={<ArrowRight size={18} />} disabled={where.index >= listLength - 1} onClick={() => moveTo(where.area, where.index + 1)}>
+                  Move right
+                </MenuItem>
+                <MenuItem icon={<ArrowLeftRight size={18} />} disabled={pageFull} onClick={() => moveTo(toOtherPage, 99)}>
+                  {`Move to page ${otherPage + 1}${pageFull ? " (full)" : ""}`}
+                </MenuItem>
+                {where.area.kind === "dock" ? null : (
+                  <MenuItem icon={<ArrowDownToLine size={18} />} disabled={dockFull} onClick={() => moveTo({ kind: "dock" }, 99)}>
+                    {dockFull ? "Dock is full" : "Move to dock"}
+                  </MenuItem>
+                )}
+              </>
             )}
           </motion.div>
         </div>

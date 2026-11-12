@@ -63,6 +63,7 @@ Until it is set, Mail tells visitors that sending isn't set up and offers their 
 ## Accessibility and performance
 
 - The phone's back button (Android back, iOS edge swipe) works like a phone: it closes the top overlay or in-app screen first (sheets, control center, menus, photo viewer, event details), then the app. See `lib/backStack.ts`; register new overlays with `useBackLayer(open, onClose)` (the shared `Sheet` already does).
+- Home screen editing works like a phone: long-press (or the "⋯" button) to enter edit mode, then drag icons to rearrange them, across pages (hold at the screen edge) and in or out of the dock. Pages hold 8 icons, the dock 4. The arrangement is saved per visitor (`lib/homeLayout.ts`); "Reset" restores the default. Each icon's "⋯" menu has Move left / right / to the other page / to the dock for keyboard and screen-reader users.
 - Every gesture has a tap or keyboard alternative: swipe up to unlock or go home (buttons), long-press (right-click, or the "⋯" edit button), swipe down for the control center (tap signal/Wi-Fi), swipe between home pages (page dots, ← and →). Esc goes home.
 - `prefers-reduced-motion`: transitions become quick fades; tilt, wiggle and the wallpaper motion stop.
 - Each app is a separate chunk (`next/dynamic`), preloaded when you hover, focus or press its icon. No 3D, no canvas: the wallpaper is CSS, motion is transform/opacity (plus one clip-path for the app open/close).

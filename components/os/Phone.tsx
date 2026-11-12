@@ -49,7 +49,9 @@ export function Phone() {
   }, [pathname])
 
   // Returning visitors and deep links skip the lock screen (the inline script already hid it).
+  // Also restore the visitor's own home-screen arrangement, if they rearranged it before.
   useEffect(() => {
+    useOS.getState().hydrateLayout()
     if (document.documentElement.getAttribute("data-returning") === "true") useOS.setState({ locked: false })
   }, [])
 

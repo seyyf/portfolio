@@ -1,6 +1,7 @@
 import { create } from "zustand"
 
 import type { AppId } from "@/data/apps"
+import { DEFAULT_LAYOUT, loadLayout, moveIcon as moveInLayout, saveLayout, type Area, type HomeLayout } from "@/lib/homeLayout"
 
 export type Theme = "light" | "dark"
 
@@ -42,6 +43,8 @@ type OSState = {
   prevPath: string | null
   homePage: number
   editMode: boolean
+  /** Arrangement of the home pages and dock (rearrangeable in edit mode, remembered per visitor). */
+  layout: HomeLayout
   theme: Theme
   sound: boolean
   battery: number
@@ -63,6 +66,11 @@ type OSState = {
   setPrevPath: (path: string | null) => void
   setHomePage: (page: number) => void
   setEditMode: (on: boolean) => void
+  /** Moves an icon; returns false if nothing changed or the target is full. */
+  moveIcon: (key: string, area: Area, index: number) => boolean
+  resetLayout: () => void
+  /** Applies the saved arrangement (client only, after hydration). */
+  hydrateLayout: () => void
   setTheme: (theme: Theme) => void
   toggleSound: () => void
   drainBattery: () => void
@@ -91,6 +99,7 @@ export const useOS = create<OSState>()((set, get) => ({
   prevPath: null,
   homePage: 0,
   editMode: false,
+  layout: DEFAULT_LAYOUT,
   theme: "light",
   sound: false,
   battery: 32,
@@ -119,6 +128,21 @@ export const useOS = create<OSState>()((set, get) => ({
   setPrevPath: (prevPath) => set({ prevPath }),
   setHomePage: (homePage) => set({ homePage }),
   setEditMode: (editMode) => set({ editMode }),
+  moveIcon: (key, area, index) => {
+    const next = moveInLayout(get().layout, key, area, index)
+    if (!next) return false
+    set({ layout: next })
+    saveLayout(next)
+    return true
+  },
+  resetLayout: () => {
+    set({ layout: DEFAULT_LAYOUT })
+    saveLayout(null)
+  },
+  hydrateLayout: () => {
+    const saved = loadLayout()
+    if (saved) set({ layout: saved })
+  },
   setTheme: (theme) => {
     set({ theme })
     try {

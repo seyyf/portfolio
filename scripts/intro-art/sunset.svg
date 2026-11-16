@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <!-- Original illustration for this site: sunset over the Gulf of Tunis, Bou Kornine on the left, the Sidi Bou Said hill on the right. -->
+  <defs>
+    <linearGradient id="sky" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="520">
+      <stop offset="0" stop-color="#1d0f3d"/>
+      <stop offset="0.32" stop-color="#5b2a9e"/>
+      <stop offset="0.6" stop-color="#d23c8f"/>
+      <stop offset="0.82" stop-color="#ff7a4a"/>
+      <stop offset="1" stop-color="#ffc94a"/>
+    </linearGradient>
+    <linearGradient id="sun" gradientUnits="userSpaceOnUse" x1="0" y1="300" x2="0" y2="520">
+      <stop offset="0" stop-color="#ffe58a"/>
+      <stop offset="0.45" stop-color="#ffb04a"/>
+      <stop offset="1" stop-color="#ff4fa3"/>
+    </linearGradient>
+    <linearGradient id="sea" gradientUnits="userSpaceOnUse" x1="0" y1="520" x2="0" y2="800">
+      <stop offset="0" stop-color="#7a2c7e"/>
+      <stop offset="0.35" stop-color="#2c1a58"/>
+      <stop offset="1" stop-color="#0d2a3f"/>
+    </linearGradient>
+    <radialGradient id="glow" gradientUnits="userSpaceOnUse" cx="600" cy="500" r="560">
+      <stop offset="0" stop-color="#ff8a3d" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#ff8a3d" stop-opacity="0"/>
+    </radialGradient>
+    <mask id="stripes">
+      <rect width="1200" height="800" fill="#fff"/>
+      <rect y="436" width="1200" height="6" fill="#000"/>
+      <rect y="458" width="1200" height="8" fill="#000"/>
+      <rect y="481" width="1200" height="10" fill="#000"/>
+      <rect y="503" width="1200" height="12" fill="#000"/>
+    </mask>
+  </defs>
+
+  <rect width="1200" height="520" fill="url(#sky)"/>
+  <rect width="1200" height="520" fill="url(#glow)"/>
+
+  <!-- thin clouds -->
+  <g fill="#ff8ac0" opacity="0.35">
+    <rect x="120" y="190" width="340" height="9" rx="4.5"/>
+    <rect x="200" y="210" width="210" height="6" rx="3"/>
+    <rect x="760" y="150" width="300" height="8" rx="4"/>
+    <rect x="830" y="168" width="180" height="5" rx="2.5"/>
+    <rect x="640" y="250" width="160" height="5" rx="2.5"/>
+  </g>
+
+  <g mask="url(#stripes)">
+    <circle cx="600" cy="470" r="172" fill="url(#sun)"/>
+  </g>
+
+  <!-- Bou Kornine, the twin-peaked mountain across the gulf -->
+  <path d="M0 520 L0 474 C60 466 110 444 160 404 L192 384 L218 400 L248 374 L282 402 C332 442 420 472 520 488 L566 520 Z" fill="#3a1a5c"/>
+  <path d="M0 520 L0 494 C120 488 240 482 360 492 C430 498 490 508 540 520 Z" fill="#2a1450" opacity="0.8"/>
+
+  <!-- the cape with white houses -->
+  <path d="M760 520 C820 500 880 470 940 440 C1000 412 1080 402 1200 398 L1200 520 Z" fill="#2f1650"/>
+  <g fill="#5a3482">
+    <rect x="958" y="424" width="26" height="18"/>
+    <rect x="988" y="417" width="20" height="24"/>
+    <rect x="1014" y="411" width="30" height="20"/>
+    <rect x="1050" y="405" width="22" height="26"/>
+    <rect x="1078" y="404" width="34" height="18"/>
+    <circle cx="1095" cy="404" r="10"/>
+    <rect x="1118" y="398" width="24" height="24"/>
+    <rect x="1148" y="398" width="30" height="20"/>
+  </g>
+  <g fill="#ffc94a" opacity="0.9">
+    <rect x="966" y="430" width="4" height="5"/>
+    <rect x="1024" y="417" width="4" height="5"/>
+    <rect x="1058" y="412" width="4" height="6"/>
+    <rect x="1126" y="406" width="4" height="5"/>
+    <rect x="1160" y="404" width="4" height="5"/>
+  </g>
+
+  <rect y="520" width="1200" height="280" fill="url(#sea)"/>
+  <rect y="517" width="1200" height="4" fill="#ffe6a8" opacity="0.75"/>
+
+  <!-- sun on the water -->
+  <g>
+    <rect x="450" y="527" width="300" height="6" rx="3" fill="#ffc94a" opacity="0.95"/>
+    <rect x="470" y="543" width="260" height="5" rx="2.5" fill="#ffb04a" opacity="0.85"/>
+    <rect x="495" y="559" width="210" height="5" rx="2.5" fill="#ff8a3d" opacity="0.8"/>
+    <rect x="480" y="577" width="240" height="4" rx="2" fill="#ff6f8f" opacity="0.7"/>
+    <rect x="520" y="597" width="160" height="4" rx="2" fill="#ff4fa3" opacity="0.65"/>
+    <rect x="535" y="620" width="130" height="4" rx="2" fill="#ff8a3d" opacity="0.5"/>
+    <rect x="550" y="646" width="100" height="3" rx="1.5" fill="#ff4fa3" opacity="0.45"/>
+    <rect x="565" y="676" width="70" height="3" rx="1.5" fill="#ffc94a" opacity="0.35"/>
+    <rect x="580" y="710" width="40" height="3" rx="1.5" fill="#ff4fa3" opacity="0.3"/>
+  </g>
+  <g fill="#ff8ac0" opacity="0.18">
+    <rect x="140" y="600" width="120" height="3" rx="1.5"/>
+    <rect x="300" y="650" width="90" height="3" rx="1.5"/>
+    <rect x="860" y="590" width="140" height="3" rx="1.5"/>
+    <rect x="930" y="660" width="80" height="3" rx="1.5"/>
+  </g>
+
+  <!-- gulls -->
+  <g fill="none" stroke="#2a1240" stroke-width="3" stroke-linecap="round">
+    <path d="M410 262 q8 -8 16 0 q8 -8 16 0"/>
+    <path d="M452 238 q6 -6 12 0 q6 -6 12 0"/>
+  </g>
+
+  <!-- foreground shore -->
+  <path d="M0 800 L0 716 C150 698 260 728 360 760 C420 780 470 792 520 800 Z" fill="#0b0f1a"/>
+  <path d="M1200 800 L1200 684 C1100 696 1000 738 900 800 Z" fill="#0b0f1a"/>
+
+  <!-- palms -->
+  <g fill="#0b0f1a" transform="translate(30 300) scale(2.3)">
+    <path d="M58 218 C 61.6 170, 72.8 120, 78 62 L 84 62 C 78.8 122, 69.6 172, 66 218 Z"/>
+    <g transform="translate(81 60)">
+      <path d="M0 0 C -18 -14, -44 -14, -60 4 C -40 -4, -20 -2, 0 4 Z"/>
+      <path d="M0 0 C -10 -22, -30 -36, -52 -34 C -32 -26, -16 -14, -2 2 Z"/>
+      <path d="M0 0 C 4 -24, -2 -44, -14 -56 C -4 -38, -2 -20, 2 0 Z"/>
+      <path d="M0 0 C 16 -20, 36 -30, 56 -26 C 36 -18, 18 -8, 2 2 Z"/>
+      <path d="M0 0 C 20 -8, 44 -4, 60 12 C 40 6, 20 4, 0 4 Z"/>
+      <path d="M0 2 C 10 10, 18 26, 20 42 C 12 28, 4 16, -2 6 Z"/>
+      <path d="M0 2 C -10 10, -20 24, -24 40 C -14 26, -6 16, 2 6 Z"/>
+    </g>
+  </g>
+  <g fill="#0b0f1a" transform="translate(1175 290) scale(-2.5 2.5)">
+    <path d="M58 218 C 60 170, 64 120, 66 62 L 72 62 C 70 122, 68 172, 66 218 Z"/>
+    <g transform="translate(69 60)">
+      <path d="M0 0 C -18 -14, -44 -14, -60 4 C -40 -4, -20 -2, 0 4 Z"/>
+      <path d="M0 0 C -10 -22, -30 -36, -52 -34 C -32 -26, -16 -14, -2 2 Z"/>
+      <path d="M0 0 C 4 -24, -2 -44, -14 -56 C -4 -38, -2 -20, 2 0 Z"/>
+      <path d="M0 0 C 16 -20, 36 -30, 56 -26 C 36 -18, 18 -8, 2 2 Z"/>
+      <path d="M0 0 C 20 -8, 44 -4, 60 12 C 40 6, 20 4, 0 4 Z"/>
+      <path d="M0 2 C 10 10, 18 26, 20 42 C 12 28, 4 16, -2 6 Z"/>
+    </g>
+  </g>
+</svg>

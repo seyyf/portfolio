@@ -272,3 +272,55 @@ New brief from Seyf: the career as a product changelog. Each job is a major vers
 - Projects have no live URLs yet, so their cards show no "Visit" link.
 - The contact form needs `FORMSPREE_ENDPOINT` to send; until then it offers a prefilled email.
 - Not tested on a physical phone or with a screen reader; keyboard paths were tested in headless Chrome.
+
+---
+
+## Phase 6: Build 6, "Seyf Mejri — Open World" (2026-11-16)
+
+New brief from Seyf: the portfolio styled like the UI of a modern open-world game, set in Greater Tunis, for the hype around a big game launch. It has a loading screen, a map hub with mission markers, a HUD with a "Wanted by recruiters ★★★★★" meter, mission pages with a MISSION PASSED moment, an in-game phone for contact, a stats menu and a pause menu. Recruiter mode (`/cv`) is always one click away. The guardrails are strict: 100% original work, no names, logos, lettering, characters, art, music or fonts from any existing game, and no crime themes.
+
+**Process**
+1. Release Notes (committed by Seyf as `35c6949`) was also copied to `design/archive/build-5-release-notes/`. cmdk and next-themes were removed. GSAP, @gsap/react and Howler were added. The original UI sounds generated for SeyfOS were restored from the `seyfos` branch.
+2. I wrote the foundation:
+   - typed data (`data/profile.ts`, `data/missions.ts` with map districts and marker positions, `data/skills.ts` with status labels derived from the CV)
+   - tokens and utilities
+   - the settings, sound and overlay stores
+   - UI primitives (an original palm silhouette among them)
+   - the HUD, the pause menu and the CV page
+3. Three subagents built against it in parallel:
+   - the map hub, loading screen and minimap (original SVG art rendered to WebP with sharp)
+   - the mission pages, MISSION PASSED overlay, before/after slider and Fripa swipe demo
+   - the phone, `/contact` and `/stats`
+
+   I integrated their work and fixed what testing found. They didn't run builds; I did all builds and browser tests.
+4. Verified with `playwright-cli` on production builds at 360, 390, 768, 1280, 1440 and 1536px, with reduced motion, and with a mock Formspree for the phone's Messages.
+
+**Decisions**
+- The loading screen is CSS only (3s), drawn from the first paint and skippable at any time. A GSAP layer (SplitText title, fly-out exit) was built and then removed; see the issues table.
+- GSAP powers the MISSION PASSED overlay, loaded when the end of a mission approaches. Mission 05 shows "Checkpoint reached", because it's Seyf's current job.
+- The map uses a small custom pan/zoom engine instead of react-zoom-pan-pinch, which was removed. Desktop zoom needs Ctrl/⌘ + wheel or a pinch, so a plain wheel can still scroll to the mission list.
+- Framer Motion's animation features load when the browser is idle or the visitor first interacts. Drag features (`domMax`) load only for the swipe demo.
+- Sound is off by default. `openPhone()` plays the open sound once, whoever opens the phone.
+
+**Issues found and fixed (all real)**
+| Found | How | Fix |
+|---|---|---|
+| Loading screen never appeared and saved settings were never applied | It never set `ow-loaded`; read the inline script in the HTML | `prefsScript` lived in a `"use client"` module, so the server layout received a client reference instead of a string and the inline script was a syntax error. Head scripts moved to `lib/headScripts.ts` |
+| `/contact` 411px wide at 360 and 390px | Overflow check across all pages and widths | Two implicit single-column grids sized to their widest child; tracks pinned to `minmax(0, 1fr)` |
+| Text running under the bottom HUD on phones | 390px screenshots | Soft background fades behind the top and bottom HUD bands |
+| Accessibility 95–97 | Lighthouse | `aria-label` on a `<p>` (wanted meter), a visible "1" badge missing from the phone button's name, a map button whose label didn't match its text, and gallery alt text duplicating captions |
+| Phone open sound played from 2 of 5 entry points | Code review of the `openPhone` callers | The sound moved into `openPhone()` |
+| A 67 KB Framer feature chunk loaded on every page, and 1.2s of blocking on the Fripa page | Lighthouse network and long tasks | `import("framer-motion")` pulled in the whole package; feature sets now come from tiny re-export modules, and drag loads only for the demo on first interaction |
+| Home LCP was a lazy-loaded loading-screen image | Lighthouse LCP element | Panels load eagerly (no preload tags) |
+| Home blocking time up to 2s | Traces: SplitText splitting the title into gradient-clipped letters, plus GSAP evaluation, only when GSAP arrived early | GSAP removed from the loading screen |
+
+**Result**: TypeScript and ESLint clean. `next build` passed with all 22 routes prerendered, including the Open Graph title card. No console errors and no horizontal scroll at any tested width. Lighthouse mobile: Accessibility, Best Practices and SEO are 100 on every page. Performance: missions 92–93, `/stats` 94, `/contact` 92, `/cv` 94.
+
+**Not reached / known**
+- **The home page is below the 90 Performance target:** 43 to 92 across 15 runs, usually 55 to 80.
+  - In the slow runs, Chrome lays out all 795 layout objects twice at about 170 ms each: once while the web fonts are pending, and again when they arrive.
+  - A `font-display: optional` experiment couldn't be measured because the machine ran out of memory (about 1.3 GB of commit memory left; builds and Lighthouse runs crashed). It was reverted.
+  - Measure the deployed site with PageSpeed Insights.
+- **Final rebuild:** after the font experiment was reverted, two more `next build` attempts crashed with out-of-memory errors. The source is identical to the last successful build.
+- **Placeholders:** all art is placeholder (clearly marked), and `profile.siteUrl` is `https://example.com`.
+- **Not tested:** physical phones, touch gestures on real devices, and screen readers. Keyboard paths were tested in headless Chrome.

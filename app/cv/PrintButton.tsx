@@ -1,22 +1,17 @@
 "use client"
 
 import { Printer } from "lucide-react"
-import { useEffect } from "react"
 
-import { Button } from "@/components/ui/Button"
-
-/** "Print / Save as PDF". Opening /cv?print=1 (the command palette's "Print CV") prints right away. */
+/** "Print / Save as PDF": the browser's print dialog saves the page as a one-page A4 PDF. */
 export function PrintButton() {
-  useEffect(() => {
-    if (new URLSearchParams(window.location.search).get("print") !== "1") return
-    window.history.replaceState(null, "", "/cv")
-    void document.fonts.ready.then(() => window.print())
-  }, [])
-
   return (
-    <Button onClick={() => window.print()}>
+    <button
+      type="button"
+      onClick={() => window.print()}
+      className="inline-flex h-11 items-center gap-2 rounded-lg bg-[#111] px-4 text-[0.9375rem] font-semibold text-white hover:bg-[#333]"
+    >
       <Printer aria-hidden="true" className="size-4" />
       Print / Save as PDF
-    </Button>
+    </button>
   )
 }

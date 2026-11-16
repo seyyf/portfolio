@@ -1,5 +1,5 @@
 /*
- * POST /api/contact: the contact form on the home page.
+ * POST /api/contact: the Messages app in the phone (and /contact).
  *
  * How to configure (Formspree):
  * 1. Create a free account at https://formspree.io and a new form; set its email to mejri.seyf@gmail.com.
@@ -12,7 +12,7 @@
  * 2. Resend (or any email API): `npm i resend`, set RESEND_API_KEY, and replace `forward()` below with
  *    `new Resend(process.env.RESEND_API_KEY).emails.send({ from, to, replyTo: email, subject, text: message })`.
  *
- * Without configuration the route answers 503 `{ ok: false, configured: false }` and the form offers a
+ * Without configuration the route answers 503 `{ ok: false, configured: false }` and the phone offers a
  * mailto: link instead. The message body is never logged.
  */
 

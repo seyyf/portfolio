@@ -1,104 +1,122 @@
-# Seyf Mejri — Release Notes
+# Seyf Mejri — Open World
 
-Seyf Mejri's portfolio, presented as a product changelog. Each job is a major version, newest first (v1.0 Bertsch Innovation → v5.0 Educaro, the current stable release). Each release lists its changes with plain-English tags: NEW, IMPROVED, FIXED, SECURITY, INFRA. v6.0, "Upcoming release: your team?", is the call to action.
+Seyf Mejri's portfolio, styled like the UI of a modern open-world game and set in Greater Tunis: a loading screen, a map with mission markers, a HUD, an in-game phone and a stats menu. Every job is a mission. Recruiters can always click **Skip to CV →** (top-left) for a plain one-page résumé.
+
+All art, names and sounds are original. The site uses no game names, logos, lettering, characters, screenshots, music or fonts from any existing game, and no crime themes. The only wink is the "Wanted by recruiters ★★★★★" meter.
 
 ```bash
 npm install
 npm run dev        # http://localhost:3000
-npm run build      # production build (every page is prerendered)
+npm run build      # production build (every page prerendered)
 npm start          # serve the production build on http://localhost:3000
 ```
 
-Stack: Next.js 16 (App Router), TypeScript, Tailwind CSS v4, Framer Motion, next-themes, cmdk, lucide-react. Fonts: Geist and Geist Mono (next/font).
+Stack: Next.js 16 (App Router), TypeScript, Tailwind CSS v4, GSAP (MISSION PASSED overlay), Framer Motion (phone, pause menu, briefings, swipe demo), Howler (optional sounds), lucide-react. Fonts: Anton (titles), Inter (body and UI), JetBrains Mono (HUD numbers).
 
 ## Pages
 
 | URL | What |
 | --- | --- |
-| `/` | Hero, latest release (v5.0), changelog with version scrubber, side releases (projects), stack as `package.json`, contact |
-| `/releases/<slug>` | Full release notes for one job: `educaro`, `uteek`, `global-enr`, `opus-lab`, `bertsch-innovation` |
-| `/cv` | One-page A4 résumé with "Print / Save as PDF" |
+| `/` | Loading screen (first visit of a session), then the map hub: intro card, map of Greater Tunis, mission list |
+| `/missions/<slug>` | A mission: `first-contract`, `table-service`, `120-orders`, `book-it`, `the-rebuild`; side missions: `fripa`, `febal-casa-usa`, `aurelia-gloves`, `weedy` |
+| `/stats` | Career stats and skills, in tabs |
+| `/contact` | The phone's Messages and Contacts, as a page |
+| `/cv` | Recruiter mode: a one-page A4 résumé with "Print / Save as PDF" |
 
-Unknown release slugs return a real 404 status (`proxy.ts`). Press **⌘K** or **Ctrl+K** (or the search button in the header) for the command palette.
+Everywhere: **Esc** (or the Menu button) opens the pause menu (Map, Missions, Stats, Phone, Settings, Recruiter mode). The phone button (bottom-right) opens the phone, and the minimap (bottom-left) goes to the full map. Settings has **Sound** (off by default) and **Reduce motion**.
 
 ## Where things live
 
 | What | Where |
 | --- | --- |
-| Name, headline, email, LinkedIn, CV path, site URL, at-a-glance row, header links | `data/profile.ts` |
-| Releases: versions, dates, change lists, stack, context, impact, metrics, images | `data/releases.ts` |
-| Side projects and their filter tags | `data/projects.ts` |
-| Skills (`package.json` groups) and languages | `data/skills.ts` |
-| Colours for both themes, tag colours, print styles | `app/globals.css` |
-| Header, mobile menu, footer, theme toggle, command palette, providers | `components/layout/` |
-| Home sections | `components/home/` |
-| Release page parts: header, change list, before/after slider, metrics, previous/next | `components/release/` |
-| Tag, chip, button, reveal | `components/ui/` |
+| Name, intro card text, HUD line, career stats, loading tips, CV path, site URL | `data/profile.ts` |
+| Missions, tutorials (education), side missions, the locked Mission 06, map districts and marker positions, metrics | `data/missions.ts` |
+| Skills and their status labels | `data/skills.ts` |
+| Colours, gradient, diagonal cuts, HUD styles, grain, reduced motion, print | `app/globals.css` |
+| HUD, recruiter button, wanted meter, minimap, pause menu | `components/hud/` |
+| Loading screen (CSS timeline in `styles.ts`) | `components/intro/` |
+| Map hub: map art and geometry, markers, cards, briefings, mission list, pan/zoom | `components/map/` |
+| Mission pages, MISSION PASSED overlay, before/after slider, swipe demo | `components/mission/` |
+| Phone, Messages, Contacts, Map and Settings apps | `components/phone/` |
+| Stats menu | `components/stats/` |
+| Settings store, sound, overlay store, GSAP setup | `lib/prefs.ts`, `lib/sound.ts`, `lib/ui.ts`, `lib/gsap.ts` |
 | Contact route (Formspree) | `app/api/contact/route.ts` |
 
-## Replacing placeholder images
+## Replacing placeholder illustrations
 
-Every image is a schematic SVG that says "Placeholder" and names its own file. Replace each file with a real image (PNG, JPG, WebP or SVG), then update the path, alt text, width and height in the data file:
+Every image is an original placeholder that says so. The SVG sources are rendered to WebP by two scripts, and `next/image` then serves them as AVIF or WebP.
 
-- **Portrait**: `public/images/portrait.svg` → `profile.portrait` in `data/profile.ts`. Remove "(placeholder)" from the alt text.
-- **Release screenshots**: `public/images/releases/<slug>.svg` → `hero` on each release in `data/releases.ts`.
-- **Educaro before/after slider**: `public/images/releases/educaro-legacy.svg` and `educaro-new.svg` → `beforeAfter` on the Educaro release.
-- **Project images**: `public/images/projects/<slug>.svg` → `image` on each project in `data/projects.ts`. Add a `url` to a project to show a "Visit" link on its card.
-- **Open Graph image**: `app/opengraph-image.png` is a 1200x630 screenshot of the hero. Retake it after changing the portrait or headline, and update `app/opengraph-image.alt.txt` if the text changes.
+- **Loading-screen panels** (portrait, Tunis sunset, Sidi Bou Said): `public/images/intro/*.webp`. To use a real photo for the portrait, drop it in `public/images/intro/` and update `profile.portrait` in `data/profile.ts` (path, width, height; remove "(placeholder)" from the alt text). To redraw a panel, edit the SVG in `scripts/intro-art/` and run `node scripts/render-intro-images.mjs`.
+- **The Rebuild's before/after slider** (the only images on mission pages): `public/images/missions/the-rebuild-legacy.webp` and `the-rebuild-new.webp`. Replace them with real screenshots (same names, or update `beforeAfter` in `data/missions.ts`). They are illustrations (no "placeholder" mark); `node scripts/render-mission-images.mjs` regenerates them.
+- **Open Graph image**: `app/opengraph-image.png` is the loading screen's title card at 1200x630. If you change the panels or name, re-capture it: open `/` in a fresh tab at 1200x630, and screenshot at about 2.2s.
+- **Domain**: set `profile.siteUrl` (now `https://example.com`) for canonical URLs, Open Graph, the sitemap and JSON-LD.
+- **Live links**: add `url` to a side mission in `data/missions.ts` to link it.
 
-Images use `next/image`. SVGs are served as is (`unoptimized`); for real photos you can remove `unoptimized` to get resized, modern-format images.
+## Adjusting map markers
 
-Also replace `profile.siteUrl` (`https://example.com`) with the real domain. It's used for canonical URLs, Open Graph, the sitemap and JSON-LD.
+Marker positions are in `data/missions.ts`, as `map: { x, y, district }` on each mission, tutorial, side mission and the locked Mission 06. The coordinates use the map's 1600×1000 grid: x runs west to east, y north to south. For reference, the sea and the coast are on the right (east), Les Berges du Lac is at about (920, 450), and Manouba is on the left (300, 560). District label positions are in `districts` in the same file. The shapes are drawn in `components/map/geometry.ts`, which also holds small label offsets so labels never sit under a marker.
 
-## Adding real metrics
+The positions are illustrative and stay at district level, never real addresses; the map says so in its legend. Keyboard users move between markers with the arrow keys, so a marker you move becomes reachable in its new direction automatically.
 
-No number on the site is invented. Where a real figure belongs, the release has a metric without a value, marked with a comment. Search the code for `TODO: add metric`:
+## Filling the `TODO: add metric` spots
+
+No number on the site is invented. Search the code for `TODO: add metric`. Each one is a metric in `data/missions.ts` without a value:
 
 ```ts
 metrics: [
   { label: "Daily active users" }, // TODO: add metric
-  { label: "Page load time, legacy vs new" }, // TODO: add metric
 ],
 ```
 
-In development (`npm run dev`), each one shows as a dashed "TODO: add metric" box in the release's Impact section. Production builds hide them, so the live site never shows an empty figure.
-
-To add a metric, give it a value. It then appears as a stat card, in development and production:
+In development (`npm run dev`), each shows as a dashed "TODO: add metric" box on its mission page. Production builds hide them. To publish a figure, give it a value, and it becomes a stat card:
 
 ```ts
 { label: "Daily active users", value: "350" },
 ```
 
-You can also add a sentence with the number to the release's `impact` list.
+Mission 03 already has one real metric from the CV: "About 120" people ordering with the PWA.
 
 ## Contact form setup (Formspree)
 
-The form posts to `app/api/contact/route.ts`. The route validates the message (20 KB limit, honeypot field) and forwards it to Formspree, with Reply-To set to the visitor. On success the visitor sees `✓ Message delivered`.
+The phone's Messages app (and `/contact`) posts to `app/api/contact/route.ts`. The route validates the message (20 KB limit, honeypot field) and forwards it to Formspree, with Reply-To set to the visitor. On success the bubble shows "Delivered ✓".
 
-1. Create a free account at [formspree.io](https://formspree.io) and a new form. Set its email to Seyf's address and confirm it when Formspree emails you.
+1. Create a free account at [formspree.io](https://formspree.io) and a new form. Set its email to Seyf's address and confirm it.
 2. In the form's **Settings**, turn **reCAPTCHA off**. Messages are sent from the server, so a captcha would make Formspree reject them.
 3. Copy the form endpoint (`https://formspree.io/f/xxxxxxx`) or just its ID.
 4. Locally: copy `.env.example` to `.env.local`, set `FORMSPREE_ENDPOINT`, and restart `npm run dev`.
-5. When deploying, add the same `FORMSPREE_ENDPOINT` variable in the host's environment settings.
+5. When deploying, add the same `FORMSPREE_ENDPOINT` in the host's environment settings.
 
-Until it's set, the form says it isn't connected yet and offers the visitor's email app with the message prefilled. To use another email service instead, replace `forward()` in the route; the file explains how.
+Until it's set, Messages replies that messages aren't connected yet and offers a prefilled email instead.
 
-## Accessibility, motion and performance
+## Motion, accessibility and performance
 
-- Semantic landmarks, one `h1` per page, a skip link, visible focus rings, and full keyboard use: the palette (arrows, Enter, Esc), the mobile menu (a native modal dialog that returns focus), the version scrubber (plain links), the project filter (`aria-pressed`) and the before/after slider (arrow keys, Home, End).
-- WCAG AA in both themes. Every tag pill is at least 6:1, muted text at least 5.1:1, and the accent at least 5.5:1.
-- Motion is limited to: fade and slide-up on scroll (once, only for content that starts below the fold), the version scrubber's indicator, hover states, the theme switch, the palette and the project filter. With `prefers-reduced-motion`, nothing moves.
-- Framer Motion's animation features and the command palette (cmdk) load after the page is interactive.
-- Lighthouse 12 on a production build served locally:
+- **Loading screen:** shown once per session on `/` only, for 3 seconds at most. Any key, click or tap skips it, and "Skip to CV" stays clickable above it. It's CSS only, so it starts with the first paint.
+- **Mission pages (GSAP):** as you scroll, the header's sun sinks and the palms move at different depths and sway, the objective rises word by word, section headings wipe in, briefing bullets slide in, chips pop in and the before/after frame opens on a diagonal. GSAP loads on the first scroll; content already on screen never re-animates.
+- **MISSION PASSED:** plays when you reach the end of a mission (or press "Complete mission"). It's skippable with any key, a click or the Skip button. Mission 05 says "Checkpoint reached" instead, because it's the current job.
+- **Reduced motion** (the OS setting or Settings → Reduce motion): no loading screen, no map flights, an instant MISSION PASSED card, and opacity-only transitions.
+- **Keyboard:**
+  - Map markers are buttons; the arrow keys move between them, Home/End jump to the ends, and Enter opens a briefing.
+  - The pause menu, phone and overlay are modal dialogs that keep focus inside and return it on close.
+  - The before/after slider and the swipe demo work with the arrow keys.
+- **Text:** body text is at least 17px on phones. Gradient text falls back to solid orange where gradient clipping isn't supported.
+- **Lighthouse 12, mobile, on a production build served locally:**
 
-  | Page | Mobile (Performance / Accessibility / Best Practices / SEO) | Desktop |
+  | Page | Performance | Accessibility / Best Practices / SEO |
   | --- | --- | --- |
-  | `/` | 95 / 100 / 100 / 100 (median of 5 runs: 85, 95, 95, 96, 96) | 100 / 100 / 100 / 100 |
-  | `/releases/educaro` | 96 / 100 / 100 / 100 | 100 / 100 / 100 / 100 |
-  | `/cv` | 96 / 100 / 100 / 100 | 100 / 100 / 100 / 100 |
+  | `/missions/the-rebuild` | 92 | 100 / 100 / 100 |
+  | `/missions/fripa` | 93 | 100 / 100 / 100 |
+  | `/stats` | 94 | 100 / 100 / 100 |
+  | `/contact` | 92 | 100 / 100 / 100 |
+  | `/cv` | 94 | 100 / 100 / 100 |
+  | `/` | 43 to 92 across 15 runs (usually 55 to 80) | 100 / 100 / 100 |
 
-  The one 85 on the home page was a run with a 378 ms hydration task while the machine was busy. Check the deployed site with PageSpeed Insights.
+  **The home page is below the 90 target.** Its scores vary because of main-thread rendering work during the first visit. In the slow runs, Chrome lays out the whole page twice at about 170 ms each: once while the web fonts are still loading, and again when they arrive. On top of that comes the 3-second animated loading screen. The test machine was also short of memory, which made it worse. Measure the deployed site with PageSpeed Insights; if it's still under 90, the next levers are a lighter first-visit loading screen and fewer font files.
 
 ## Earlier builds
 
-Earlier concepts are kept for reference and are not part of the app: `design/archive/build-2-seyf-city` (a 3D city) and `design/archive/build-4-seyf-times` (an editorial newspaper). SeyfOS, the smartphone OS, is in the git history and on the local `seyfos` branch.
+Kept for reference, not part of the app:
+- `design/archive/build-2-seyf-city` (a 3D city)
+- `design/archive/build-4-seyf-times` (an editorial newspaper)
+- `design/archive/build-5-release-notes` (a product changelog, also in git as commit `35c6949`)
+
+SeyfOS is in the git history and on the local `seyfos` branch.

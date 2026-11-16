@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+<rect width="800" height="1000" fill="#ece6d8"/>
+<circle cx="400" cy="470" r="420" fill="none" stroke="#d6cdbb" stroke-width="3"/><circle cx="400" cy="470" r="340" fill="none" stroke="#d6cdbb" stroke-width="3"/><circle cx="400" cy="470" r="260" fill="none" stroke="#a39a89" stroke-width="3"/>
+<path d="M120 900c0-170 110-260 280-260s280 90 280 260z" fill="#6b6b6b"/>
+<path d="M340 560h120v120q-60 40-120 0z" fill="#a39a89"/>
+<ellipse cx="400" cy="420" rx="135" ry="165" fill="#a39a89"/>
+<path d="M265 400c0-120 60-170 135-170s135 50 135 170c-30-60-80-80-135-80s-105 20-135 80z" fill="#6b6b6b"/>
+<path d="M330 660l70 60l70-60" fill="none" stroke="#ece6d8" stroke-width="6"/>
+<line x1="60" y1="900" x2="740" y2="900" stroke="#141414" stroke-width="2"/>
+<text x="400" y="955" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="24" letter-spacing="5" fill="#6b6b6b">PORTRAIT PLACEHOLDER</text>
+</svg>

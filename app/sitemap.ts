@@ -1,12 +1,13 @@
 import type { MetadataRoute } from "next"
 
-import { appIds } from "@/data/apps"
 import { profile } from "@/data/profile"
+import { jobs } from "@/data/releases"
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const base = profile.siteUrl
   return [
-    { url: profile.siteUrl, changeFrequency: "monthly", priority: 1 },
-    { url: `${profile.siteUrl}/resume`, changeFrequency: "monthly", priority: 0.9 },
-    ...appIds.map((id) => ({ url: `${profile.siteUrl}/app/${id}`, changeFrequency: "monthly" as const, priority: 0.7 })),
+    { url: base, changeFrequency: "monthly", priority: 1 },
+    ...jobs.map((j) => ({ url: `${base}/releases/${j.slug}`, changeFrequency: "yearly" as const, priority: 0.7 })),
+    { url: `${base}/cv`, changeFrequency: "monthly", priority: 0.6 },
   ]
 }

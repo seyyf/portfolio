@@ -1,1 +1,1 @@
-SeyfOS: Seyf Mejri's portfolio as a phone home screen, with an app for each project he built.
+Seyf Mejri, Fullstack JavaScript Developer: "Fullstack JavaScript developer. I ship products end to end." Portfolio presented as release notes.

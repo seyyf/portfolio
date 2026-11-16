@@ -194,3 +194,81 @@ Seyf asked for edit mode to work like a phone: move apps wherever he wants.
 **Verified** with real pointer drags on a production build (1440x900): reorder within a page; dock to page; edge-hold to the other page; page to dock; drop into a full page refused; long-press then drag without edit mode; arrangement survives reload; menu move actions (disabled with a reason when the target is full); Reset clears the saved layout. Console: 0 errors.
 
 **Not tested**: touch drags on a physical phone (icons use `touch-action: none` and pointer capture so the browser doesn't take over the gesture, but this was only exercised with a mouse).
+
+---
+
+## Phase 4: Build 4, "The Seyf Times" (2026-11-13)
+
+New brief from Seyf: the portfolio as a modern editorial newspaper. Morning Edition (light) and Night Edition (dark), a blackletter masthead, a breaking-news ticker, halftone images, page-turn transitions, skills as the markets page, contact as classifieds, and a printable A4 edition. Targets: mobile-first, reduced motion, accessible, Lighthouse 95+ in all four categories, no invented numbers.
+
+**Process**
+1. SeyfOS is kept on the local `seyfos` branch and in the pushed `main` history. Its code, sounds and dependencies (Zustand, Vaul, Howler) were removed from the working tree. next-themes was added.
+2. Content was rewritten into `data/profile.ts`, `data/projects.ts` (nine stories), `data/career.ts` and `data/skills.ts`. Facts come from `cv.md`. Skills show only one number: how many roles used each skill, counted from the career data. Missing figures are `todo` lists, shown only in development.
+3. I built the frame first (fonts, tokens for both editions, masthead, ticker, sticky header, sections menu, footer, intro, reveals, halftone, theme switch, page transitions, the 404 proxy). Subagents then built the sections against it: the front page, project index and articles; then career, skills, contact and print. Images are schematic SVG placeholders, marked as such.
+4. Verified with `playwright-cli` on production builds at 390px and 1440x900, in both editions and with reduced motion. Screenshots are in `design/log/times/`.
+
+**Decisions**
+- Page turns use React's `<ViewTransition>` with CSS keyframes instead of Framer Motion. It is native, works with the App Router, and costs no JavaScript. Framer Motion handles the interactive pieces: the project filter's layout animation, the RECEIVED stamp, the form states, the before/after slider and the swipe deck.
+- The intro is CSS (masthead inked in, rule drawn) and never hides the page, so the first paint is the real page.
+- GSAP and Lenis load on the first scroll, touch, key press or mouse move (`lib/gsapLazy.ts`). Content on screen at load is shown as is; everything below the fold still reveals.
+
+**Issues found and fixed (all real)**
+| Found | How | Fix |
+|---|---|---|
+| `/projects/nope` answered 200 with a noindex "not found" page (soft 404) | curl | With partial prerendering the status is sent before `notFound()` runs, so `proxy.ts` rewrites unknown slugs to the 404 page with status 404 |
+| Reused SeyfOS components still had SeyfOS classes | Screenshots | Restyled to the newspaper tokens |
+| Theme colours snapped instead of gliding | Manual check | Removed next-themes' `disableTransitionOnChange` |
+| Masthead printed on the print edition | Print preview | `no-print` on the header |
+| Front page Lighthouse Performance 52 (LCP 5.7 s, TBT 1.3 s, CLS 0.077) | Lighthouse 12, mobile | Intro no longer hides `<main>`; reveals skip what is on screen at load; date placeholder stops the layout shift; Framer removed from always-mounted components |
+| Small red kickers at 4.40:1 contrast | Lighthouse accessibility | `--accent-text` (#c21f36, 5.26:1) for small red text; the brand red stays for large type and fills |
+| Edition switch's accessible name didn't contain its visible text | Lighthouse (label-content-name-mismatch) | The name now starts with the visible label |
+| Front page still 57 after lazy-loading GSAP: TBT 1.1 s | Lighthouse trace | GSAP loaded during hydration because every reveal requested it on mount. It now loads on first interaction (TBT about 70 ms) |
+| First layout took 193 ms unthrottled | Chrome trace | `text-wrap: pretty` on every paragraph and list item; now only on article body copy (layout 73 ms) |
+| Career card label at 4.28:1 (grey on the card's darker paper) | Lighthouse accessibility | Ink at 75% on that surface (7.24:1); the brand grey is unchanged elsewhere |
+| One Lighthouse run gave TBT 4 to 6 s | Benchmark index 330 against about 2,400 normally | Machine under load; discarded, and each page re-run 3 times |
+
+**Result**: TypeScript and ESLint clean; `next build` passes with every page prerendered; console has 0 errors. Lighthouse mobile: Accessibility, Best Practices and SEO are 100 on every page. Performance is 85 to 90 (`/` 87, `/career` 90), with CLS 0 to 0.02 and TBT about 70 ms. Desktop: 99 to 100.
+
+**Not reached / known**
+- Mobile Performance is below the 95 target. The remaining cost is LCP in Lighthouse's simulation (3.6 to 4.0 s; about 0.3 s measured locally). The simulation charges the five web fonts (about 265 KB) and the React runtime to LCP. Dropping or merging a type family is the next lever, but the brief names all five. Not yet measured on a deployed site.
+- `profile.siteUrl` is `https://example.com` until a domain is chosen. All images, including the portrait, are placeholders.
+- Page turns use View Transitions; Firefox versions without them switch pages without the animation.
+- Not tested on a physical phone; mobile was checked in headless Chrome at 390px.
+
+---
+
+## Phase 5: Build 5, "Seyf Mejri — Release Notes" (2026-11-16)
+
+New brief from Seyf: the career as a product changelog. Each job is a major version, newest first; each release lists its changes with tags (NEW, IMPROVED, FIXED, SECURITY, INFRA); v6.0 "Upcoming release: your team?" is the call to action. Calm and premium, readable in five seconds. Strict restraint: two font families (Geist and Geist Mono), one accent (Sidi Bou Said blue), no custom cursor, intro, page turns, smooth-scroll library or ticker.
+
+**Process**
+1. The Seyf Times (uncommitted) was copied to `design/archive/build-4-seyf-times/` (source, images, screenshots), then removed from the app. GSAP and Lenis were uninstalled; cmdk was added.
+2. Content went into typed files: `data/profile.ts`, `data/releases.ts` (version map, change lists and stacks exactly as in the brief), `data/projects.ts` and `data/skills.ts`. Context and impact paragraphs only restate CV facts. Every missing figure is a metric with no value, marked `// TODO: add metric`.
+3. Built in the main session in the brief's order: tokens and fonts; header, mobile menu, footer and theme toggle; hero, featured release, changelog and version scrubber; projects, `package.json` stack and contact; release pages with the before/after slider; the CV page; the command palette.
+4. Verified with `playwright-cli` on production builds at 360, 390, 768, 1280, 1440 and 1536px, in both themes and with reduced motion, using a mock Formspree for the contact form.
+
+**Decisions**
+- The command palette and mobile menu are native modal `<dialog>` elements, with cmdk inside the palette. This gives an inert background, Esc and focus return for free, and the palette code downloads only when it's first opened. Open and close are CSS transitions (`@starting-style`), not Framer Motion.
+- Framer Motion runs through `LazyMotion`, with its features loaded after hydration. Reveals render visible on the server and hide only what starts below the fold, so nothing on the first screen waits for JavaScript.
+- The version scrubber is one component: a sticky strip of pills under the header on mobile, a sticky rail in the left gutter on desktop. Both use plain hash links.
+- `TODO: add metric` boxes render only in development; production hides metrics that have no value.
+
+**Issues found and fixed (all real)**
+| Found | How | Fix |
+|---|---|---|
+| Page 430px wide at 390px | `scrollWidth` check | The theme toggle and CV button had both `hidden` and `inline-flex`, and `inline-flex` won; they're now wrapped in a container hidden below `lg` |
+| Rail dot for v1.0 off the line | 1440px screenshot | Its long hidden label shrank the dot; the dot no longer shrinks |
+| Dates wrapping in the changelog's version column | 1440px screenshot | Column widened to 10rem |
+| `package.json` strings breaking mid-word ("REST / APIs") | 1440px screenshot | Short strings don't wrap; only the long tool descriptions may |
+| Palette opened with focus on a `div`, so typing did nothing | Checked `document.activeElement` after Ctrl+K | `showModal()` ignores React's `autoFocus`; the input is focused explicitly |
+| Searching "fripa" opened Opus Lab | Listed the ranked items after typing | cmdk's fuzzy score matched scattered letters in keywords; replaced with a filter where every typed word must appear and name matches rank first |
+| An empty form submit made a server round trip and logged a 422 in the console | Playwright request log | The same validation now runs in the browser first; the server still validates |
+| Home-page Lighthouse run at 76 | Benchmark index 1,122 (normally about 2,300) | Machine under load; discarded and re-run 5 times |
+
+**Result**: TypeScript and ESLint clean; `next build` passes with every page prerendered; no console errors; no horizontal scroll at any tested width; the CV prints on one A4 page. Lighthouse mobile: `/` 95 (median of 85, 95, 95, 96, 96), `/releases/educaro` 96, `/cv` 96, with Accessibility, Best Practices and SEO at 100. Desktop: 100 in every category on all three.
+
+**Not done / known**
+- All images, including the portrait and the Open Graph image (a screenshot of the hero with the placeholder portrait), are placeholders. `profile.siteUrl` is `https://example.com`.
+- Projects have no live URLs yet, so their cards show no "Visit" link.
+- The contact form needs `FORMSPREE_ENDPOINT` to send; until then it offers a prefilled email.
+- Not tested on a physical phone or with a screen reader; keyboard paths were tested in headless Chrome.

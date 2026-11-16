@@ -1,0 +1,379 @@
+@import "tailwindcss";
+
+/* The Seyf Times. Morning Edition (light) and Night Edition (dark, html.dark via next-themes). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-masthead: var(--font-unifraktur), "Old English Text MT", serif;
+  --font-headline: var(--font-playfair), Georgia, serif;
+  --font-body: var(--font-newsreader), Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+
+  --ease-ink: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-ink: var(--ink);
+  --color-gray: var(--gray);
+  --color-rule: var(--rule);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-text);
+  --color-market: var(--market);
+}
+
+:root {
+  --paper: #f5f1e8;
+  --paper-2: #ece6d8;
+  --ink: #141414;
+  /* #6B6B6B is 4.6:1 on the paper: fine for small text. */
+  --gray: #6b6b6b;
+  --rule: #141414;
+  --accent: #d7263d;
+  /* Brand red for large type and fills; a deeper red for small text so it stays above 4.5:1 on paper. */
+  --accent-text: #c21f36;
+  --market: #1f9d55;
+  --grain-opacity: 0.06;
+  color-scheme: light;
+}
+
+.dark {
+  --paper: #121212;
+  --paper-2: #1c1c1c;
+  --ink: #ede8dc;
+  --gray: #a8a294;
+  --rule: #ede8dc;
+  --accent: #ff4d5e;
+  --accent-text: #ff4d5e;
+  --market: #3ddc84;
+  --grain-opacity: 0.05;
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    background: var(--paper);
+  }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1.0625rem; /* 17px minimum body size */
+    line-height: 1.6;
+    min-height: 100dvh;
+    overflow-x: clip;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      background-color 400ms var(--ease-ink),
+      color 400ms var(--ease-ink);
+  }
+  /* Subtle paper grain over everything (pointer-events none, so it never gets in the way). */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    /* Own compositor layer: the noise is rasterised once, not repainted on every scroll frame. */
+    will-change: transform;
+    transform: translateZ(0);
+    opacity: var(--grain-opacity);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-headline);
+    text-wrap: balance;
+  }
+  /* text-wrap: pretty is costly to lay out, so it is kept for long-form article copy only. */
+  .prose-news p,
+  .prose-news li {
+    text-wrap: pretty;
+  }
+  a,
+  button {
+    touch-action: manipulation;
+  }
+  button {
+    cursor: pointer;
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  ::selection {
+    background: var(--accent);
+    color: #fff;
+  }
+}
+
+@layer components {
+  /* Small uppercase, letter-spaced labels: kickers, nav, datelines. */
+  .label {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .kicker {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent-text);
+  }
+  .byline {
+    font-family: var(--font-body);
+    font-variant: small-caps;
+    letter-spacing: 0.04em;
+    color: var(--gray);
+  }
+  /* Body copy: comfortable measure. */
+  .prose-news {
+    max-width: 68ch;
+  }
+  .prose-news p + p {
+    margin-top: 1em;
+  }
+  /* Double rule between sections. */
+  .rule-double {
+    border-top: 3px double var(--rule);
+  }
+  .rule-thin {
+    border-top: 1px solid var(--rule);
+  }
+  /* Ink buttons. */
+  .btn-ink {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0.6rem 1.1rem;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--paper);
+    border: 1px solid var(--ink);
+    transition:
+      transform 160ms var(--ease-ink),
+      background-color 200ms,
+      color 200ms;
+  }
+  .btn-ink:hover {
+    transform: translateY(-1px);
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--ink);
+  }
+  .btn-outline:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    min-height: 26px;
+    padding: 0.1rem 0.55rem;
+    border: 1px solid color-mix(in srgb, var(--ink) 35%, transparent);
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  /* Animated red underline for headlines inside links. */
+  .headline-link {
+    background-image: linear-gradient(var(--accent), var(--accent));
+    background-size: 0% 2px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 350ms var(--ease-ink);
+  }
+  a:hover .headline-link,
+  a:focus-visible .headline-link,
+  .headline-link:hover {
+    background-size: 100% 2px;
+  }
+}
+
+/* Halftone: images are printed as dots (grayscale + a paper-coloured dot screen) and turn into full
+   colour on hover, focus or tap. */
+.halftone {
+  position: relative;
+  overflow: hidden;
+  background: var(--paper-2);
+}
+.halftone img {
+  filter: grayscale(1) contrast(1.15);
+  transition: filter 600ms var(--ease-ink);
+}
+.halftone::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle at center, transparent 0.85px, var(--paper) 1.35px);
+  background-size: 4px 4px;
+  opacity: 0.55;
+  transition: opacity 600ms var(--ease-ink);
+}
+.halftone-trigger:hover .halftone img,
+.halftone-trigger:focus-visible .halftone img,
+.halftone-trigger:active .halftone img,
+.halftone:hover img,
+.halftone.is-color img {
+  filter: none;
+}
+.halftone-trigger:hover .halftone::after,
+.halftone-trigger:focus-visible .halftone::after,
+.halftone-trigger:active .halftone::after,
+.halftone:hover::after,
+.halftone.is-color::after {
+  opacity: 0;
+}
+
+/* Drop cap on lead paragraphs. */
+.drop-cap::first-letter {
+  float: left;
+  font-family: var(--font-headline);
+  font-weight: 900;
+  font-size: 4.1em;
+  line-height: 0.82;
+  padding: 0.06em 0.1em 0 0;
+  color: var(--ink);
+}
+
+/* Ticker marquee: pauses on hover, static for reduced motion. */
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.ticker-track {
+  animation: ticker var(--ticker-duration, 40s) linear infinite;
+}
+.ticker:hover .ticker-track,
+.ticker:focus-within .ticker-track {
+  animation-play-state: paused;
+}
+
+/* Page turn between sections (React <ViewTransition> + View Transitions API). */
+@keyframes page-out {
+  to {
+    opacity: 0;
+    transform: perspective(1400px) rotateY(-8deg) translateX(-24px);
+  }
+}
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: perspective(1400px) rotateY(8deg) translateX(24px);
+  }
+}
+::view-transition-old(.page-turn) {
+  transform-origin: left center;
+  animation: page-out 220ms var(--ease-ink) both;
+}
+::view-transition-new(.page-turn) {
+  transform-origin: right center;
+  animation: page-in 320ms var(--ease-ink) 80ms both;
+}
+
+/* Theme switch: let colours glide instead of snapping. */
+.theme-transition,
+.theme-transition * {
+  transition:
+    background-color 400ms var(--ease-ink),
+    color 400ms var(--ease-ink),
+    border-color 400ms var(--ease-ink) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+    transform: none;
+  }
+  ::view-transition-old(.page-turn),
+  ::view-transition-new(.page-turn) {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* Print: plain black on white, no chrome. */
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm 14mm 16mm;
+  }
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  body::after {
+    display: none;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* "Printing" intro, first visit of the session (class set before first paint by an inline script):
+   the masthead inks in from left to right, then the double rule draws out from the centre. Pure CSS,
+   so it runs from the very first frame; skipping removes the class and everything is simply there. */
+@keyframes ink-in {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes rule-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+html.intro-pending #masthead-title {
+  animation: ink-in 700ms var(--ease-ink) both;
+}
+html.intro-pending #masthead-rule {
+  transform-origin: center;
+  animation: rule-draw 600ms var(--ease-ink) 450ms both;
+}
+
+/* Mobile sections index: drops in like a turned page. */
+@keyframes sections-in {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+}
+.sections-index {
+  animation: sections-in 250ms var(--ease-ink) both;
+}

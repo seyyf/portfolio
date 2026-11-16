@@ -1,312 +1,238 @@
 @import "tailwindcss";
 
-/* SeyfOS design tokens. Accents are pastel in light mode and a little more saturated in dark mode. */
-@theme {
-  --color-mint: #a8e6cf;
-  --color-coral: #ff8b94;
-  --color-sky: #a0d2eb;
-  --color-butter: #ffd97d;
-  --color-lavender: #c3b1e1;
-  --color-ink: #1f2233;
-  --color-night: #0e1020;
-  --color-glow: #ffc46b;
-
-  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-fredoka), ui-rounded, system-ui, sans-serif;
-
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
-}
+/* Dark mode follows the class next-themes puts on <html>. */
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+
   --color-bg: var(--bg);
   --color-surface: var(--surface);
-  --color-surface-2: var(--surface-2);
-  --color-text: var(--text);
-  --color-text-soft: var(--text-soft);
-  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --color-accent-soft: var(--accent-soft);
+
+  --color-tag-new: var(--tag-new);
+  --color-tag-new-bg: var(--tag-new-bg);
+  --color-tag-improved: var(--tag-improved);
+  --color-tag-improved-bg: var(--tag-improved-bg);
+  --color-tag-fixed: var(--tag-fixed);
+  --color-tag-fixed-bg: var(--tag-fixed-bg);
+  --color-tag-security: var(--tag-security);
+  --color-tag-security-bg: var(--tag-security-bg);
+  --color-tag-infra: var(--tag-infra);
+  --color-tag-infra-bg: var(--tag-infra-bg);
+
+  --radius-card: 12px;
+  --radius-control: 10px;
 }
 
-:root {
-  --bg: #f6f4fb;
+/* Light. Every text/background pair below is WCAG AA at 11px (checked: 5.1:1 and up).
+   .force-light keeps the résumé on white paper in dark mode. */
+:root,
+.force-light {
+  --bg: #fafaf7;
   --surface: #ffffff;
-  --surface-2: #f3f1f8;
-  --glass: rgba(255, 255, 255, 0.62);
-  --glass-strong: rgba(255, 255, 255, 0.82);
-  --text: #1f2233;
-  --text-soft: #5c6079;
-  --line: rgba(31, 34, 51, 0.1);
-  --shadow: 0 1px 2px rgba(31, 34, 51, 0.06), 0 8px 24px -8px rgba(31, 34, 51, 0.18);
-  --focus: #1f2233;
-  /* wallpaper blobs */
-  --wp-bg: #f4eefc;
-  --wp-1: #c3b1e1;
-  --wp-2: #a0d2eb;
-  --wp-3: #ffd0c4;
-  --wp-4: #a8e6cf;
-  /* phone chrome */
-  --status-h: 50px;
-  --home-h: 30px;
+  --ink: #111111;
+  --muted: #6b6b6b;
+  --border: #e7e5e0;
+  --accent: #0e4c92; /* Sidi Bou Said blue */
+  --on-accent: #ffffff;
+  --accent-soft: #e4ecf6;
+
+  --tag-new: #0e4c92;
+  --tag-new-bg: #e4ecf6;
+  --tag-improved: #13653a;
+  --tag-improved-bg: #e2f1e7;
+  --tag-fixed: #8a4700;
+  --tag-fixed-bg: #fbeed6;
+  --tag-security: #a3172b;
+  --tag-security-bg: #fbe5e7;
+  --tag-infra: #4a4a48;
+  --tag-infra-bg: #edece7;
+
+  --shadow-hover: 0 1px 2px rgb(17 17 17 / 0.04), 0 8px 24px -12px rgb(17 17 17 / 0.14);
   color-scheme: light;
 }
 
-:root[data-theme="dark"] {
-  --color-mint: #7ee2bc;
-  --color-coral: #ff7a86;
-  --color-sky: #84c6f0;
-  --color-butter: #ffcf5c;
-  --color-lavender: #b39bea;
-  --bg: #0e1020;
-  --surface: #1a1d33;
-  --surface-2: #23274a;
-  --glass: rgba(26, 29, 51, 0.62);
-  --glass-strong: rgba(26, 29, 51, 0.86);
-  --text: #f3f1fa;
-  --text-soft: #a9aecb;
-  --line: rgba(255, 255, 255, 0.09);
-  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 30px -10px rgba(0, 0, 0, 0.7);
-  --focus: #ffc46b;
-  --wp-bg: #0e1020;
-  --wp-1: #3b2f6e;
-  --wp-2: #173b5c;
-  --wp-3: #5a2a4a;
-  --wp-4: #164a40;
+.dark {
+  --bg: #0d0f12;
+  --surface: #15181d;
+  --ink: #eceae4;
+  --muted: #9a9a9a;
+  --border: #24282f;
+  --accent: #5b8def;
+  --on-accent: #0d0f12;
+  --accent-soft: #18243a;
+
+  --tag-new: #a8c4fa;
+  --tag-new-bg: #18243a;
+  --tag-improved: #86d7a6;
+  --tag-improved-bg: #13291d;
+  --tag-fixed: #f1c47f;
+  --tag-fixed-bg: #2d2312;
+  --tag-security: #f6a3ad;
+  --tag-security-bg: #33171c;
+  --tag-infra: #bdbdba;
+  --tag-infra-bg: #23262c;
+
+  --shadow-hover: 0 1px 2px rgb(0 0 0 / 0.3), 0 10px 28px -12px rgb(0 0 0 / 0.6);
   color-scheme: dark;
 }
 
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
-    background: var(--bg);
+    text-rendering: optimizeLegibility;
+    /* Anchored sections land below the sticky header (and the mobile version strip). */
+    scroll-padding-top: 7.5rem;
+  }
+  @media (min-width: 1024px) {
+    html {
+      scroll-padding-top: 5rem;
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
   body {
     background: var(--bg);
-    color: var(--text);
+    color: var(--ink);
     font-family: var(--font-sans);
-    -webkit-tap-highlight-color: transparent;
-    min-height: 100dvh;
+    font-size: 1.0625rem; /* 17px minimum on mobile */
+    line-height: 1.65;
+    overflow-x: clip;
   }
-  /* The OS owns the whole screen: no page scroll, no pull-to-refresh fighting the gestures. */
-  body:has(.os-root) {
-    overflow: hidden;
-    overscroll-behavior: none;
+  @media (min-width: 768px) {
+    body {
+      font-size: 1.125rem;
+    }
   }
   h1,
   h2,
   h3 {
+    letter-spacing: -0.03em;
+    line-height: 1.1;
     text-wrap: balance;
   }
-  p,
-  li {
-    text-wrap: pretty;
-  }
-  button,
-  a {
-    touch-action: manipulation;
-  }
-  button {
-    cursor: pointer;
-  }
   :focus-visible {
-    outline: 2.5px solid var(--focus);
-    outline-offset: 2px;
-    border-radius: 12px;
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
   }
   ::selection {
-    background: var(--color-butter);
-    color: #1f2233;
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+  a,
+  button {
+    touch-action: manipulation;
   }
 }
 
-@layer components {
-  /* Frosted glass panel. */
-  .glass {
-    background: var(--glass);
-    -webkit-backdrop-filter: blur(22px) saturate(1.6);
-    backdrop-filter: blur(22px) saturate(1.6);
+/* Colours glide when the theme changes (the class is only present for 300 ms during a switch). */
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+  transition:
+    background-color 300ms ease,
+    border-color 300ms ease,
+    color 300ms ease,
+    fill 300ms ease !important;
+}
+
+/* Native <dialog> for the command palette and the mobile menu: fade and rise in, fade out. */
+dialog.sheet {
+  opacity: 0;
+  transform: translateY(8px) scale(0.99);
+  transition:
+    opacity 160ms ease,
+    transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    overlay 200ms allow-discrete,
+    display 200ms allow-discrete;
+}
+dialog.sheet[open] {
+  opacity: 1;
+  transform: none;
+}
+@starting-style {
+  dialog.sheet[open] {
+    opacity: 0;
+    transform: translateY(8px) scale(0.99);
   }
-  .glass-strong {
-    background: var(--glass-strong);
-    -webkit-backdrop-filter: blur(26px) saturate(1.7);
-    backdrop-filter: blur(26px) saturate(1.7);
-  }
-  .card {
-    background: var(--surface);
-    border-radius: 24px;
-    box-shadow: var(--shadow);
-  }
-  .chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    min-height: 28px;
-    border-radius: 999px;
-    padding: 0.2rem 0.7rem;
-    font-size: 0.8125rem;
-    font-weight: 600;
-    background: var(--surface-2);
-    color: var(--text);
-  }
-  /* Primary pill button. */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.45rem;
-    min-height: 44px;
-    padding: 0.55rem 1.1rem;
-    border-radius: 999px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    background: var(--text);
-    color: var(--bg);
-    transition:
-      transform 160ms var(--ease-spring),
-      opacity 160ms;
-  }
-  .btn:active {
-    transform: scale(0.95);
-  }
-  .btn-soft {
-    background: var(--surface-2);
-    color: var(--text);
-  }
-  .btn-accent {
-    background: var(--color-mint);
-    color: #1f2233;
-  }
-  /* Scrolling area inside an app: native scroll, contained so the page never scrolls behind it. */
-  .app-scroll {
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-  .app-scroll::-webkit-scrollbar {
-    display: none;
+}
+dialog.sheet::backdrop {
+  background: rgb(13 15 18 / 0);
+  transition:
+    background 200ms ease,
+    overlay 200ms allow-discrete,
+    display 200ms allow-discrete;
+}
+dialog.sheet[open]::backdrop {
+  background: rgb(13 15 18 / 0.45);
+}
+@starting-style {
+  dialog.sheet[open]::backdrop {
+    background: rgb(13 15 18 / 0);
   }
 }
 
-/* Animated wallpaper: soft blurred blobs drifting slowly (transform-only, GPU friendly). */
-.wallpaper {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  background: var(--wp-bg);
-  transition: background-color 600ms;
+/* cmdk: highlighted item. */
+[cmdk-item][data-selected="true"] {
+  background: var(--accent-soft);
+  color: var(--ink);
 }
-.wallpaper span {
-  position: absolute;
-  width: 75%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  filter: blur(48px);
-  opacity: 0.85;
-  transition: background-color 800ms;
-  will-change: transform;
+[cmdk-group-heading] {
+  padding: 0.75rem 0.75rem 0.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
 }
-.wallpaper span:nth-child(1) {
-  background: var(--wp-1);
-  top: -15%;
-  left: -20%;
-  animation: blob-a 22s ease-in-out infinite alternate;
+
+/* Placeholder images are light illustrations; dim them slightly at night. */
+.dark .dim-at-night {
+  filter: brightness(0.88);
 }
-.wallpaper span:nth-child(2) {
-  background: var(--wp-2);
-  top: 25%;
-  right: -30%;
-  animation: blob-b 26s ease-in-out infinite alternate;
-}
-.wallpaper span:nth-child(3) {
-  background: var(--wp-3);
-  bottom: -20%;
-  left: -10%;
-  animation: blob-c 30s ease-in-out infinite alternate;
-}
-.wallpaper span:nth-child(4) {
-  background: var(--wp-4);
-  bottom: 10%;
-  right: -25%;
-  width: 55%;
-  animation: blob-a 34s ease-in-out infinite alternate-reverse;
-}
-@keyframes blob-a {
-  to {
-    transform: translate(18%, 22%) scale(1.15);
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
   }
-}
-@keyframes blob-b {
-  to {
-    transform: translate(-25%, 12%) scale(0.9);
-  }
-}
-@keyframes blob-c {
-  to {
-    transform: translate(20%, -18%) scale(1.1);
+  dialog.sheet,
+  dialog.sheet[open] {
+    transform: none;
   }
 }
 
-/* Edit mode: icons wiggle. */
-@keyframes wiggle {
-  0%,
-  100% {
-    transform: rotate(-2.2deg);
-  }
-  50% {
-    transform: rotate(2.2deg);
-  }
-}
-.wiggle {
-  animation: wiggle 0.28s ease-in-out infinite;
-}
-
-/* Circular theme reveal (View Transitions API), started from the dark-mode tile. */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
-
-/* Lock screen is skipped for returning visitors before the first paint (set by an inline script). */
-:root[data-returning="true"] .lock-screen {
-  display: none;
-}
-
+/* Print: only the résumé is meant to be printed; site chrome is hidden. */
 @media print {
+  @page {
+    size: A4;
+    margin: 12mm 14mm;
+  }
   html,
   body {
     background: #fff !important;
-    color: #000 !important;
-    overflow: visible !important;
+    color: #111 !important;
+    font-size: 9.5pt;
+    line-height: 1.4;
   }
   .no-print {
     display: none !important;
   }
-  @page {
-    margin: 14mm 14mm 16mm;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .wallpaper span,
-  .wiggle {
-    animation: none !important;
-  }
-  *,
-  *::before,
-  *::after {
-    transition-duration: 1ms !important;
-    animation-duration: 1ms !important;
-    animation-iteration-count: 1 !important;
-  }
-}
-
-/* Short phones (and short desktop windows): the home page drops the "Now" shortcut so both icon rows fit. */
-.home-viewport {
-  container-type: size;
-}
-@container (max-height: 430px) {
-  .now-widget {
-    display: none;
+  a {
+    color: inherit !important;
+    text-decoration: none !important;
   }
 }

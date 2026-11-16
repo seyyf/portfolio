@@ -114,7 +114,7 @@ Until it's set, Messages replies that messages aren't connected yet and offers a
 
 ## Earlier builds
 
-Kept for reference, not part of the app:
+Kept for reference, not part of the app. `design/archive/` is git-ignored (Vercel would otherwise try to compile the old `app/` folders): the folders live on this machine, and in git history up to commit `795ee7d`:
 - `design/archive/build-2-seyf-city` (a 3D city)
 - `design/archive/build-4-seyf-times` (an editorial newspaper)
 - `design/archive/build-5-release-notes` (a product changelog, also in git as commit `35c6949`)

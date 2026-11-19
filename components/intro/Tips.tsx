@@ -4,7 +4,8 @@ import { cn } from "@/lib/utils"
 
 /** Loading tips, shown one after another by CSS over the ~3s of the loading screen. */
 export function Tips({ tips, className }: { tips: readonly string[]; className?: string }) {
-  const each = 2.85 / tips.length
+  // The tips share the 2.5s intro (from 0.15s to the exit at about 2.5s).
+  const each = 2.35 / tips.length
   return (
     <div className={cn("grid min-w-0", className)}>
       {tips.map((tip, i) => {

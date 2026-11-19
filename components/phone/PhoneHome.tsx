@@ -44,7 +44,6 @@ export function PhoneHome({ returnFrom }: { returnFrom: PhoneApp }) {
             <span className="lean">{profile.name}</span>
           </p>
           <p className="mt-0.5 text-sm leading-snug text-ink/85">{profile.title}</p>
-          <p className="mt-1 text-sm leading-snug text-gold">{profile.availability}</p>
         </div>
 
         <ul aria-label="Apps" className="mt-auto grid grid-cols-2 gap-3 pt-8">

@@ -11,7 +11,7 @@ import { Briefing, Objective, Section } from "@/components/mission/Section"
 import { SwipeDemo } from "@/components/mission/SwipeDemo"
 import { ChipList } from "@/components/ui/Chip"
 import { lockedMission, missionBySlug, missionPages, type Mission, type SideMission } from "@/data/missions"
-import { profile } from "@/data/profile"
+import { pageMeta } from "@/lib/site"
 
 // Every mission and side mission is prerendered. Unknown slugs get a real 404 from proxy.ts.
 export function generateStaticParams() {
@@ -28,9 +28,7 @@ export async function generateMetadata({ params }: PageProps<"/missions/[slug]">
   return {
     title,
     description,
-    alternates: { canonical: url },
-    openGraph: { type: "article", siteName: `${profile.name} — ${profile.edition}`, locale: "en_US", title, description, url },
-    twitter: { card: "summary_large_image", title, description },
+    ...pageMeta(url, title, description, "article"),
   }
 }
 

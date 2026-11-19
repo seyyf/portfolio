@@ -102,7 +102,6 @@ export function Contacts({ className }: { className?: string }) {
           </Link>
         </li>
       </ul>
-      <p className="mt-4 px-1 text-sm text-muted">{profile.availability}</p>
     </div>
   )
 }

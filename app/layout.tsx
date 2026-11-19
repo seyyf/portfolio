@@ -7,6 +7,7 @@ import { missions, tutorials } from "@/data/missions"
 import { profile } from "@/data/profile"
 import { statTabs } from "@/data/skills"
 import { headScript } from "@/lib/headScripts"
+import { siteName, siteUrl } from "@/lib/site"
 import "./globals.css"
 
 // Anton for display titles, Inter for body and UI, JetBrains Mono for HUD numbers.
@@ -18,7 +19,8 @@ const title = `${profile.name} — ${profile.title} · ${profile.edition}`
 const description = `${profile.intro} Explore the missions on a map of Tunis, or skip straight to the CV.`
 
 export const metadata: Metadata = {
-  metadataBase: new URL(profile.siteUrl),
+  // Every URL below (canonical, og:url, og:image, twitter:image) is resolved against this base.
+  metadataBase: new URL(siteUrl),
   title: { default: title, template: `%s · ${profile.name}` },
   description,
   applicationName: `${profile.name} — ${profile.edition}`,
@@ -26,7 +28,7 @@ export const metadata: Metadata = {
   creator: profile.name,
   keywords: ["Seyf Mejri", "Fullstack JavaScript Developer", "React", "Next.js", "Node.js", "TypeScript", "Tunis", "portfolio"],
   alternates: { canonical: "/" },
-  openGraph: { type: "profile", siteName: `${profile.name} — ${profile.edition}`, title, description, url: "/", locale: "en_US", firstName: "Seyf", lastName: "Mejri" },
+  openGraph: { type: "profile", siteName, title, description, url: "/", locale: "en_US", firstName: "Seyf", lastName: "Mejri" },
   twitter: { card: "summary_large_image", title, description },
   robots: { index: true, follow: true },
 }
@@ -39,7 +41,7 @@ const personJsonLd = {
   name: profile.name,
   jobTitle: profile.title,
   description: profile.summary,
-  url: profile.siteUrl,
+  url: siteUrl,
   email: `mailto:${profile.email}`,
   address: { "@type": "PostalAddress", addressLocality: "Tunis", addressCountry: "TN" },
   sameAs: [profile.linkedin],

@@ -4,11 +4,14 @@ import { Contacts } from "@/components/phone/Contacts"
 import { Messages } from "@/components/phone/Messages"
 import { DisplayTitle } from "@/components/ui/Gradient"
 import { profile } from "@/data/profile"
+import { pageMeta } from "@/lib/site"
+
+const description = `Contact ${profile.name}, ${profile.title} in Tunis: send a message, copy the email, open LinkedIn or download the CV.`
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: `Contact ${profile.name}, ${profile.title} in Tunis: send a message, copy the email, open LinkedIn or download the CV.`,
-  alternates: { canonical: "/contact" },
+  description,
+  ...pageMeta("/contact", `Contact · ${profile.name}`, description),
 }
 
 /** The phone's Messages and Contacts apps as a plain page: works without the overlay. */
@@ -19,7 +22,7 @@ export default function ContactPage() {
         <header className="pt-6 lg:pt-10">
           <p className="font-mono text-xs tracking-[0.2em] text-muted uppercase">Phone · {profile.name}</p>
           <DisplayTitle className="mt-2 text-6xl sm:text-7xl lg:text-8xl">Contact</DisplayTitle>
-          <p className="mt-4 max-w-[60ch] text-muted">{profile.availability}. Send a message below, or pick whichever channel suits you.</p>
+          <p className="mt-4 max-w-[60ch] text-muted">Send a message below, or pick whichever channel suits you.</p>
         </header>
 
         <div className="mt-10 grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-start lg:gap-12">

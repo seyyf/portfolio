@@ -214,24 +214,3 @@ html.reduce-motion *::after {
   }
 }
 
-/* Wanted meter: each star lights up in turn on first load. */
-.wanted-star {
-  transform-box: fill-box;
-  transform-origin: center;
-  fill: #ffc94a;
-  filter: drop-shadow(0 0 4px rgb(255 201 74 / 0.55));
-  animation: star-on 420ms var(--ease-out-expo) both;
-}
-@keyframes star-on {
-  0% {
-    fill: rgb(245 241 234 / 0.18);
-    filter: none;
-    transform: scale(0.6);
-  }
-  60% {
-    transform: scale(1.25);
-  }
-  100% {
-    transform: scale(1);
-  }
-}

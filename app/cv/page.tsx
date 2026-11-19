@@ -5,13 +5,16 @@ import Link from "next/link"
 import { missions, sideMissions, tutorials } from "@/data/missions"
 import { profile } from "@/data/profile"
 import { statTabs } from "@/data/skills"
+import { pageMeta } from "@/lib/site"
 
 import { PrintButton } from "./PrintButton"
 
+const description = `One-page résumé of ${profile.name}, ${profile.title} in Tunis. Print it or save it as a PDF.`
+
 export const metadata: Metadata = {
   title: "CV",
-  description: `One-page résumé of ${profile.name}, ${profile.title} in Tunis. Print it or save it as a PDF.`,
-  alternates: { canonical: "/cv" },
+  description,
+  ...pageMeta("/cv", `CV · ${profile.name}`, description),
 }
 
 const jobs = [...missions].reverse()
@@ -50,8 +53,7 @@ export default function CvPage() {
           <h1 className="text-[2rem] font-bold tracking-tight print:text-[20pt]">{profile.name}</h1>
           <p className="text-lg print:text-[11pt]">{profile.title}</p>
           <p className="mt-1 text-[0.875rem] text-[#444] print:text-[8.5pt]">
-            {profile.location} · <a href={`mailto:${profile.email}`}>{profile.email}</a> · <a href={profile.linkedin}>{profile.linkedinLabel}</a> ·{" "}
-            {profile.availability}
+            {profile.location} · <a href={`mailto:${profile.email}`}>{profile.email}</a> · <a href={profile.linkedin}>{profile.linkedinLabel}</a>
           </p>
           <div aria-hidden="true" className="mt-4 h-[3px] w-24 rounded-full bg-[linear-gradient(90deg,#ff4fa3,#ff8a3d_55%,#ffc94a)] print:mt-2.5" />
         </header>

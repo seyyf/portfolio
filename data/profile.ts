@@ -9,9 +9,6 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/seyf-mejri-848a8416b",
   linkedinLabel: "linkedin.com/in/seyf-mejri-848a8416b",
   cvPdf: "/cv/Seyf-Mejri-CV.pdf",
-  /** Replace with the real domain once deployed (canonical URLs, Open Graph, sitemap, JSON-LD). */
-  siteUrl: "https://example.com",
-  availability: "Open to new opportunities · Open to remote",
   edition: "Open World Edition",
 
   /** The 5-second card above the map. */

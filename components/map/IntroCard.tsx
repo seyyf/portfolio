@@ -26,10 +26,6 @@ export function IntroCard() {
         <span className="mt-2 block text-xl font-semibold text-ink lg:mt-1.5">{profile.title}</span>
       </h1>
       <p className="mt-3 max-w-[60ch] text-ink/85 lg:text-[1.0625rem] lg:leading-relaxed">{profile.intro}</p>
-      <p className="mt-3 flex items-center gap-2 text-sm text-ink/85">
-        <span aria-hidden="true" className="size-2 rounded-full bg-gold shadow-[0_0_8px_#ffc94a]" />
-        {profile.availability}
-      </p>
       <div className="mt-5">
         <IntroActions />
       </div>

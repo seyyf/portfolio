@@ -116,9 +116,9 @@ export const missions: Mission[] = [
   },
   {
     kind: "mission",
-    slug: "120-orders",
+    slug: "120-users",
     number: "03",
-    codename: "120 Orders",
+    codename: "120 Users",
     company: "Global ENR",
     role: "Fullstack Developer",
     dates: "Feb 2023 – Feb 2024",
@@ -129,7 +129,7 @@ export const missions: Mission[] = [
       "Built a restaurant PWA used by about 120 people to order food and drinks from their phone.",
       "Designed and built the backend REST APIs of an internal ERP in Node.js, Express and MySQL, plus its HR, finance and marketing modules.",
     ],
-    gear: ["React", "Tailwind CSS", "Node.js", "Express", "MySQL", "GitHub"],
+    gear: ["React", "Tailwind CSS", "Node.js", "Express", "MySQL"],
     skillsUnlocked: ["Node.js", "Express", "MySQL", "REST API design", "PWAs"],
     metrics: [
       { label: "People ordering with the PWA", value: "About 120" },
@@ -205,7 +205,7 @@ export const lockedMission: LockedMission = {
 }
 
 export const tutorials: Tutorial[] = [
-  { kind: "tutorial", slug: "tutorial-1", number: "1", degree: "Bachelor's in Multimedia Communication", school: "ISAMM Tunis", dates: "2017 – 2020", map: { x: 290, y: 600, district: "manouba" } },
+  { kind: "tutorial", slug: "tutorial-1", number: "1", degree: "Bachelor's in Multimedia Communication", school: "ISAMM, Tunis", dates: "2017 – 2020", map: { x: 290, y: 600, district: "manouba" } },
   { kind: "tutorial", slug: "tutorial-2", number: "2", degree: "Master's in Media Engineering (Web Development)", school: "ISAMM Manouba", dates: "2020 – 2022", map: { x: 370, y: 520, district: "manouba" } },
 ]
 
@@ -232,7 +232,7 @@ export const sideMissions: SideMission[] = [
     objective: "Present an Italian furniture and interior-design brand to the US market.",
     description: "Website for an Italian furniture and interior-design brand in the US.",
     map: { x: 1210, y: 450, district: "carthage" },
-    url: "https://www.febalcasa.com/fr/",
+    url: "https://www.febalcasa.com/it/",
   },
   {
     kind: "side",

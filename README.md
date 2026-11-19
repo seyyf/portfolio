@@ -2,7 +2,7 @@
 
 Seyf Mejri's portfolio, styled like the UI of a modern open-world game and set in Greater Tunis: a loading screen, a map with mission markers, a HUD, an in-game phone and a stats menu. Every job is a mission. Recruiters can always click **Skip to CV →** (top-left) for a plain one-page résumé.
 
-All art, names and sounds are original. The site uses no game names, logos, lettering, characters, screenshots, music or fonts from any existing game, and no crime themes. The only wink is the "Wanted by recruiters ★★★★★" meter.
+All art, names and sounds are original. The site uses no game names, logos, lettering, characters, screenshots, music or fonts from any existing game, and no crime themes.
 
 ```bash
 npm install
@@ -17,8 +17,8 @@ Stack: Next.js 16 (App Router), TypeScript, Tailwind CSS v4, GSAP (MISSION PASSE
 
 | URL | What |
 | --- | --- |
-| `/` | Loading screen (first visit of a session), then the map hub: intro card, map of Greater Tunis, mission list |
-| `/missions/<slug>` | A mission: `first-contract`, `table-service`, `120-orders`, `book-it`, `the-rebuild`; side missions: `fripa`, `febal-casa-usa`, `aurelia-gloves`, `weedy` |
+| `/` | Loading screen (a visitor's first visit only), then the map hub: intro card, map of Greater Tunis, mission list |
+| `/missions/<slug>` | A mission: `first-contract`, `table-service`, `120-users`, `book-it`, `the-rebuild`; side missions: `fripa`, `febal-casa-usa`, `aurelia-gloves`, `weedy` |
 | `/stats` | Career stats and skills, in tabs |
 | `/contact` | The phone's Messages and Contacts, as a page |
 | `/cv` | Recruiter mode: a one-page A4 résumé with "Print / Save as PDF" |
@@ -33,7 +33,7 @@ Everywhere: **Esc** (or the Menu button) opens the pause menu (Map, Missions, St
 | Missions, tutorials (education), side missions, the locked Mission 06, map districts and marker positions, metrics | `data/missions.ts` |
 | Skills and their status labels | `data/skills.ts` |
 | Colours, gradient, diagonal cuts, HUD styles, grain, reduced motion, print | `app/globals.css` |
-| HUD, recruiter button, wanted meter, minimap, pause menu | `components/hud/` |
+| HUD, recruiter button, minimap, pause menu | `components/hud/` |
 | Loading screen (CSS timeline in `styles.ts`) | `components/intro/` |
 | Map hub: map art and geometry, markers, cards, briefings, mission list, pan/zoom | `components/map/` |
 | Mission pages, MISSION PASSED overlay, before/after slider, swipe demo | `components/mission/` |
@@ -48,8 +48,8 @@ Every image is an original placeholder that says so. The SVG sources are rendere
 
 - **Loading-screen panels** (portrait, Tunis sunset, Sidi Bou Said): `public/images/intro/*.webp`. To use a real photo for the portrait, drop it in `public/images/intro/` and update `profile.portrait` in `data/profile.ts` (path, width, height; remove "(placeholder)" from the alt text). To redraw a panel, edit the SVG in `scripts/intro-art/` and run `node scripts/render-intro-images.mjs`.
 - **The Rebuild's before/after slider** (the only images on mission pages): `public/images/missions/the-rebuild-legacy.webp` and `the-rebuild-new.webp`. Replace them with real screenshots (same names, or update `beforeAfter` in `data/missions.ts`). They are illustrations (no "placeholder" mark); `node scripts/render-mission-images.mjs` regenerates them.
-- **Open Graph image**: `app/opengraph-image.png` is the loading screen's title card at 1200x630. If you change the panels or name, re-capture it: open `/` in a fresh tab at 1200x630, and screenshot at about 2.2s.
-- **Domain**: set `profile.siteUrl` (now `https://example.com`) for canonical URLs, Open Graph, the sitemap and JSON-LD.
+- **Open Graph image**: `app/opengraph-image.png` is the loading screen's title card at 1200x630. If you change the panels or name, re-capture it: open `/` in a fresh tab at 1200x630, and screenshot at about 1.9s (title card fully in, before the exit at 2.15s).
+- **Domain**: the base URL for canonical URLs, Open Graph/Twitter images, the sitemap, robots.txt and JSON-LD comes from `lib/site.ts`: `NEXT_PUBLIC_SITE_URL` if set (use it for a custom domain), otherwise the Vercel production domain (automatic on Vercel, so previews still point at production), otherwise `http://localhost:3000`.
 - **Live links**: add `url` to a side mission in `data/missions.ts` to link it.
 
 ## Adjusting map markers
@@ -90,7 +90,7 @@ Until it's set, Messages replies that messages aren't connected yet and offers a
 
 ## Motion, accessibility and performance
 
-- **Loading screen:** shown once per session on `/` only, for 3 seconds at most. Any key, click or tap skips it, and "Skip to CV" stays clickable above it. It's CSS only, so it starts with the first paint.
+- **Loading screen:** shown only on a visitor's first visit to `/` (a `localStorage` flag, `ow-intro-seen`, skips it afterwards), for 2.5 seconds at most, never with reduced motion. Any key, click or tap skips it, and "Skip to CV" stays clickable above it. It's CSS only, so it starts with the first paint.
 - **Mission pages (GSAP):** as you scroll, the header's sun sinks and the palms move at different depths and sway, the objective rises word by word, section headings wipe in, briefing bullets slide in, chips pop in and the before/after frame opens on a diagonal. GSAP loads on the first scroll; content already on screen never re-animates.
 - **MISSION PASSED:** plays when you reach the end of a mission (or press "Complete mission"). It's skippable with any key, a click or the Skip button. Mission 05 says "Checkpoint reached" instead, because it's the current job.
 - **Reduced motion** (the OS setting or Settings → Reduce motion): no loading screen, no map flights, an instant MISSION PASSED card, and opacity-only transitions.

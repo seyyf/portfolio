@@ -22,7 +22,6 @@ export function MapPreview() {
           <span className="font-mono text-xs text-ink/80">{markers.length} markers</span>
         </span>
       </OpenMapButton>
-      <p className="mt-2 text-xs text-muted">Marker positions are illustrative</p>
     </div>
   )
 }

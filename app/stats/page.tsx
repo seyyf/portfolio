@@ -6,11 +6,14 @@ import { ButtonLink } from "@/components/ui/Button"
 import { DisplayTitle } from "@/components/ui/Gradient"
 import { profile } from "@/data/profile"
 import { statTabs } from "@/data/skills"
+import { pageMeta } from "@/lib/site"
+
+const description = `Career stats and skills of ${profile.name}, ${profile.title}: frontend, backend, databases, DevOps, tools and languages, labelled by how they've been used.`
 
 export const metadata: Metadata = {
   title: "Stats",
-  description: `Career stats and skills of ${profile.name}, ${profile.title}: frontend, backend, databases, DevOps, tools and languages, labelled by how they've been used.`,
-  alternates: { canonical: "/stats" },
+  description,
+  ...pageMeta("/stats", `Stats · ${profile.name}`, description),
 }
 
 /** The stats menu: career numbers, then skills by category. No percentages, no ratings. */

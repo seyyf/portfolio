@@ -19,9 +19,11 @@ export function LoadingScreen() {
       <div aria-hidden="true" className="ow-glow absolute inset-0" />
 
       <div aria-hidden="true" className="absolute inset-x-4 top-[4.25rem] bottom-[12rem] flex flex-col gap-3 lg:inset-x-12 sm:bottom-[9.5rem] lg:top-[5.5rem] lg:bottom-[10rem] lg:flex-row lg:gap-5">
-        <LoadingPanel src={profile.portrait.src} position="50% 42%" tint="linear-gradient(#2a1450,#c2337f)" />
-        <LoadingPanel src="/images/intro/sunset.webp" position="50% 62%" tint="linear-gradient(#5b2a9e,#ff8a3d 70%,#2c1a58)" className="lg:flex-[1.5]" />
-        <LoadingPanel src="/images/intro/sidi-bou-said.webp" position="50% 58%" tint="linear-gradient(#25124a,#e0468f 55%,#f5ece8 56%)" />
+        {/* sizes: on phones the panels are full width but decorative, so ~2x density is plenty ("70vw");
+            on desktop the side panels are ~32vw and the middle one ~45vw. */}
+        <LoadingPanel src={profile.portrait.src} first sizes="(min-width: 1024px) 32vw, 70vw" position="50% 42%" tint="linear-gradient(#2a1450,#c2337f)" />
+        <LoadingPanel src="/images/intro/sunset.webp" sizes="(min-width: 1024px) 45vw, 70vw" position="50% 62%" tint="linear-gradient(#5b2a9e,#ff8a3d 70%,#2c1a58)" className="lg:flex-[1.5]" />
+        <LoadingPanel src="/images/intro/sidi-bou-said.webp" sizes="(min-width: 1024px) 32vw, 70vw" position="50% 58%" tint="linear-gradient(#25124a,#e0468f 55%,#f5ece8 56%)" />
       </div>
       <div aria-hidden="true" className="ow-dim pointer-events-none absolute inset-0" />
 

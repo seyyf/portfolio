@@ -2,6 +2,7 @@
 
 import { useEffect } from "react"
 
+import { INTRO_SEEN_KEY } from "@/lib/headScripts"
 import { motionReduced } from "@/lib/prefs"
 
 // Drives the loading screen once React has hydrated. CSS already plays the whole timeline and
@@ -9,7 +10,7 @@ import { motionReduced } from "@/lib/prefs"
 // (No GSAP here on purpose: loading it during the first seconds cost up to 2s of main-thread time
 // on mobile. The CSS timeline is the whole sequence.) A hard timer always ends it.
 
-const TOTAL = 3000
+const TOTAL = 2500 // the CSS timeline ends at 2.5s too (styles.ts); never longer
 const CLASSES = ["intro-pending", "intro-js-title", "intro-js-exit"]
 const MODIFIERS = new Set(["Shift", "Control", "Alt", "Meta", "CapsLock", "Fn"])
 
@@ -39,8 +40,9 @@ export function IntroController() {
       if (done) return
       done = true
       removeListeners()
+      // Remembered for good: returning visitors go straight to the map (see lib/headScripts.ts).
       try {
-        sessionStorage.setItem("ow-loaded", "1")
+        localStorage.setItem(INTRO_SEEN_KEY, "1")
       } catch {}
       // Keep the map's landing flight (normal or skip) running for a moment after the screen is gone.
       html.classList.add("intro-landing")

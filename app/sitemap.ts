@@ -1,10 +1,10 @@
 import type { MetadataRoute } from "next"
 
 import { missionPages } from "@/data/missions"
-import { profile } from "@/data/profile"
+import { siteUrl } from "@/lib/site"
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = profile.siteUrl
+  const base = siteUrl
   return [
     { url: base, changeFrequency: "monthly", priority: 1 },
     ...missionPages.map((m) => ({ url: `${base}/missions/${m.slug}`, changeFrequency: "yearly" as const, priority: m.kind === "mission" ? 0.8 : 0.6 })),

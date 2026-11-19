@@ -38,7 +38,10 @@ function Node({ number, current, locked }: { number: string; current?: boolean; 
  */
 export function MissionList() {
   return (
-    <section id="missions" aria-label="Mission list" className="relative px-4 pt-14 pb-[calc(var(--hud-bottom)+3rem)] sm:px-6 lg:px-10 lg:pt-28">
+    // overflow-x-clip: the story cards slide in from the right (StoryMotion); without it they widen
+    // the page mid-animation and phones get a horizontal scroll. Clip (not hidden) keeps it from
+    // becoming a scroll container.
+    <section id="missions" aria-label="Mission list" className="relative overflow-x-clip px-4 pt-14 pb-[calc(var(--hud-bottom)+3rem)] sm:px-6 lg:px-10 lg:pt-28">
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-[radial-gradient(60%_100%_at_50%_0%,rgb(91_42_158/0.28),transparent)]" />
       <StoryMotion />
       <div data-story className="relative mx-auto max-w-5xl">

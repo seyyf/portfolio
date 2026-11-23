@@ -6,17 +6,18 @@ import { profile } from "@/data/profile"
  * The site's public base URL, used as `metadataBase` (canonical, Open Graph and Twitter URLs are
  * relative paths resolved against it), and by the sitemap, robots.txt and JSON-LD.
  *
- * 1. NEXT_PUBLIC_SITE_URL, when set (e.g. your custom domain: https://seyfmejri.com).
- * 2. On Vercel, the project's production domain (VERCEL_PROJECT_PRODUCTION_URL, set automatically),
- *    so preview deployments still point canonical URLs at production.
- * 3. Locally: http://localhost:3000.
+ * 1. NEXT_PUBLIC_SITE_URL, when set (overrides everything).
+ * 2. In `next dev`: http://localhost:3000.
+ * 3. Otherwise (every production build, previews included): the live domain, so canonical URLs
+ *    always point at https://www.seyfmejri.tn.
  */
+const PRODUCTION_URL = "https://www.seyfmejri.tn"
+
 function resolveSiteUrl() {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim()
   if (explicit) return explicit.replace(/\/+$/, "")
-  const vercelProd = process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim()
-  if (vercelProd) return `https://${vercelProd.replace(/\/+$/, "")}`
-  return "http://localhost:3000"
+  if (process.env.NODE_ENV === "development") return "http://localhost:3000"
+  return PRODUCTION_URL
 }
 
 export const siteUrl = resolveSiteUrl()

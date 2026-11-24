@@ -1,5 +1,6 @@
 import { ArrowDown } from "lucide-react"
 
+import { Door } from "@/components/game/Door"
 import { IntroActions } from "@/components/map/IntroActions"
 import { profile } from "@/data/profile"
 
@@ -15,6 +16,7 @@ export function IntroCard() {
       className="relative z-10 px-4 pt-[calc(var(--hud-top)+1rem)] sm:px-6 lg:absolute lg:top-[5.5rem] lg:left-6 lg:w-[26rem] lg:rounded-2xl lg:border lg:border-ink/12 lg:bg-bg/85 lg:p-6 lg:shadow-[0_30px_80px_-30px_rgb(0_0_0/0.9)] lg:backdrop-blur-md"
     >
       <div aria-hidden="true" className="bg-sunset-h absolute inset-x-0 top-0 hidden h-1 rounded-t-2xl lg:block" />
+      <Door id="hub" className="absolute top-[calc(var(--hud-top)+0.25rem)] right-3 lg:top-3 lg:right-3" />
       <p className="flex items-center gap-2 font-mono text-xs tracking-[0.16em] text-muted uppercase">
         <span aria-hidden="true" className="size-1.5 rounded-full bg-pink shadow-[0_0_8px_#ff4fa3]" />
         {profile.edition} · Greater Tunis

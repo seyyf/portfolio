@@ -1,6 +1,7 @@
 import { ArrowRight, GraduationCap, Lock, MapPin } from "lucide-react"
 import Link from "next/link"
 
+import { Door } from "@/components/game/Door"
 import { LocateButton, UnlockButton } from "@/components/map/ListActions"
 import { StoryMotion } from "@/components/map/StoryMotion"
 import { StatusBadge } from "@/components/map/MissionCard"
@@ -180,6 +181,7 @@ export function MissionList() {
           </ul>
         </div>
       </div>
+      <Door id="mission-list" className="absolute right-4 bottom-[calc(var(--hud-bottom)+0.5rem)] sm:right-6 lg:right-10" />
     </section>
   )
 }

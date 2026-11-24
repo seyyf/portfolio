@@ -5,6 +5,7 @@ import { CircleAlert, LoaderCircle, Mail, RotateCcw, Send } from "lucide-react"
 import { useEffect, useId, useRef, useState, useSyncExternalStore, type FormEvent, type KeyboardEvent } from "react"
 
 import { profile } from "@/data/profile"
+import { addHeat } from "@/lib/game"
 import { useMotionReduced } from "@/lib/prefs"
 import { play } from "@/lib/sound"
 import { cn } from "@/lib/utils"
@@ -145,7 +146,10 @@ export function Messages({ variant = "phone", className }: { variant?: "phone" |
       status = "failed"
     }
     setSent((list) => list.map((s) => (s.id === id ? { ...s, status } : s)))
-    if (status === "delivered") play("ding")
+    if (status === "delivered") {
+      play("ding")
+      addHeat("message")
+    }
   }
 
   const onSubmit = (e: FormEvent) => {

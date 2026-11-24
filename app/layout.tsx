@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next"
 import { Anton, Inter, JetBrains_Mono } from "next/font/google"
 
+import { Game } from "@/components/game/Game"
 import { HUD } from "@/components/hud/HUD"
 import { Providers } from "@/components/Providers"
 import { missions, tutorials } from "@/data/missions"
@@ -66,6 +67,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             {children}
           </main>
           <HUD />
+          <Game />
         </Providers>
         <script
           type="application/ld+json"

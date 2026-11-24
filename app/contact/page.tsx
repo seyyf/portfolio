@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 
+import { Door } from "@/components/game/Door"
 import { Contacts } from "@/components/phone/Contacts"
 import { Messages } from "@/components/phone/Messages"
 import { DisplayTitle } from "@/components/ui/Gradient"
@@ -19,7 +20,8 @@ export default function ContactPage() {
   return (
     <div className="hud-safe">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <header className="pt-6 lg:pt-10">
+        <header className="relative pt-6 lg:pt-10">
+          <Door id="contact" className="absolute right-0 bottom-0" />
           <p className="font-mono text-xs tracking-[0.2em] text-muted uppercase">Phone · {profile.name}</p>
           <DisplayTitle className="mt-2 text-6xl sm:text-7xl lg:text-8xl">Contact</DisplayTitle>
           <p className="mt-4 max-w-[60ch] text-muted">Send a message below, or pick whichever channel suits you.</p>

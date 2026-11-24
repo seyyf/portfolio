@@ -6,6 +6,7 @@ import { useEffect, useEffectEvent, useId, useLayoutEffect, useRef, useState, ty
 import { createPortal } from "react-dom"
 
 import { buttonClass } from "@/components/ui/Button"
+import { addHeat } from "@/lib/game"
 import { motionReduced } from "@/lib/prefs"
 import { play } from "@/lib/sound"
 import { getUI, openPhone } from "@/lib/ui"
@@ -179,6 +180,7 @@ export function MissionPassed({
     setMode(reduced ? "static" : "anim")
     setDone(reduced)
     setOpen(true)
+    addHeat(`passed:${location.pathname}`)
     if (reduced) play("ding")
   }
 

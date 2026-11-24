@@ -10,13 +10,15 @@ import { closePhone, getUI, setPhoneApp, useUI, type PhoneApp } from "@/lib/ui"
 import { cn } from "@/lib/utils"
 
 import { useTunisClock } from "./clock"
+import { CallApp } from "./CallApp"
+import { CodesApp } from "./CodesApp"
 import { Contacts } from "./Contacts"
 import { MapApp } from "./MapApp"
 import { Messages } from "./Messages"
 import { PhoneHome, Wallpaper } from "./PhoneHome"
 import { SettingsApp } from "./SettingsApp"
 
-const TITLES: Record<Exclude<PhoneApp, "home">, string> = { messages: "Messages", contacts: "Contacts", map: "Map", settings: "Settings" }
+const TITLES: Record<Exclude<PhoneApp, "home">, string> = { messages: "Messages", contacts: "Contacts", map: "Map", settings: "Settings", codes: "Codes", call: "Call" }
 const EASE = [0.16, 1, 0.3, 1] as const
 
 /**
@@ -192,6 +194,8 @@ function AppScreen({ app, cameFrom }: { app: PhoneApp; cameFrom: PhoneApp }) {
   if (app === "messages") body = <Messages variant="phone" />
   else if (app === "contacts") body = <Contacts className="px-4 py-4" />
   else if (app === "map") body = <MapApp />
+  else if (app === "codes") body = <CodesApp />
+  else if (app === "call") body = <CallApp />
   else body = <SettingsApp />
 
   return (

@@ -1,6 +1,8 @@
 import { FileText } from "lucide-react"
 import type { Metadata } from "next"
 
+import { Door } from "@/components/game/Door"
+import { Progress } from "@/components/game/Progress"
 import { StatsMenu } from "@/components/stats/StatsMenu"
 import { ButtonLink } from "@/components/ui/Button"
 import { DisplayTitle } from "@/components/ui/Gradient"
@@ -16,7 +18,7 @@ export const metadata: Metadata = {
   ...pageMeta("/stats", `Stats · ${profile.name}`, description),
 }
 
-/** The stats menu: career numbers, then skills by category. No percentages, no ratings. */
+/** The stats menu: career numbers, skills by category (no percentages, no ratings), then game progress. */
 export default function StatsPage() {
   return (
     <div className="hud-safe">
@@ -27,7 +29,8 @@ export default function StatsPage() {
           <p className="mt-4 max-w-[60ch] text-muted">{profile.intro}</p>
         </header>
 
-        <section aria-labelledby="career-stats" className="hud-panel cut-br mt-8 rounded-t-2xl px-5 pt-5 pb-8 sm:px-7">
+        <section aria-labelledby="career-stats" className="hud-panel cut-br relative mt-8 rounded-t-2xl px-5 pt-5 pb-8 sm:px-7">
+          <Door id="stats" className="absolute top-2 right-2" />
           <h2 id="career-stats" className="font-mono text-xs tracking-[0.2em] text-gold uppercase">
             Career stats
           </h2>
@@ -51,6 +54,8 @@ export default function StatsPage() {
           </p>
           <StatsMenu tabs={statTabs} />
         </section>
+
+        <Progress />
 
         <div className="mt-10 flex flex-wrap gap-3">
           <ButtonLink href="/cv" variant="outline">

@@ -1,27 +1,34 @@
 "use client"
 
+import { PhoneIncoming } from "lucide-react"
 import { useId } from "react"
 
 import { Palm } from "@/components/ui/Palm"
+import { calls } from "@/data/game"
 import { profile } from "@/data/profile"
+import { startCall, useGame } from "@/lib/game"
 import { play } from "@/lib/sound"
-import { setPhoneApp, type PhoneApp } from "@/lib/ui"
+import { openWheel, setPhoneApp, type PhoneApp } from "@/lib/ui"
 
 import { useTunisClock } from "./clock"
 
-type App = Exclude<PhoneApp, "home">
+/** Phone apps on the home screen, plus "wheel", which opens the skills wheel. */
+type App = Exclude<PhoneApp, "home" | "call"> | "wheel"
 
 const APPS: { id: App; label: string; hint: string; Icon: (p: { uid: string }) => React.ReactElement }[] = [
   { id: "messages", label: "Messages", hint: "Send Seyf a message", Icon: MessagesIcon },
   { id: "contacts", label: "Contacts", hint: "Email, LinkedIn, CV", Icon: ContactsIcon },
   { id: "map", label: "Map", hint: "Missions across Tunis", Icon: MapIcon },
+  { id: "codes", label: "Codes", hint: "Enter cheat codes", Icon: CodesIcon },
+  { id: "wheel", label: "Skills", hint: "The skills wheel", Icon: WheelIcon },
   { id: "settings", label: "Settings", hint: "Sound, motion", Icon: SettingsIcon },
 ]
 
-/** The phone's home screen: a sunset wallpaper, a clock widget and four apps. */
+/** The phone's home screen: a sunset wallpaper, a clock widget, recent calls and the apps. */
 export function PhoneHome({ returnFrom }: { returnFrom: PhoneApp }) {
   const uid = useId().replace(/[^a-zA-Z0-9_-]/g, "")
   const { time, date } = useTunisClock()
+  const { save } = useGame()
 
   return (
     <div className="flex min-h-full flex-col">
@@ -46,6 +53,34 @@ export function PhoneHome({ returnFrom }: { returnFrom: PhoneApp }) {
           <p className="mt-0.5 text-sm leading-snug text-ink/85">{profile.title}</p>
         </div>
 
+        {save.calls.length > 0 && (
+          <div className="hud-panel mt-3 rounded-2xl px-4 py-3">
+            <h3 className="font-mono text-[0.6875rem] tracking-[0.16em] text-gold uppercase">Recent calls</h3>
+            <ul className="mt-1.5 grid gap-1">
+              {save.calls.map((id) => (
+                <li key={id}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      play("tap")
+                      startCall(id)
+                      setPhoneApp("call")
+                    }}
+                    className="-mx-2 flex min-h-11 w-[calc(100%+1rem)] items-center gap-2.5 rounded-xl px-2 text-left hover:bg-ink/[0.06]"
+                  >
+                    <PhoneIncoming aria-hidden="true" className="size-4 shrink-0 text-orange" />
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-[0.9375rem] font-semibold text-ink">{profile.name}</span>
+                      <span className="block truncate text-[0.8125rem] text-ink/75">{calls[id].label}</span>
+                    </span>
+                    <span className="font-mono text-[0.6875rem] tracking-[0.12em] text-gold uppercase">Replay</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
         <ul aria-label="Apps" className="mt-auto grid grid-cols-2 gap-3 pt-8">
           {APPS.map(({ id, label, hint, Icon }) => (
             <li key={id}>
@@ -54,7 +89,8 @@ export function PhoneHome({ returnFrom }: { returnFrom: PhoneApp }) {
                 data-phone-focus={id === (returnFrom === "home" ? "messages" : returnFrom) || undefined}
                 onClick={() => {
                   play("tap")
-                  setPhoneApp(id)
+                  if (id === "wheel") openWheel()
+                  else setPhoneApp(id)
                 }}
                 className="hud-panel group flex w-full flex-col items-start gap-2 rounded-2xl p-3 text-left transition-[border-color,transform] hover:border-orange active:scale-[0.98]"
               >
@@ -146,6 +182,42 @@ function MapIcon({ uid }: { uid: string }) {
       <path d="M11 30c6-2 9 3 14 1s8-6 13-3 5 2 7 1" stroke="#f5f1ea" strokeOpacity="0.55" strokeWidth="1.6" fill="none" />
       <path d="M33 14a6 6 0 0 1 6 6c0 4.6-6 10-6 10s-6-5.4-6-10a6 6 0 0 1 6-6Z" fill="#ffc94a" />
       <circle cx="33" cy="20" r="2.2" fill="#0e3b43" />
+    </svg>
+  )
+}
+
+function CodesIcon({ uid }: { uid: string }) {
+  const g = `${uid}-codes`
+  return (
+    <svg viewBox="0 0 56 56" className="size-12">
+      <defs>
+        <linearGradient id={g} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#0e3b43" />
+          <stop offset="1" stopColor="#0b0f1a" />
+        </linearGradient>
+      </defs>
+      <rect width="56" height="56" rx="15" fill={`url(#${g})`} />
+      <rect x="10" y="18" width="36" height="20" rx="5" fill="none" stroke="#50e3c2" strokeOpacity="0.7" strokeWidth="2" />
+      <path d="M17 28h3M24 28h3M31 28h3" stroke="#50e3c2" strokeWidth="3" strokeLinecap="round" />
+      <rect x="37" y="23" width="2.4" height="10" rx="1" fill="#ffc94a" />
+    </svg>
+  )
+}
+
+function WheelIcon({ uid }: { uid: string }) {
+  const g = `${uid}-wheel`
+  return (
+    <svg viewBox="0 0 56 56" className="size-12">
+      <defs>
+        <linearGradient id={g} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#ff4fa3" />
+          <stop offset="1" stopColor="#ff8a3d" />
+        </linearGradient>
+      </defs>
+      <rect width="56" height="56" rx="15" fill="#1b2236" />
+      <circle cx="28" cy="28" r="17" fill="none" stroke="#f5f1ea" strokeOpacity="0.25" strokeWidth="8" />
+      <path d="M28 11a17 17 0 0 1 14.7 8.5" fill="none" stroke={`url(#${g})`} strokeWidth="8" />
+      <circle cx="28" cy="28" r="6" fill="#ffc94a" />
     </svg>
   )
 }

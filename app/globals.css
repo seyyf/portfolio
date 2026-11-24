@@ -173,6 +173,193 @@ html.intro-pending .loading-screen {
   display: block;
 }
 
+/* ---------------------------------------------------------------------------------------------
+   Game layer (components/game): notifications, the ringing phone, stars, the skills wheel, the 404.
+   Every animation here is cut by the reduced-motion rules below. */
+
+@keyframes game-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-12px) skewX(-6deg);
+  }
+}
+.game-toast {
+  animation: game-toast-in 420ms var(--ease-out-expo) both;
+}
+
+@keyframes game-call-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+}
+.game-call {
+  animation: game-call-in 380ms var(--ease-out-expo) both;
+}
+@keyframes call-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+.call-pulse {
+  animation: call-pulse 1.4s ease-out infinite;
+}
+@keyframes call-line-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+.call-line {
+  animation: call-line-in 350ms var(--ease-out-expo) both;
+}
+
+/* The HUD phone button shakes while Seyf is calling. */
+@keyframes phone-ring {
+  0%,
+  40%,
+  100% {
+    transform: rotate(0);
+  }
+  5%,
+  15%,
+  25%,
+  35% {
+    transform: rotate(-12deg);
+  }
+  10%,
+  20%,
+  30% {
+    transform: rotate(12deg);
+  }
+}
+html.phone-ringing [data-phone-button] {
+  animation: phone-ring 1.6s ease-in-out infinite;
+  border-color: #ff8a3d;
+  box-shadow: var(--glow);
+}
+
+@keyframes star-pop {
+  0% {
+    transform: scale(0.2) rotate(-40deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.35) rotate(8deg);
+  }
+}
+.star-pop {
+  animation: star-pop 520ms var(--ease-out-expo) both;
+}
+@keyframes star-max {
+  50% {
+    filter: drop-shadow(0 0 6px #ff4fa3);
+  }
+}
+.star-max {
+  animation:
+    star-pop 520ms var(--ease-out-expo) both,
+    star-max 1.2s ease-in-out 600ms 3;
+}
+
+@keyframes wheel-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+}
+.wheel-in {
+  animation: wheel-in 260ms var(--ease-out-expo) both;
+}
+
+@keyframes respawn-in {
+  from {
+    opacity: 0;
+  }
+}
+.respawn {
+  animation: respawn-in 450ms ease-out both;
+}
+
+/* 404: patrol lights, pink then blue, sweeping across slowly. */
+@keyframes busted-lights {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+.busted-lights {
+  background: linear-gradient(100deg, rgb(255 79 163 / 0.16), transparent 30%, transparent 70%, rgb(47 109 181 / 0.22));
+  background-size: 200% 100%;
+  animation: busted-lights 3.2s ease-in-out infinite;
+}
+@keyframes busted-stamp {
+  from {
+    opacity: 0;
+    transform: scale(1.6) rotate(-4deg);
+  }
+}
+.busted-title {
+  animation: busted-stamp 500ms cubic-bezier(0.2, 0.9, 0.3, 1.25) both;
+}
+
+/* Cheats (lib/game.ts toggles html.cheat-<id>). */
+html.cheat-nightride #main::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 45; /* under the HUD (z-50) */
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(180deg, rgb(0 0 0 / 0.14) 0 1px, transparent 1px 3px),
+    radial-gradient(120% 90% at 50% 110%, rgb(255 79 163 / 0.25), transparent 60%),
+    linear-gradient(180deg, rgb(40 20 110 / 0.35), rgb(11 15 26 / 0.15));
+  backdrop-filter: hue-rotate(-28deg) saturate(1.6) contrast(1.06);
+  -webkit-backdrop-filter: hue-rotate(-28deg) saturate(1.6) contrast(1.06);
+}
+html.cheat-xray main * {
+  outline: 1px dashed rgb(80 227 194 / 0.45) !important;
+  outline-offset: -1px;
+}
+[data-hud-name] {
+  transform-origin: top right;
+  transition: transform 450ms var(--ease-out-expo);
+}
+html.cheat-bighead [data-hud-name] {
+  transform: scale(1.9);
+}
+/* The career line and stars move down out of the way. */
+[data-hud-name] ~ * {
+  transition: transform 450ms var(--ease-out-expo);
+}
+html.cheat-bighead [data-hud-name] ~ * {
+  transform: translateY(1.25rem);
+}
+@media (min-width: 1024px) {
+  html.cheat-bighead [data-hud-name] ~ * {
+    transform: translateY(1.8rem);
+  }
+}
+@keyframes door-glow {
+  50% {
+    box-shadow:
+      0 0 0 2px #2f6db5,
+      0 0 24px 4px rgb(47 109 181 / 0.8);
+  }
+}
+html.cheat-bluedoor [data-door] {
+  opacity: 1;
+  animation: door-glow 1.2s ease-in-out infinite;
+}
+
 /* Reduced motion: the OS setting or the in-site setting (html.reduce-motion). */
 @media (prefers-reduced-motion: reduce) {
   *,

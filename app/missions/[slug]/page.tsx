@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
+import { Door } from "@/components/game/Door"
 import { BeforeAfter } from "@/components/mission/BeforeAfter"
 import { MissionHeader, SideMissionHeader } from "@/components/mission/MissionHeader"
 import { MissionMotion } from "@/components/mission/MissionMotion"
@@ -10,6 +11,7 @@ import { Metrics, shownMetrics } from "@/components/mission/Metrics"
 import { Briefing, Objective, Section } from "@/components/mission/Section"
 import { SwipeDemo } from "@/components/mission/SwipeDemo"
 import { ChipList } from "@/components/ui/Chip"
+import type { DoorId } from "@/data/game"
 import { lockedMission, missionBySlug, missionPages, type Mission, type SideMission } from "@/data/missions"
 import { pageMeta } from "@/lib/site"
 
@@ -39,6 +41,24 @@ export default async function MissionPage({ params }: PageProps<"/missions/[slug
   return page.kind === "mission" ? <MainMission mission={page} /> : <SideMissionPage mission={page} />
 }
 
+/** Where each main mission hides its blue door (a collectible), so they're not all in one spot. */
+const DOOR_SLOT: Record<string, "objective" | "briefing" | "gear" | "reward" | "nav"> = {
+  "first-contract": "briefing",
+  "table-service": "gear",
+  "120-users": "objective",
+  "book-it": "reward",
+  "the-rebuild": "nav",
+}
+
+function DoorSpot({ slug, at }: { slug: string; at: (typeof DOOR_SLOT)[string] }) {
+  if (DOOR_SLOT[slug] !== at) return null
+  return (
+    <div className="mt-4 flex justify-end">
+      <Door id={slug as DoorId} />
+    </div>
+  )
+}
+
 /** Section headings are numbered in reading order, whichever optional sections a page has. */
 function counter() {
   let n = 0
@@ -61,13 +81,16 @@ function MainMission({ mission: m }: { mission: Mission }) {
       <MissionHeader mission={m} />
       <div className="mx-auto max-w-[1120px] px-4 sm:px-6">
         <Objective id={id("objective")}>{m.objective}</Objective>
+        <DoorSpot slug={m.slug} at="objective" />
 
         <Section id={id("briefing")} index={next()} title="Briefing">
           <Briefing items={m.briefing} />
+          <DoorSpot slug={m.slug} at="briefing" />
         </Section>
 
         <Section id={id("gear")} index={next()} title="Gear">
           <ChipList items={m.gear} label={`Gear for ${m.codename}`} />
+          <DoorSpot slug={m.slug} at="gear" />
         </Section>
 
         {hasMetrics && (
@@ -86,6 +109,7 @@ function MainMission({ mission: m }: { mission: Mission }) {
           {inProgress && <p className="mb-5 max-w-[60ch] text-muted">Mission {m.number} is still in progress: it&apos;s Seyf&apos;s current role.</p>}
           <p className="font-mono text-sm tracking-[0.2em] text-gold uppercase">Skills unlocked</p>
           <ChipList items={m.skillsUnlocked} label="Skills unlocked" className="mt-3" />
+          <DoorSpot slug={m.slug} at="reward" />
           <div className="mt-8">
             <MissionPassed
               key={m.slug}
@@ -100,6 +124,7 @@ function MainMission({ mission: m }: { mission: Mission }) {
 
         <div data-mm-nav className="pb-6">
           <MissionNav page={m} />
+          <DoorSpot slug={m.slug} at="nav" />
         </div>
       </div>
     </article>

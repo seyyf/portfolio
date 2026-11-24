@@ -3,6 +3,7 @@
 import { Menu, Smartphone } from "lucide-react"
 import { usePathname } from "next/navigation"
 
+import { WantedStars } from "@/components/game/WantedStars"
 import { Minimap } from "@/components/hud/Minimap"
 import { PauseMenu } from "@/components/hud/PauseMenu"
 import { RecruiterButton } from "@/components/hud/RecruiterButton"
@@ -48,12 +49,13 @@ export function HUD() {
         <kbd className="hidden rounded border border-ink/25 px-1 text-[0.625rem] lg:inline">Esc</kbd>
       </button>
 
-      {/* Name and career line. */}
+      {/* Name, career line and the interest level. */}
       <div className="pointer-events-none fixed top-3 right-3 z-50 text-right lg:top-4 lg:right-5">
-        <p className="font-display text-[1.375rem] leading-none tracking-[0.02em] text-ink drop-shadow-[0_2px_8px_rgb(0_0_0/0.6)] lg:text-[2rem]">
+        <p data-hud-name className="font-display text-[1.375rem] leading-none tracking-[0.02em] text-ink drop-shadow-[0_2px_8px_rgb(0_0_0/0.6)] lg:text-[2rem]">
           <span className="lean">{profile.name}</span>
         </p>
         <p className="mt-1 font-mono text-[0.625rem] tracking-[0.14em] text-ink/80 lg:text-xs">{profile.hudLine}</p>
+        <WantedStars />
       </div>
 
       <Minimap />

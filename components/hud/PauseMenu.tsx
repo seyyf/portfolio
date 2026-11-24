@@ -1,19 +1,19 @@
 "use client"
 
 import { m } from "framer-motion"
-import { BarChart3, Briefcase, FileText, Map as MapIcon, Settings, Smartphone, X } from "lucide-react"
+import { BarChart3, Briefcase, Disc3, FileText, Map as MapIcon, Settings, Smartphone, X } from "lucide-react"
 import { usePathname, useRouter } from "next/navigation"
 import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react"
 
 import { DisplayTitle } from "@/components/ui/Gradient"
 import { setPrefs, usePrefs, useMotionReduced } from "@/lib/prefs"
 import { play } from "@/lib/sound"
-import { closePause, getUI, openPause, openPhone, useUI } from "@/lib/ui"
+import { closePause, getUI, openPause, openPhone, openWheel, useUI } from "@/lib/ui"
 import { cn } from "@/lib/utils"
 
 /**
- * Pause menu (Esc anywhere, or the Menu button): Map · Missions · Stats · Phone · Settings ·
- * Recruiter mode. A native modal <dialog>: focus stays inside, the page behind is inert, Esc closes.
+ * Pause menu (Esc anywhere, or the Menu button): Map · Missions · Stats · Skills wheel · Phone ·
+ * Settings · Recruiter mode. A native modal <dialog>: focus stays inside, the page behind is inert, Esc closes.
  * ↑/↓ move between items. Full screen on desktop, a bottom sheet on phones.
  */
 export function PauseMenu() {
@@ -94,6 +94,7 @@ export function PauseMenu() {
                 Paused
               </DisplayTitle>
               <p className="mt-4 hidden max-w-[40ch] text-muted lg:block">Use ↑ ↓ and Enter, or click. Esc resumes.</p>
+              <p className="mt-2 hidden max-w-[40ch] text-sm text-muted/80 lg:block">Psst: some words do things here. Type one anywhere.</p>
             </div>
             <button
               type="button"
@@ -110,8 +111,9 @@ export function PauseMenu() {
               <Item index={0} reduced={reduced} icon={<MapIcon />} label="Map" hint="All missions on Greater Tunis" onClick={() => go("/")} />
               <Item index={1} reduced={reduced} icon={<Briefcase />} label="Missions" hint="The mission list" onClick={() => go("/#missions")} />
               <Item index={2} reduced={reduced} icon={<BarChart3 />} label="Stats" hint="Skills and career stats" onClick={() => go("/stats")} />
+              <Item index={3} reduced={reduced} icon={<Disc3 />} label="Skills wheel" hint="The whole stack (or hold Q)" onClick={() => openWheel()} />
               <Item
-                index={3}
+                index={4}
                 reduced={reduced}
                 icon={<Smartphone />}
                 label="Phone"
@@ -120,7 +122,7 @@ export function PauseMenu() {
               />
               <li>
                 <Item
-                  index={4}
+                  index={5}
                   reduced={reduced}
                   icon={<Settings />}
                   label="Settings"
@@ -136,7 +138,7 @@ export function PauseMenu() {
                   </div>
                 )}
               </li>
-              <Item index={5} reduced={reduced} icon={<FileText />} label="Recruiter mode" hint="Plain one-page CV" onClick={() => go("/cv")} accent />
+              <Item index={6} reduced={reduced} icon={<FileText />} label="Recruiter mode" hint="Plain one-page CV" onClick={() => go("/cv")} accent />
             </ul>
           </nav>
         </m.div>

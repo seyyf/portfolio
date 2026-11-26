@@ -33,8 +33,8 @@ function Star({ on, className }: { on: boolean; className?: string }) {
     <svg viewBox="0 0 24 24" aria-hidden="true" className={cn("size-3.5 lg:size-[1.125rem]", className)}>
       <path
         d="M12 2.8l2.7 5.9 6.4.7-4.8 4.3 1.4 6.3L12 16.8 6.3 20l1.4-6.3L2.9 9.4l6.4-.7Z"
-        fill={on ? "#ffc94a" : "rgb(11 15 26 / 0.55)"}
-        stroke={on ? "#ff8a3d" : "rgb(245 241 234 / 0.45)"}
+        fill={on ? "#e6c27a" : "rgb(20 23 28 / 0.55)"}
+        stroke={on ? "#f0965a" : "rgb(221 226 234 / 0.45)"}
         strokeWidth="1.4"
         strokeLinejoin="round"
       />

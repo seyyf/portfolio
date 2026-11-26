@@ -7,8 +7,8 @@ import { cn } from "@/lib/utils"
 type Props = Omit<ComponentProps<"button">, "children"> & { m: MarkerItem; active: boolean; pingDelay?: number; buttonRef?: Ref<HTMLButtonElement> }
 
 /**
- * A map marker: a real button. Missions are numbered sunset rings that pulse (static under
- * reduced motion), the locked mission has a padlock, side missions are small gold diamonds and
+ * A map marker: a real button. Missions are numbered blue rings that pulse (static under
+ * reduced motion), the locked mission has a padlock, side missions are small yellow diamonds and
  * education ("tutorials") small teal caps.
  */
 export function MissionMarker({ m, active, pingDelay = 0, buttonRef, className, ...props }: Props) {
@@ -27,14 +27,14 @@ export function MissionMarker({ m, active, pingDelay = 0, buttonRef, className, 
     >
       {m.kind === "mission" && (
         <>
-          <span aria-hidden="true" className="ow-ping bg-sunset absolute inset-0 rounded-full" style={{ animationDelay: `${pingDelay}s` }} />
-          <span aria-hidden="true" className="bg-sunset absolute inset-0 rounded-full p-[3px] shadow-[0_0_22px_rgb(255_79_163/0.55)]">
+          <span aria-hidden="true" className="ow-ping bg-blue absolute inset-0 rounded-full" style={{ animationDelay: `${pingDelay}s` }} />
+          <span aria-hidden="true" className="bg-blue absolute inset-0 rounded-full p-[3px]">
             <span className={cn("block size-full rounded-full transition-colors", active ? "bg-transparent" : "bg-bg")} />
           </span>
           <span aria-hidden="true" className={cn("relative font-mono text-sm font-bold", active ? "text-bg" : "text-ink")}>
             {m.data.number}
           </span>
-          {m.data.status === "IN PROGRESS" && <span aria-hidden="true" className="absolute -top-0.5 -right-0.5 size-3 rounded-full bg-gold ring-2 ring-bg" />}
+          {m.data.status === "IN PROGRESS" && <span aria-hidden="true" className="absolute -top-0.5 -right-0.5 size-3 rounded-full bg-yellow ring-2 ring-bg" />}
         </>
       )}
       {m.kind === "locked" && (
@@ -48,14 +48,14 @@ export function MissionMarker({ m, active, pingDelay = 0, buttonRef, className, 
       )}
       {m.kind === "side" && (
         <>
-          <span aria-hidden="true" className={cn("absolute inset-[5px] rotate-45 rounded-[4px] border-2 border-gold shadow-[0_0_14px_rgb(255_201_74/0.45)]", active ? "bg-gold" : "bg-bg")} />
-          <span aria-hidden="true" className={cn("relative size-1.5 rounded-full", active ? "bg-bg" : "bg-gold")} />
+          <span aria-hidden="true" className={cn("absolute inset-[5px] rotate-45 rounded-[4px] border-2 border-yellow", active ? "bg-yellow" : "bg-bg")} />
+          <span aria-hidden="true" className={cn("relative size-1.5 rounded-full", active ? "bg-bg" : "bg-yellow")} />
         </>
       )}
       {m.kind === "tutorial" && (
         <>
-          <span aria-hidden="true" className={cn("absolute inset-0.5 rounded-lg border border-[#4fb7c4]/80", active ? "bg-[#4fb7c4]" : "bg-teal")} />
-          <GraduationCap aria-hidden="true" className={cn("relative size-4", active ? "text-bg" : "text-[#bfe9ee]")} />
+          <span aria-hidden="true" className={cn("absolute inset-0.5 rounded-lg border border-green/80", active ? "bg-green" : "bg-teal")} />
+          <GraduationCap aria-hidden="true" className={cn("relative size-4", active ? "text-bg" : "text-[#d6edcd]")} />
         </>
       )}
     </button>

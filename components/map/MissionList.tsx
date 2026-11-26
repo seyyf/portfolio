@@ -11,7 +11,7 @@ import { VisitLink } from "@/components/ui/VisitLink"
 import { districts, lockedMission, missions, sideMissions, tutorials } from "@/data/missions"
 import { cn } from "@/lib/utils"
 
-const eyebrow = "font-mono text-xs tracking-[0.16em] uppercase"
+const eyebrow = "font-mono text-xs lowercase"
 
 /** A route node on the story line, echoing the map markers. */
 function Node({ number, current, locked }: { number: string; current?: boolean; locked?: boolean }) {
@@ -21,7 +21,7 @@ function Node({ number, current, locked }: { number: string; current?: boolean; 
       data-story-node
       className={cn(
         "relative z-10 grid size-10 place-items-center rounded-full font-mono text-sm font-bold lg:size-14 lg:text-base",
-        locked ? "border-2 border-dashed border-ink/40 bg-violet/60 text-ink" : "bg-sunset p-[3px] text-ink"
+        locked ? "border-2 border-dashed border-ink/40 bg-violet/60 text-ink" : "bg-blue p-[3px] text-ink"
       )}
     >
       {locked ? (
@@ -43,20 +43,20 @@ export function MissionList() {
     // the page mid-animation and phones get a horizontal scroll. Clip (not hidden) keeps it from
     // becoming a scroll container.
     <section id="missions" aria-label="Mission list" className="relative overflow-x-clip px-4 pt-14 pb-[calc(var(--hud-bottom)+3rem)] sm:px-6 lg:px-10 lg:pt-28">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-[radial-gradient(60%_100%_at_50%_0%,rgb(91_42_158/0.28),transparent)]" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-[radial-gradient(60%_100%_at_50%_0%,rgb(74_63_117/0.28),transparent)]" />
       <StoryMotion />
       <div data-story className="relative mx-auto max-w-5xl">
         <header>
-          <p className={`${eyebrow} text-gold`}>Mission list</p>
+          <p className={`${eyebrow} text-blue`}>Mission list</p>
           <h2 className="mt-2 font-display text-5xl text-ink lg:text-7xl">
-            <span className="lean">Story missions</span>
+            <span>Story missions</span>
           </h2>
           <p className="mt-3 max-w-[60ch] text-ink/80">Every job is a mission, in order. Each one opens a full briefing.</p>
         </header>
 
         <div data-story-route className="relative mt-10 lg:mt-14">
           <span aria-hidden="true" className="absolute top-5 bottom-10 left-5 w-0.5 -translate-x-1/2 lg:top-7 lg:left-7">
-            <span data-story-line className="block size-full origin-top bg-[linear-gradient(#ff4fa3,#ff8a3d_60%,rgb(245_241_234/0.2))]" />
+            <span data-story-line className="block size-full origin-top bg-blue/70" />
           </span>
           <ol className="relative">
             {missions.map((m) => {
@@ -68,15 +68,15 @@ export function MissionList() {
                     data-story-card
                     className={cn(
                       "cut-br rounded-2xl border bg-surface/85 p-5 sm:p-6 lg:p-8",
-                      current ? "border-orange/45 shadow-[0_20px_60px_-30px_rgb(255_138_61/0.6)]" : "border-line"
+                      current ? "border-orange/45 shadow-[0_20px_60px_-30px_rgb(0_0_0/0.6)]" : "border-line"
                     )}
                   >
                     <p data-story-part className="flex flex-wrap items-center gap-2">
-                      <span className={`${eyebrow} text-sunset font-bold`}>Mission {m.number}</span>
+                      <span className={`${eyebrow} text-blue font-bold`}>Mission {m.number}</span>
                       <StatusBadge status={m.status} />
                     </p>
                     <h3 data-story-part className="mt-2 font-display text-[2.125rem] text-ink lg:text-5xl">
-                      <span className="lean">{m.codename}</span>
+                      <span>{m.codename}</span>
                     </h3>
                     <p data-story-part className="mt-3 font-semibold text-ink">
                       {m.company} <span className="font-normal text-muted">· {m.role}</span>
@@ -112,7 +112,7 @@ export function MissionList() {
                   <StatusBadge status="LOCKED" />
                 </p>
                 <h3 className="mt-2 font-display text-[2.125rem] text-ink lg:text-5xl">
-                  <span className="lean">{lockedMission.codename}</span>
+                  <span>{lockedMission.codename}</span>
                 </h3>
                 <p className="mt-3 max-w-[62ch] text-ink/85">{lockedMission.teaser}</p>
                 <div className="mt-5">
@@ -125,28 +125,28 @@ export function MissionList() {
 
         <div className="mt-20 lg:mt-28">
           <h2 className="font-display text-4xl text-ink lg:text-6xl">
-            <span className="lean">Side missions</span>
+            <span>Side missions</span>
           </h2>
           <p className="mt-3 max-w-[60ch] text-ink/80">Client and personal builds.</p>
           <ul data-story-grid className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {sideMissions.map((s) => (
               <li key={s.slug}>
-                <article className="glow-hover relative flex h-full flex-col rounded-2xl border border-line bg-surface/85 p-5 hover:border-gold/50 has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-3 has-[a:focus-visible]:outline-gold">
+                <article className="glow-hover relative flex h-full flex-col rounded-2xl border border-line bg-surface/85 p-5 hover:border-blue/50 has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-3 has-[a:focus-visible]:outline-blue">
                   <span aria-hidden="true" className="grid size-8 place-items-center">
-                    <span className="size-5 rotate-45 rounded-[4px] border-2 border-gold" />
+                    <span className="size-5 rotate-45 rounded-[4px] border-2 border-blue" />
                   </span>
                   <h3 className="mt-3 font-display text-[1.75rem] text-ink">
                     <Link href={`/missions/${s.slug}`} className="after:absolute after:inset-0 after:rounded-2xl focus-visible:outline-none">
-                      <span className="lean">{s.name}</span>
+                      <span>{s.name}</span>
                     </Link>
                   </h3>
                   <p className="mt-2 text-base leading-relaxed text-ink/85">{s.objective}</p>
                   <ChipList items={s.tags} label={`${s.name} tags`} className="mt-4" />
                   <div className="mt-auto flex flex-wrap items-center justify-between gap-x-4 gap-y-2 pt-5">
-                    <p aria-hidden="true" className="inline-flex items-center gap-1.5 text-sm font-semibold text-gold">
+                    <p aria-hidden="true" className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue">
                       Start mission <ArrowRight className="size-4" />
                     </p>
-                    <VisitLink url={s.url} name={s.name} className="text-sm text-ink/90 decoration-ink/30 hover:text-gold" />
+                    <VisitLink url={s.url} name={s.name} className="text-sm text-ink/90 decoration-ink/30 hover:text-blue" />
                   </div>
                 </article>
               </li>
@@ -156,18 +156,18 @@ export function MissionList() {
 
         <div className="mt-20 lg:mt-28">
           <h2 className="font-display text-4xl text-ink lg:text-6xl">
-            <span className="lean">Tutorials</span>
+            <span>Tutorials</span>
           </h2>
           <p className="mt-3 max-w-[60ch] text-ink/80">Education, before and alongside the first mission.</p>
           <ul data-story-grid className="mt-8 grid gap-4 sm:grid-cols-2">
             {tutorials.map((t) => (
               <li key={t.slug}>
-                <article className="flex h-full gap-4 rounded-2xl border border-[#4fb7c4]/25 bg-teal/25 p-5 sm:p-6">
-                  <span aria-hidden="true" className="grid size-11 shrink-0 place-items-center rounded-xl border border-[#4fb7c4]/60 bg-teal text-[#bfe9ee]">
+                <article className="flex h-full gap-4 rounded-2xl border border-green/25 bg-teal/25 p-5 sm:p-6">
+                  <span aria-hidden="true" className="grid size-11 shrink-0 place-items-center rounded-xl border border-green/60 bg-teal text-[#d6edcd]">
                     <GraduationCap className="size-5" />
                   </span>
                   <div className="min-w-0">
-                    <p className={`${eyebrow} text-[#7fd3dc]`}>Tutorial {t.number}</p>
+                    <p className={`${eyebrow} text-[#b4dca3]`}>Tutorial {t.number}</p>
                     <h3 className="mt-1 text-lg leading-snug font-semibold text-ink">{t.degree}</h3>
                     <p className="mt-1 text-ink/85">{t.school}</p>
                     <p className="font-mono text-sm text-muted">{t.dates}</p>

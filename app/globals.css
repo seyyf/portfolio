@@ -1,23 +1,29 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-display: var(--font-anton), "Arial Narrow", Impact, sans-serif;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, Menlo, monospace;
+  --font-display: var(--font-martian), ui-monospace, Menlo, monospace;
+  --font-sans: var(--font-plex), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-martian), ui-monospace, Menlo, monospace;
 
-  --color-pink: #ff4fa3;
-  --color-orange: #ff8a3d;
-  --color-gold: #ffc94a;
-  --color-violet: #5b2a9e;
-  --color-bg: #0b0f1a;
-  --color-surface: #141a2a;
-  --color-surface-2: #1b2236;
-  --color-teal: #0e3b43;
-  --color-ink: #f5f1ea;
-  --color-muted: #9aa3b5;
-  --color-line: rgb(245 241 234 / 0.12);
-  --color-sea: #0d2a3f;
-  --color-land: #161d30;
+  /* An editor colour theme: graphite ground, flat syntax colours, no gradients.
+     blue = keyword (primary: links, buttons, focus), green = string (education, success),
+     yellow = function (stars, highlights), orange = constant, red = tag (alerts, unread). */
+  --color-bg: #14171c;
+  --color-surface: #1c2027;
+  --color-surface-2: #242933;
+  --color-ink: #dde2ea;
+  --color-muted: #8f98a8; /* comments */
+  --color-line: rgb(221 226 234 / 0.1);
+  --color-blue: #6cb6ff;
+  --color-blue-hover: #8ec7ff;
+  --color-green: #9fd28b;
+  --color-yellow: #e6c27a;
+  --color-orange: #f0965a;
+  --color-red: #f47b72;
+  --color-violet: #4a3f75; /* locked missions */
+  --color-teal: #1e3326; /* tutorial (education) panels, dark green */
+  --color-sea: #121c27;
+  --color-land: #1c2027;
   --color-sbs: #2f6db5; /* Sidi Bou Said blue, for doors and map water accents */
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -25,9 +31,8 @@
 }
 
 :root {
-  --sunset: linear-gradient(135deg, #ff4fa3, #ff8a3d 55%, #ffc94a);
-  --sunset-h: linear-gradient(90deg, #ff4fa3, #ff8a3d 55%, #ffc94a);
-  --glow: 0 0 0 1px rgb(255 138 61 / 0.35), 0 8px 32px -8px rgb(255 79 163 / 0.45);
+  /* Hover/focus ring for interactive cards: a crisp 1px keyword-blue line, no neon. */
+  --glow: 0 0 0 1px rgb(108 182 255 / 0.55);
   --hud-top: 4.25rem; /* space kept free under the top HUD on content pages */
   --hud-bottom: 6rem;
   color-scheme: dark;
@@ -42,13 +47,13 @@
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
-    background: #0b0f1a;
+    background: #14171c;
     scroll-padding-top: var(--hud-top);
     scrollbar-gutter: stable;
   }
   body {
-    background: #0b0f1a;
-    color: #f5f1ea;
+    background: #14171c;
+    color: #dde2ea;
     font-family: var(--font-sans);
     font-size: 1.0625rem; /* 17px minimum on mobile */
     line-height: 1.65;
@@ -65,13 +70,13 @@
     text-wrap: balance;
   }
   :focus-visible {
-    outline: 2px solid #ffc94a;
+    outline: 2px solid #6cb6ff;
     outline-offset: 3px;
     border-radius: 6px;
   }
   ::selection {
-    background: #ff4fa3;
-    color: #0b0f1a;
+    background: rgb(108 182 255 / 0.35);
+    color: #dde2ea;
   }
   a,
   button {
@@ -79,54 +84,16 @@
   }
 }
 
-/* Film grain over everything (static, no repaint on scroll). */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  pointer-events: none;
-  opacity: 0.06;
-  transform: translateZ(0);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* Display type: Anton, uppercase, with an optional forward lean. */
+/* Display type: Martian Mono, condensed and heavy, set in the case it is written in. */
 .font-display {
-  text-transform: uppercase;
-  letter-spacing: 0.01em;
-  line-height: 0.95;
+  font-stretch: 75%;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
 }
-.lean {
-  display: inline-block;
-  transform: skewX(-8deg);
-}
-
-/* Sunset gradient text. Without background-clip support it falls back to readable orange. */
-.text-sunset {
-  color: #ff9a52;
-}
-@supports ((-webkit-background-clip: text) or (background-clip: text)) {
-  .text-sunset {
-    background: var(--sunset);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
-  }
-}
-@media (forced-colors: active) {
-  .text-sunset {
-    color: CanvasText;
-    -webkit-text-fill-color: CanvasText;
-    background: none;
-  }
-}
-.bg-sunset {
-  background: var(--sunset);
-}
-.bg-sunset-h {
-  background: var(--sunset-h);
+/* Small mono labels (HUD, metadata): a narrower cut so they stay compact. */
+.font-mono {
+  font-stretch: 87.5%;
 }
 
 /* Diagonal cuts (~10°). */
@@ -153,8 +120,8 @@ body::after {
 
 /* HUD panels: dark glass with a hairline. */
 .hud-panel {
-  background: rgb(11 15 26 / 0.72);
-  border: 1px solid rgb(245 241 234 / 0.12);
+  background: rgb(20 23 28 / 0.8);
+  border: 1px solid rgb(221 226 234 / 0.12);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
@@ -240,7 +207,7 @@ html.intro-pending .loading-screen {
 }
 html.phone-ringing [data-phone-button] {
   animation: phone-ring 1.6s ease-in-out infinite;
-  border-color: #ff8a3d;
+  border-color: #6cb6ff;
   box-shadow: var(--glow);
 }
 
@@ -258,7 +225,7 @@ html.phone-ringing [data-phone-button] {
 }
 @keyframes star-max {
   50% {
-    filter: drop-shadow(0 0 6px #ff4fa3);
+    filter: drop-shadow(0 0 6px #e6c27a);
   }
 }
 .star-max {
@@ -297,7 +264,7 @@ html.phone-ringing [data-phone-button] {
   }
 }
 .busted-lights {
-  background: linear-gradient(100deg, rgb(255 79 163 / 0.16), transparent 30%, transparent 70%, rgb(47 109 181 / 0.22));
+  background: linear-gradient(100deg, rgb(244 123 114 / 0.16), transparent 30%, transparent 70%, rgb(47 109 181 / 0.22));
   background-size: 200% 100%;
   animation: busted-lights 3.2s ease-in-out infinite;
 }
@@ -320,13 +287,13 @@ html.cheat-nightride #main::after {
   pointer-events: none;
   background:
     repeating-linear-gradient(180deg, rgb(0 0 0 / 0.14) 0 1px, transparent 1px 3px),
-    radial-gradient(120% 90% at 50% 110%, rgb(255 79 163 / 0.25), transparent 60%),
-    linear-gradient(180deg, rgb(40 20 110 / 0.35), rgb(11 15 26 / 0.15));
+    radial-gradient(120% 90% at 50% 110%, rgb(108 182 255 / 0.22), transparent 60%),
+    linear-gradient(180deg, rgb(40 20 110 / 0.35), rgb(20 23 28 / 0.15));
   backdrop-filter: hue-rotate(-28deg) saturate(1.6) contrast(1.06);
   -webkit-backdrop-filter: hue-rotate(-28deg) saturate(1.6) contrast(1.06);
 }
 html.cheat-xray main * {
-  outline: 1px dashed rgb(80 227 194 / 0.45) !important;
+  outline: 1px dashed rgb(159 210 139 / 0.45) !important;
   outline-offset: -1px;
 }
 [data-hud-name] {

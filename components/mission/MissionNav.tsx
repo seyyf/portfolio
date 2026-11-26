@@ -14,13 +14,13 @@ function NavCard({ item, dir }: { item: Item; dir: "prev" | "next" }) {
   const Arrow = dir === "prev" ? ArrowLeft : ArrowRight
   return (
     <Link href={item.href} rel={dir} className={cn(navCardClass, dir === "next" && "sm:items-end sm:text-right")}>
-      <span className="flex items-center gap-2 font-mono text-xs tracking-[0.16em] text-muted uppercase">
+      <span className="flex items-center gap-2 font-mono text-xs text-muted lowercase">
         {dir === "prev" && <Arrow aria-hidden="true" className="size-4 transition-transform group-hover:-translate-x-1" />}
         {dir === "prev" ? "Previous" : "Next"} · {item.kicker}
         {dir === "next" && <Arrow aria-hidden="true" className="size-4 transition-transform group-hover:translate-x-1" />}
       </span>
       <span className="font-display text-[1.75rem] text-ink md:text-[2rem]">
-        <span className="lean">{item.title}</span>
+        <span>{item.title}</span>
       </span>
     </Link>
   )
@@ -58,7 +58,7 @@ export function MissionNav({ page }: { page: Mission | SideMission }) {
       </div>
       <Link
         href="/#missions"
-        className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-lg font-mono text-sm tracking-[0.12em] text-ink/85 uppercase transition-colors hover:text-gold"
+        className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-lg font-mono text-sm text-ink/85 lowercase transition-colors hover:text-blue"
       >
         <MapIcon aria-hidden="true" className="size-4" />
         Back to the map

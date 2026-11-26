@@ -27,26 +27,26 @@ export function Toasts() {
 function ToastCard({ toast }: { toast: Toast }) {
   return (
     <div className="game-toast hud-panel relative !bg-bg/95 overflow-hidden rounded-xl px-4 py-3 shadow-[0_18px_40px_-18px_rgb(0_0_0/0.9)]">
-      <span aria-hidden="true" className="bg-sunset absolute inset-y-0 left-0 w-1" />
+      <span aria-hidden="true" className="bg-blue absolute inset-y-0 left-0 w-1" />
       <p className="font-display text-xl leading-none text-ink">
-        <span className="lean">{toast.title}</span>
+        <span>{toast.title}</span>
       </p>
       {toast.kind === "loot" ? (
         <>
-          <p className="mt-1 font-mono text-xs tracking-[0.16em] text-gold">{toast.detail}</p>
+          <p className="mt-1 font-mono text-xs text-blue">{toast.detail}</p>
           <ul className="mt-2 grid grid-cols-4 gap-2">
             {profile.careerStats.map((s) => (
               <li key={s.label} className="text-center">
-                <span className="block font-mono text-2xl leading-none font-semibold text-gold tabular-nums">
+                <span className="block font-mono text-2xl leading-none font-semibold text-blue tabular-nums">
                   +<CountUp to={Number(s.value)} />
                 </span>
-                <span className="mt-1 block font-mono text-[0.625rem] tracking-[0.12em] text-ink/80 uppercase">{s.label}</span>
+                <span className="mt-1 block font-mono text-[0.625rem] text-ink/80 lowercase">{s.label}</span>
               </li>
             ))}
           </ul>
         </>
       ) : (
-        toast.detail && <p className="mt-1 font-mono text-xs tracking-[0.14em] text-gold">{toast.detail}</p>
+        toast.detail && <p className="mt-1 font-mono text-xs text-blue">{toast.detail}</p>
       )}
     </div>
   )

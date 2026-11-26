@@ -58,17 +58,17 @@ export function StatsMenu({ tabs }: { tabs: StatTab[] }) {
               tabIndex={selected ? 0 : -1}
               onClick={() => select(i)}
               className={cn(
-                "relative flex h-12 items-center justify-center rounded-lg border px-2 font-display text-lg tracking-[0.02em] uppercase transition-colors md:text-xl",
+                "relative flex h-12 items-center justify-center rounded-lg border px-2 font-display text-lg transition-colors md:text-xl",
                 selected ? "border-orange/60 bg-surface-2 text-ink" : "border-ink/10 bg-surface/60 text-muted hover:border-ink/25 hover:text-ink"
               )}
             >
               <span className={cn(selected && "lean")}>{t.label}</span>
-              <span aria-hidden="true" className={cn("bg-sunset-h absolute inset-x-3 -bottom-px h-[3px] rounded-full transition-opacity", selected ? "opacity-100" : "opacity-0")} />
+              <span aria-hidden="true" className={cn("bg-blue absolute inset-x-3 -bottom-px h-[3px] rounded-full transition-opacity", selected ? "opacity-100" : "opacity-0")} />
             </button>
           )
         })}
       </div>
-      <p aria-hidden="true" className="mt-2 hidden text-right font-mono text-xs tracking-[0.12em] text-muted uppercase md:block">
+      <p aria-hidden="true" className="mt-2 hidden text-right font-mono text-xs text-muted lowercase md:block">
         ← → to switch
       </p>
 

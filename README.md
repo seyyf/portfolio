@@ -11,7 +11,7 @@ npm run build      # production build (every page prerendered)
 npm start          # serve the production build on http://localhost:3000
 ```
 
-Stack: Next.js 16 (App Router), TypeScript, Tailwind CSS v4, GSAP (MISSION PASSED overlay), Framer Motion (phone, pause menu, briefings, swipe demo), Howler (optional sounds), lucide-react. Fonts: Anton (titles), Inter (body and UI), JetBrains Mono (HUD numbers).
+Stack: Next.js 16 (App Router), TypeScript, Tailwind CSS v4, GSAP (MISSION PASSED overlay), Framer Motion (phone, pause menu, briefings, swipe demo), Howler (optional sounds), lucide-react. Fonts: Martian Mono (titles and HUD labels), IBM Plex Sans (body and UI).
 
 ## Pages
 
@@ -32,7 +32,7 @@ Everywhere: **Esc** (or the Menu button) opens the pause menu (Map, Missions, St
 | Name, intro card text, HUD line, career stats, loading tips, CV path, site URL | `data/profile.ts` |
 | Missions, tutorials (education), side missions, the locked Mission 06, map districts and marker positions, metrics | `data/missions.ts` |
 | Skills and their status labels | `data/skills.ts` |
-| Colours, gradient, diagonal cuts, HUD styles, grain, reduced motion, print | `app/globals.css` |
+| Colours (an editor-style theme), diagonal cuts, HUD styles, reduced motion, print | `app/globals.css` |
 | HUD, recruiter button, minimap, pause menu | `components/hud/` |
 | Loading screen (CSS timeline in `styles.ts`) | `components/intro/` |
 | Map hub: map art and geometry, markers, cards, briefings, mission list, pan/zoom | `components/map/` |

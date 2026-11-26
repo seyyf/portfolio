@@ -133,7 +133,7 @@ function Device({ app, reduced }: { app: PhoneApp; reduced: boolean }) {
 
   return (
     // Frame (md+ only): a dark bezel with a sunset rim light. Below md the screen is the whole viewport.
-    <div className="h-full w-full md:rounded-[3rem] md:border md:border-ink/20 md:bg-[#05070d] md:p-2.5 md:shadow-[0_40px_90px_-30px_rgb(255_79_163/0.55),0_0_0_1px_rgb(255_138_61/0.25)]">
+    <div className="h-full w-full md:rounded-[3rem] md:border md:border-ink/20 md:bg-[#0b0d10] md:p-2.5 md:shadow-[0_40px_90px_-30px_rgb(0_0_0/0.55),0_0_0_1px_rgb(0_0_0/0.25)]">
       <div aria-hidden="true" className="absolute top-28 -left-[3px] hidden h-12 w-[3px] rounded-l bg-ink/20 md:block" />
       <div aria-hidden="true" className="absolute top-44 -left-[3px] hidden h-16 w-[3px] rounded-l bg-ink/20 md:block" />
       <div aria-hidden="true" className="absolute top-36 -right-[3px] hidden h-20 w-[3px] rounded-r bg-ink/20 md:block" />
@@ -207,7 +207,7 @@ function AppScreen({ app, cameFrom }: { app: PhoneApp; cameFrom: PhoneApp }) {
             play("tap")
             setPhoneApp("home")
           }}
-          className="inline-flex h-11 items-center gap-0.5 rounded-xl pr-3 pl-1.5 text-[0.9375rem] font-semibold text-gold hover:bg-ink/[0.06]"
+          className="inline-flex h-11 items-center gap-0.5 rounded-xl pr-3 pl-1.5 text-[0.9375rem] font-semibold text-blue hover:bg-ink/[0.06]"
           aria-label="Back to Home screen"
         >
           <ChevronLeft aria-hidden="true" className="size-5" />
@@ -243,7 +243,7 @@ function StatusBar() {
     <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-20 flex h-[calc(2.5rem+env(safe-area-inset-top))] items-center justify-between px-6 pt-[env(safe-area-inset-top)] font-mono text-[0.8125rem] font-medium text-ink md:h-11 md:px-7">
       <span className="tabular-nums">{time}</span>
       {/* Notch / camera pill (md+). */}
-      <span className="hidden h-6 w-24 rounded-full bg-[#05070d] md:block" />
+      <span className="hidden h-6 w-24 rounded-full bg-[#0b0d10] md:block" />
       <span className="flex items-center gap-1.5">
         <svg viewBox="0 0 18 12" className="h-3 w-[1.1rem]" fill="currentColor">
           <rect x="0" y="8" width="3" height="4" rx="1" />
@@ -251,10 +251,10 @@ function StatusBar() {
           <rect x="10" y="3" width="3" height="9" rx="1" />
           <rect x="15" y="0" width="3" height="12" rx="1" opacity="0.4" />
         </svg>
-        <span className="text-[0.6875rem] tracking-[0.1em]">TN</span>
+        <span className="text-[0.6875rem]">TN</span>
         <svg viewBox="0 0 26 12" className="h-3 w-[1.6rem]">
           <rect x="0.5" y="0.5" width="22" height="11" rx="3" fill="none" stroke="currentColor" strokeOpacity="0.5" />
-          <rect x="2.5" y="2.5" width="14" height="7" rx="1.5" fill="#ffc94a" />
+          <rect x="2.5" y="2.5" width="14" height="7" rx="1.5" fill="#e6c27a" />
           <rect x="23.5" y="4" width="2" height="4" rx="1" fill="currentColor" fillOpacity="0.5" />
         </svg>
       </span>

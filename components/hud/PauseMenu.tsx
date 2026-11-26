@@ -5,7 +5,7 @@ import { BarChart3, Briefcase, Disc3, FileText, Map as MapIcon, Settings, Smartp
 import { usePathname, useRouter } from "next/navigation"
 import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react"
 
-import { DisplayTitle } from "@/components/ui/Gradient"
+import { DisplayTitle } from "@/components/ui/DisplayTitle"
 import { setPrefs, usePrefs, useMotionReduced } from "@/lib/prefs"
 import { play } from "@/lib/sound"
 import { closePause, getUI, openPause, openPhone, openWheel, useUI } from "@/lib/ui"
@@ -89,7 +89,7 @@ export function PauseMenu() {
           <div aria-hidden="true" className="mx-auto h-1.5 w-12 rounded-full bg-ink/25 lg:hidden" />
           <div className="flex items-start justify-between gap-4 lg:block">
             <div>
-              <p className="font-mono text-xs tracking-[0.2em] text-muted uppercase">Game paused</p>
+              <p className="font-mono text-xs text-muted lowercase">Game paused</p>
               <DisplayTitle as="h2" className="mt-2 text-6xl lg:text-[9rem]">
                 Paused
               </DisplayTitle>
@@ -179,17 +179,17 @@ function Item({
       transition={{ delay: reduced ? 0 : 0.05 + index * 0.04, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
       className={cn(
         "group flex w-full items-center gap-4 rounded-xl border border-transparent px-4 py-3 text-left transition-colors",
-        "hover:border-ink/15 hover:bg-surface focus-visible:border-gold focus-visible:bg-surface focus-visible:outline-none"
+        "hover:border-ink/15 hover:bg-surface focus-visible:border-blue focus-visible:bg-surface focus-visible:outline-none"
       )}
     >
-      <span aria-hidden="true" className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-surface-2 text-muted transition-colors group-hover:text-gold group-focus-visible:text-gold [&>svg]:size-5">
+      <span aria-hidden="true" className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-surface-2 text-muted transition-colors group-hover:text-blue group-focus-visible:text-blue [&>svg]:size-5">
         {icon}
       </span>
       <span className="min-w-0 flex-1">
-        <span className={cn("block font-display text-3xl leading-none lg:text-4xl", accent ? "text-gold" : "text-ink")}>{label}</span>
+        <span className={cn("block font-display text-3xl leading-none lg:text-4xl", accent ? "text-blue" : "text-ink")}>{label}</span>
         <span className="mt-1 block text-sm text-muted">{hint}</span>
       </span>
-      <span aria-hidden="true" className="h-8 w-1 rounded-full bg-sunset opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" />
+      <span aria-hidden="true" className="h-8 w-1 rounded-full bg-blue opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" />
     </m.button>
   )
   return asLi ? <li>{button}</li> : button
@@ -212,7 +212,7 @@ function Toggle({ label, detail, on, onChange }: { label: string; detail: string
         <span className="block font-semibold">{label}</span>
         <span className="block text-sm text-muted">{detail}</span>
       </span>
-      <span aria-hidden="true" className={cn("relative h-7 w-12 shrink-0 rounded-full transition-colors", on ? "bg-sunset" : "bg-ink/20")}>
+      <span aria-hidden="true" className={cn("relative h-7 w-12 shrink-0 rounded-full transition-colors", on ? "bg-blue" : "bg-ink/20")}>
         <span className={cn("absolute top-1 left-1 size-5 rounded-full bg-ink transition-transform", on && "translate-x-5 bg-bg")} />
       </span>
     </button>

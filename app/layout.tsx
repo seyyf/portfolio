@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next"
-import { Anton, Inter, JetBrains_Mono } from "next/font/google"
+import { IBM_Plex_Sans, Martian_Mono } from "next/font/google"
 
 import { Game } from "@/components/game/Game"
 import { HUD } from "@/components/hud/HUD"
@@ -11,10 +11,9 @@ import { headScript } from "@/lib/headScripts"
 import { siteName, siteUrl } from "@/lib/site"
 import "./globals.css"
 
-// Anton for display titles, Inter for body and UI, JetBrains Mono for HUD numbers.
-const anton = Anton({ subsets: ["latin"], weight: "400", variable: "--font-anton", display: "swap" })
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" })
-const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains", display: "swap" })
+// Martian Mono (variable width) for titles and HUD labels, IBM Plex Sans for body and UI.
+const martian = Martian_Mono({ subsets: ["latin"], axes: ["wdth"], variable: "--font-martian", display: "swap" })
+const plex = IBM_Plex_Sans({ subsets: ["latin"], axes: ["wdth"], variable: "--font-plex", display: "swap" })
 
 const title = `${profile.name} — ${profile.title} · ${profile.edition}`
 const description = `${profile.intro} Explore the missions on a map of Tunis, or skip straight to the CV.`
@@ -34,7 +33,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
-export const viewport: Viewport = { themeColor: "#0b0f1a", colorScheme: "dark", interactiveWidget: "resizes-content" }
+export const viewport: Viewport = { themeColor: "#14171c", colorScheme: "dark", interactiveWidget: "resizes-content" }
 
 const personJsonLd = {
   "@context": "https://schema.org",
@@ -54,13 +53,13 @@ const personJsonLd = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${anton.variable} ${inter.variable} ${jetbrains.variable} antialiased`} suppressHydrationWarning>
+    <html lang="en" className={`${martian.variable} ${plex.variable} antialiased`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: headScript }} />
       </head>
       <body>
         <Providers>
-          <a href="#main" className="sr-only z-[95] rounded-lg bg-gold px-4 py-2 font-semibold text-bg focus:not-sr-only focus:fixed focus:top-16 focus:left-3">
+          <a href="#main" className="sr-only z-[95] rounded-lg bg-blue px-4 py-2 font-semibold text-bg focus:not-sr-only focus:fixed focus:top-16 focus:left-3">
             Skip to content
           </a>
           <main id="main" tabIndex={-1} className="outline-none">

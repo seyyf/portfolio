@@ -190,12 +190,12 @@ export function Messages({ variant = "phone", className }: { variant?: "phone" |
   const inputClass = (f: Field) =>
     cn(
       "w-full rounded-xl border bg-bg/70 px-3 text-base text-ink placeholder:text-muted/80 transition-colors focus-visible:outline-2 focus-visible:outline-offset-1",
-      errors[f] ? "border-pink" : "border-ink/15 hover:border-ink/30 focus-visible:border-gold"
+      errors[f] ? "border-red" : "border-ink/15 hover:border-ink/30 focus-visible:border-blue"
     )
 
   const errorText = (f: Field) =>
     errors[f] ? (
-      <p id={errId(f)} className="mt-1 flex items-start gap-1.5 text-sm leading-snug text-pink">
+      <p id={errId(f)} className="mt-1 flex items-start gap-1.5 text-sm leading-snug text-red">
         <CircleAlert aria-hidden="true" className="mt-0.5 size-3.5 shrink-0" />
         {errors[f]}
       </p>
@@ -213,7 +213,7 @@ export function Messages({ variant = "phone", className }: { variant?: "phone" |
           variant === "phone" ? "min-h-0 flex-1" : "max-h-[26rem] min-h-[12rem]"
         )}
       >
-        <p className="font-mono text-[0.6875rem] tracking-[0.16em] text-muted uppercase self-center">Today</p>
+        <p className="font-mono text-[0.6875rem] text-muted lowercase self-center">Today</p>
         <Incoming>{GREETING}</Incoming>
         <AnimatePresence initial={false}>
           {sent.map((s) => (
@@ -234,7 +234,7 @@ export function Messages({ variant = "phone", className }: { variant?: "phone" |
                       type="button"
                       onClick={() => retry(s)}
                       aria-disabled={sending}
-                      className="inline-flex h-10 items-center gap-1.5 rounded-lg border border-ink/20 px-3 text-sm font-semibold hover:border-gold hover:text-gold aria-disabled:opacity-60"
+                      className="inline-flex h-10 items-center gap-1.5 rounded-lg border border-ink/20 px-3 text-sm font-semibold hover:border-blue hover:text-blue aria-disabled:opacity-60"
                     >
                       <RotateCcw aria-hidden="true" className="size-4" />
                       Try again
@@ -252,7 +252,7 @@ export function Messages({ variant = "phone", className }: { variant?: "phone" |
         {/* Who's writing: compact, above the composer. */}
         <div className="grid grid-cols-2 gap-2">
           <div className="min-w-0">
-            <label htmlFor={ids.name} className="mb-1 block font-mono text-[0.6875rem] tracking-[0.14em] text-muted uppercase">
+            <label htmlFor={ids.name} className="mb-1 block font-mono text-[0.6875rem] text-muted lowercase">
               Your name
             </label>
             <input
@@ -272,7 +272,7 @@ export function Messages({ variant = "phone", className }: { variant?: "phone" |
             {errorText("name")}
           </div>
           <div className="min-w-0">
-            <label htmlFor={ids.email} className="mb-1 block font-mono text-[0.6875rem] tracking-[0.14em] text-muted uppercase">
+            <label htmlFor={ids.email} className="mb-1 block font-mono text-[0.6875rem] text-muted lowercase">
               Your email
             </label>
             <input
@@ -327,7 +327,7 @@ export function Messages({ variant = "phone", className }: { variant?: "phone" |
           <button
             type="submit"
             aria-disabled={sending}
-            className="bg-sunset inline-flex h-11 shrink-0 items-center gap-1.5 rounded-xl px-4 text-[0.9375rem] font-semibold text-bg shadow-[0_6px_24px_-10px_rgb(255_79_163/0.8)] transition-shadow hover:shadow-[var(--glow)] aria-disabled:opacity-70"
+            className="bg-blue inline-flex h-11 shrink-0 items-center gap-1.5 rounded-xl px-4 text-[0.9375rem] font-semibold text-bg shadow-[0_6px_24px_-10px_rgb(0_0_0/0.8)] transition-shadow hover:shadow-[var(--glow)] aria-disabled:opacity-70"
           >
             {sending ? <LoaderCircle aria-hidden="true" className="size-4 animate-spin" /> : <Send aria-hidden="true" className="size-4" />}
             {sending ? "Sending" : "Send"}
@@ -336,7 +336,7 @@ export function Messages({ variant = "phone", className }: { variant?: "phone" |
         {errorText("message")}
         <p id={ids.hint} className="mt-2 text-[0.8125rem] leading-snug text-muted">
           <span className="hidden sm:inline">Ctrl + Enter sends. </span>Replies go to the email you enter.
-          {left < 500 && <span className={left < 0 ? "text-pink" : "text-gold"}> {left < 0 ? `${-left} characters over the limit.` : `${left} characters left.`}</span>}
+          {left < 500 && <span className={left < 0 ? "text-red" : "text-blue"}> {left < 0 ? `${-left} characters over the limit.` : `${left} characters left.`}</span>}
         </p>
       </div>
     </form>
@@ -346,7 +346,7 @@ export function Messages({ variant = "phone", className }: { variant?: "phone" |
 function Incoming({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex max-w-[88%] items-end gap-2 self-start">
-      <span aria-hidden="true" className="bg-sunset flex size-7 shrink-0 items-center justify-center rounded-full font-display text-xs text-bg">
+      <span aria-hidden="true" className="bg-blue flex size-7 shrink-0 items-center justify-center rounded-full font-display text-xs text-bg">
         S
       </span>
       <p className="min-w-0 rounded-2xl rounded-bl-md bg-surface-2 px-3.5 py-2.5 text-[0.9375rem] leading-snug [overflow-wrap:anywhere] text-ink">
@@ -367,11 +367,11 @@ const STATUS_TEXT: Record<Sent["status"], string> = {
 function Outgoing({ children, status }: { children: React.ReactNode; status: Sent["status"] }) {
   return (
     <div className="flex max-w-[88%] flex-col items-end gap-1 self-end">
-      <p className="rounded-2xl rounded-br-md bg-[linear-gradient(135deg,#ff4fa3,#ff8a3d)] px-3.5 py-2.5 text-[0.9375rem] leading-snug [overflow-wrap:anywhere] whitespace-pre-wrap text-bg">
+      <p className="rounded-2xl rounded-br-md bg-blue px-3.5 py-2.5 text-[0.9375rem] leading-snug [overflow-wrap:anywhere] whitespace-pre-wrap text-bg">
         <span className="sr-only">You: </span>
         {children}
       </p>
-      <p className={cn("flex items-center gap-1 font-mono text-[0.6875rem] tracking-[0.08em] uppercase", status === "delivered" ? "text-gold" : status === "sending" ? "text-muted" : "text-pink")}>
+      <p className={cn("flex items-center gap-1 font-mono text-[0.6875rem] lowercase", status === "delivered" ? "text-blue" : status === "sending" ? "text-muted" : "text-red")}>
         {STATUS_TEXT[status]}
       </p>
     </div>
@@ -383,7 +383,7 @@ function MailLink({ href, inline }: { href: string; inline?: boolean }) {
     <a
       href={href}
       className={cn(
-        "min-h-10 items-center gap-1.5 rounded-lg bg-ink px-3 py-2 text-sm font-semibold text-bg hover:bg-gold",
+        "min-h-10 items-center gap-1.5 rounded-lg bg-ink px-3 py-2 text-sm font-semibold text-bg hover:bg-blue",
         inline ? "inline-flex" : "mt-2 flex w-fit"
       )}
     >

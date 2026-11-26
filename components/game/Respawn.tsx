@@ -36,7 +36,7 @@ export function Respawn() {
           setGoing(true)
           window.setTimeout(() => router.push("/"), 1100)
         }}
-        className={buttonClass("sunset", "lg")}
+        className={buttonClass("primary", "lg")}
       >
         <RotateCcw aria-hidden="true" className="size-4" />
         Respawn at the map
@@ -44,7 +44,7 @@ export function Respawn() {
       {going && (
         <div role="status" className="respawn fixed inset-0 z-[95] flex items-center justify-center bg-bg">
           <p className="font-display text-5xl text-ink lg:text-7xl">
-            <span className="lean text-sunset">Respawning…</span>
+            <span className="text-blue">Respawning…</span>
           </p>
         </div>
       )}

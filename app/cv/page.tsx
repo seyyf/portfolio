@@ -20,11 +20,11 @@ export const metadata: Metadata = {
 const jobs = [...missions].reverse()
 
 const H = ({ children }: { children: React.ReactNode }) => (
-  <h2 className="border-b border-[#ddd] pb-1 text-[0.8125rem] font-bold tracking-[0.04em] text-[#111] print:text-[8.5pt]">{children}</h2>
+  <h2 className="border-b border-[#ddd] pb-1 text-[0.8125rem] font-bold text-[#111] print:text-[8.5pt]">{children}</h2>
 )
 
 /**
- * Recruiter mode: a plain one-page A4 résumé. Black on white, Inter, one thin sunset line.
+ * Recruiter mode: a plain one-page A4 résumé. Black on white, IBM Plex Sans, one thin blue line.
  * No HUD, no animations. Same facts as the PDF.
  */
 export default function CvPage() {
@@ -55,7 +55,7 @@ export default function CvPage() {
           <p className="mt-1 text-[0.875rem] text-[#444] print:text-[8.5pt]">
             {profile.location} · <a href={`mailto:${profile.email}`}>{profile.email}</a> · <a href={profile.linkedin}>{profile.linkedinLabel}</a>
           </p>
-          <div aria-hidden="true" className="mt-4 h-[3px] w-24 rounded-full bg-[linear-gradient(90deg,#ff4fa3,#ff8a3d_55%,#ffc94a)] print:mt-2.5" />
+          <div aria-hidden="true" className="mt-4 h-[3px] w-24 rounded-full bg-[#2f6db5] print:mt-2.5" />
         </header>
 
         <p className="mt-4 print:mt-2.5">{profile.summary}</p>

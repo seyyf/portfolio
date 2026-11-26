@@ -26,8 +26,8 @@ import { cn } from "@/lib/utils"
  *   0.36  title letters slide in from the right (expo.out, 24ms stagger) with a skew/stretch that
  *         settles past zero and back (back.out) while the whole title pushes in (scale .94 → 1)
  *   0.66  the hit: "ding" (if sound is on)
- *   0.74  sunset bar draws left → right (0.6, power4.inOut)
- *   0.82  a gold gleam crosses the band
+ *   0.74  the rule draws left → right (0.6, power4.inOut)
+ *   0.82  a light gleam crosses the band
  *   1.22  "Skills unlocked:" slides in
  *   1.40  each skill pops in (back.out, 140ms stagger)
  *   end   Continue (+ next step) fades up; Skip fades out. ~2.4–3.0s depending on skill count.
@@ -64,18 +64,6 @@ const prefetchGsap = () => {
   if (!motionReduced()) loadGsap().catch(() => {})
 }
 
-// Each letter takes its colour from the sunset gradient (pink → orange → gold), so the title keeps
-// the gradient while every letter moves on its own (background-clip text can't follow transforms).
-const STOPS: [number, number, number][] = [
-  [255, 79, 163],
-  [255, 138, 61],
-  [255, 201, 74],
-]
-function sunsetAt(t: number) {
-  const [a, b, u] = t <= 0.55 ? [STOPS[0], STOPS[1], t / 0.55] : [STOPS[1], STOPS[2], (t - 0.55) / 0.45]
-  return `rgb(${a.map((v, i) => Math.round(v + (b[i] - v) * u)).join(" ")})`
-}
-
 type Els = {
   dim: HTMLElement
   stage: HTMLElement
@@ -95,9 +83,6 @@ type Els = {
 function buildTimeline({ gsap, SplitText }: GsapModule, el: Els, onHit: () => void, onDone: () => void): { tl: Timeline; split: InstanceType<typeof SplitText> } {
   const split = SplitText.create(el.titleText, { type: "words,chars", tag: "span", aria: "auto" })
   const chars = split.chars as HTMLElement[]
-  chars.forEach((c, i) => {
-    c.style.color = sunsetAt(chars.length > 1 ? i / (chars.length - 1) : 0)
-  })
   const each = 0.024
 
   const tl = gsap.timeline({ defaults: { ease: "power3.out" }, onComplete: onDone })
@@ -406,7 +391,7 @@ export function MissionPassed({
       <div
         ref={dim}
         aria-hidden="true"
-        className={cn("fixed inset-0 bg-bg/80 bg-[radial-gradient(ellipse_at_center,transparent_25%,rgb(11_15_26/0.75)_100%)]", anim && "opacity-0")}
+        className={cn("fixed inset-0 bg-bg/80 bg-[radial-gradient(ellipse_at_center,transparent_25%,rgb(20_23_28/0.75)_100%)]", anim && "opacity-0")}
       />
 
       <div ref={stage} className={cn("relative flex min-h-full items-center justify-center px-4 pt-20 pb-28 md:py-24", anim && "invisible")}>
@@ -414,40 +399,40 @@ export function MissionPassed({
           {/* The diagonal band behind the card: body + bottom edge, and a separate top edge. */}
           <div aria-hidden="true" className="pointer-events-none absolute -inset-y-10 left-1/2 w-[140vw] -translate-x-1/2 md:-inset-y-14">
             <div ref={band} className="absolute inset-0">
-              <div className="absolute inset-0 -skew-y-5 overflow-hidden bg-[linear-gradient(90deg,rgb(20_26_42/0.97),rgb(14_59_67/0.95)_50%,rgb(20_26_42/0.97))] shadow-[0_30px_80px_-20px_rgb(0_0_0/0.85)]">
-                <div ref={gleam} className="absolute inset-y-0 left-0 w-1/5 bg-[linear-gradient(100deg,transparent,rgb(255_201_74/0.16),transparent)] opacity-0" />
-                <div className="absolute inset-x-0 bottom-0 h-0.75 bg-sunset-h" />
+              <div className="absolute inset-0 -skew-y-5 overflow-hidden bg-[linear-gradient(90deg,rgb(28_32_39/0.97),rgb(30_51_38/0.95)_50%,rgb(28_32_39/0.97))] shadow-[0_30px_80px_-20px_rgb(0_0_0/0.85)]">
+                <div ref={gleam} className="absolute inset-y-0 left-0 w-1/5 bg-[linear-gradient(100deg,transparent,rgb(230_194_122/0.16),transparent)] opacity-0" />
+                <div className="absolute inset-x-0 bottom-0 h-0.75 bg-blue" />
               </div>
             </div>
             <div ref={edge} className="absolute inset-0">
               <div className="absolute inset-0 -skew-y-5">
-                <div className="absolute inset-x-0 top-0 h-0.75 bg-sunset-h" />
+                <div className="absolute inset-x-0 top-0 h-0.75 bg-blue" />
               </div>
             </div>
           </div>
 
-          <p ref={kickerEl} className="relative font-mono text-xs tracking-[0.28em] text-ink/85 uppercase md:text-sm">
+          <p ref={kickerEl} className="relative font-mono text-xs text-ink/85 lowercase md:text-sm">
             {kicker}
           </p>
           <h2
             ref={title}
             id={titleId}
-            className="relative mt-3 font-display text-[clamp(2.75rem,12.5vw,6.5rem)] leading-[0.92] text-ink [filter:drop-shadow(0_0.05em_0_rgb(11_15_26/0.9))]"
+            className="relative mt-3 font-display text-[clamp(2.75rem,12.5vw,6.5rem)] leading-[0.92] text-ink [filter:drop-shadow(0_0.05em_0_rgb(20_23_28/0.9))]"
           >
-            <span ref={titleText} className={cn("lean px-[0.06em]", !anim && "text-sunset")}>
+            <span ref={titleText} className="px-[0.06em] text-green">
               {TITLES[variant]}
             </span>
           </h2>
-          <div ref={rule} aria-hidden="true" className="relative mx-auto mt-4 h-1.5 w-[min(78%,30rem)] -skew-x-[30deg] bg-sunset-h md:h-2" />
+          <div ref={rule} aria-hidden="true" className="relative mx-auto mt-4 h-1.5 w-[min(78%,30rem)] -skew-x-[30deg] bg-blue md:h-2" />
 
           <div id={descId} className="relative mt-7">
-            <p ref={label} className="font-mono text-sm tracking-[0.2em] text-gold uppercase">
+            <p ref={label} className="font-mono text-sm text-blue lowercase">
               {skillsLabel}
             </p>
             <ul ref={list} className="mx-auto mt-3 flex max-w-[40rem] flex-wrap justify-center gap-2">
               {skills.map((s) => (
-                <li key={s} className="rounded-md border border-gold/35 bg-bg/70 px-3 py-1.5 text-[0.9375rem] leading-6 font-semibold text-ink">
-                  <span aria-hidden="true" className="mr-1 text-gold">
+                <li key={s} className="rounded-md border border-blue/35 bg-bg/70 px-3 py-1.5 text-[0.9375rem] leading-6 font-semibold text-ink">
+                  <span aria-hidden="true" className="mr-1 text-blue">
                     +
                   </span>
                   {s}
@@ -457,7 +442,7 @@ export function MissionPassed({
           </div>
 
           <div ref={actions} inert={!done} className="relative mt-9 flex flex-wrap items-center justify-center gap-3">
-            <button ref={continueBtn} type="button" onClick={() => close()} className={buttonClass("sunset", "lg", "min-w-40")}>
+            <button ref={continueBtn} type="button" onClick={() => close()} className={buttonClass("primary", "lg", "min-w-40")}>
               Continue
             </button>
             {action?.type === "link" && (
@@ -489,7 +474,7 @@ export function MissionPassed({
           ref={skipBtn}
           type="button"
           onClick={finish}
-          className="hud-panel fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] inline-flex h-11 items-center gap-2 rounded-lg px-4 font-mono text-xs tracking-[0.14em] text-ink uppercase transition-colors hover:border-gold hover:text-gold lg:right-6 lg:bottom-6"
+          className="hud-panel fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] inline-flex h-11 items-center gap-2 rounded-lg px-4 font-mono text-xs text-ink lowercase transition-colors hover:border-blue hover:text-blue lg:right-6 lg:bottom-6"
         >
           Skip
           <kbd aria-hidden="true" className="hidden rounded border border-ink/25 px-1 text-[0.625rem] normal-case sm:inline">
@@ -513,7 +498,7 @@ export function MissionPassed({
           onPointerEnter={prefetchGsap}
           onFocus={prefetchGsap}
           aria-haspopup="dialog"
-          className={buttonClass("sunset", "lg")}
+          className={buttonClass("primary", "lg")}
         >
           <Flag aria-hidden="true" className="size-4" />
           {triggerLabel}

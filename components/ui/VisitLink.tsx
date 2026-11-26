@@ -11,7 +11,7 @@ export function VisitLink({ url, name, className }: { url?: string; name: string
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        "relative z-10 inline-flex items-center gap-1.5 font-semibold text-gold underline decoration-gold/40 underline-offset-4 transition-colors hover:decoration-gold",
+        "relative z-10 inline-flex items-center gap-1.5 font-semibold text-blue underline decoration-blue/40 underline-offset-4 transition-colors hover:decoration-blue",
         className
       )}
     >

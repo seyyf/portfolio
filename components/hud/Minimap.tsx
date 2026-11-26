@@ -32,8 +32,8 @@ export function Minimap() {
         className="absolute inset-0 size-full opacity-90 transition-transform duration-500 group-hover:scale-110"
       />
       <span aria-hidden="true" className="absolute top-1/2 left-1/2 size-4 -translate-1/2 animate-ping rounded-full bg-red/50" />
-      <span aria-hidden="true" className="absolute inset-0 rounded-full shadow-[inset_0_0_0_2px_rgb(0_0_0/0.55),inset_0_0_18px_rgb(20_23_28/0.9)]" />
-      <span aria-hidden="true" className="absolute top-1 left-1/2 -translate-x-1/2 font-mono text-[0.5625rem] leading-none font-bold text-blue lg:top-1.5 lg:text-[0.6875rem]">
+      <span aria-hidden="true" className="absolute inset-0 rounded-full shadow-[inset_0_0_0_2px_rgb(0_0_0/0.55),inset_0_0_18px_rgb(14_27_43/0.9)]" />
+      <span aria-hidden="true" className="absolute top-1 left-1/2 -translate-x-1/2 font-mono text-[0.5625rem] leading-none font-bold text-pink lg:top-1.5 lg:text-[0.6875rem]">
         N
       </span>
     </>

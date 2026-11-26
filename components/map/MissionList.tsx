@@ -21,7 +21,7 @@ function Node({ number, current, locked }: { number: string; current?: boolean; 
       data-story-node
       className={cn(
         "relative z-10 grid size-10 place-items-center rounded-full font-mono text-sm font-bold lg:size-14 lg:text-base",
-        locked ? "border-2 border-dashed border-ink/40 bg-violet/60 text-ink" : "bg-blue p-[3px] text-ink"
+        locked ? "border-2 border-dashed border-ink/40 bg-violet/60 text-ink" : "bg-pink p-[3px] text-ink"
       )}
     >
       {locked ? (
@@ -43,11 +43,11 @@ export function MissionList() {
     // the page mid-animation and phones get a horizontal scroll. Clip (not hidden) keeps it from
     // becoming a scroll container.
     <section id="missions" aria-label="Mission list" className="relative overflow-x-clip px-4 pt-14 pb-[calc(var(--hud-bottom)+3rem)] sm:px-6 lg:px-10 lg:pt-28">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-[radial-gradient(60%_100%_at_50%_0%,rgb(74_63_117/0.28),transparent)]" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-[radial-gradient(60%_100%_at_50%_0%,rgb(59_52_102/0.28),transparent)]" />
       <StoryMotion />
       <div data-story className="relative mx-auto max-w-5xl">
         <header>
-          <p className={`${eyebrow} text-blue`}>Mission list</p>
+          <p className={`${eyebrow} text-pink`}>Mission list</p>
           <h2 className="mt-2 font-display text-5xl text-ink lg:text-7xl">
             <span>Story missions</span>
           </h2>
@@ -56,7 +56,7 @@ export function MissionList() {
 
         <div data-story-route className="relative mt-10 lg:mt-14">
           <span aria-hidden="true" className="absolute top-5 bottom-10 left-5 w-0.5 -translate-x-1/2 lg:top-7 lg:left-7">
-            <span data-story-line className="block size-full origin-top bg-blue/70" />
+            <span data-story-line className="block size-full origin-top bg-pink/70" />
           </span>
           <ol className="relative">
             {missions.map((m) => {
@@ -72,7 +72,7 @@ export function MissionList() {
                     )}
                   >
                     <p data-story-part className="flex flex-wrap items-center gap-2">
-                      <span className={`${eyebrow} text-blue font-bold`}>Mission {m.number}</span>
+                      <span className={`${eyebrow} text-pink font-bold`}>Mission {m.number}</span>
                       <StatusBadge status={m.status} />
                     </p>
                     <h3 data-story-part className="mt-2 font-display text-[2.125rem] text-ink lg:text-5xl">
@@ -131,9 +131,9 @@ export function MissionList() {
           <ul data-story-grid className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {sideMissions.map((s) => (
               <li key={s.slug}>
-                <article className="glow-hover relative flex h-full flex-col rounded-2xl border border-line bg-surface/85 p-5 hover:border-blue/50 has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-3 has-[a:focus-visible]:outline-blue">
+                <article className="glow-hover relative flex h-full flex-col rounded-2xl border border-line bg-surface/85 p-5 hover:border-pink/50 has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-3 has-[a:focus-visible]:outline-pink">
                   <span aria-hidden="true" className="grid size-8 place-items-center">
-                    <span className="size-5 rotate-45 rounded-[4px] border-2 border-blue" />
+                    <span className="size-5 rotate-45 rounded-[4px] border-2 border-pink" />
                   </span>
                   <h3 className="mt-3 font-display text-[1.75rem] text-ink">
                     <Link href={`/missions/${s.slug}`} className="after:absolute after:inset-0 after:rounded-2xl focus-visible:outline-none">
@@ -143,10 +143,10 @@ export function MissionList() {
                   <p className="mt-2 text-base leading-relaxed text-ink/85">{s.objective}</p>
                   <ChipList items={s.tags} label={`${s.name} tags`} className="mt-4" />
                   <div className="mt-auto flex flex-wrap items-center justify-between gap-x-4 gap-y-2 pt-5">
-                    <p aria-hidden="true" className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue">
+                    <p aria-hidden="true" className="inline-flex items-center gap-1.5 text-sm font-semibold text-pink">
                       Start mission <ArrowRight className="size-4" />
                     </p>
-                    <VisitLink url={s.url} name={s.name} className="text-sm text-ink/90 decoration-ink/30 hover:text-blue" />
+                    <VisitLink url={s.url} name={s.name} className="text-sm text-ink/90 decoration-ink/30 hover:text-pink" />
                   </div>
                 </article>
               </li>
@@ -163,11 +163,11 @@ export function MissionList() {
             {tutorials.map((t) => (
               <li key={t.slug}>
                 <article className="flex h-full gap-4 rounded-2xl border border-green/25 bg-teal/25 p-5 sm:p-6">
-                  <span aria-hidden="true" className="grid size-11 shrink-0 place-items-center rounded-xl border border-green/60 bg-teal text-[#d6edcd]">
+                  <span aria-hidden="true" className="grid size-11 shrink-0 place-items-center rounded-xl border border-green/60 bg-teal text-[#c7f0e6]">
                     <GraduationCap className="size-5" />
                   </span>
                   <div className="min-w-0">
-                    <p className={`${eyebrow} text-[#b4dca3]`}>Tutorial {t.number}</p>
+                    <p className={`${eyebrow} text-[#8adccb]`}>Tutorial {t.number}</p>
                     <h3 className="mt-1 text-lg leading-snug font-semibold text-ink">{t.degree}</h3>
                     <p className="mt-1 text-ink/85">{t.school}</p>
                     <p className="font-mono text-sm text-muted">{t.dates}</p>

@@ -63,7 +63,7 @@ export function StatsMenu({ tabs }: { tabs: StatTab[] }) {
               )}
             >
               <span className={cn(selected && "lean")}>{t.label}</span>
-              <span aria-hidden="true" className={cn("bg-blue absolute inset-x-3 -bottom-px h-[3px] rounded-full transition-opacity", selected ? "opacity-100" : "opacity-0")} />
+              <span aria-hidden="true" className={cn("bg-pink absolute inset-x-3 -bottom-px h-[3px] rounded-full transition-opacity", selected ? "opacity-100" : "opacity-0")} />
             </button>
           )
         })}

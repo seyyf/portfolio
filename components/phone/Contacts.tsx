@@ -46,7 +46,7 @@ export function Contacts({ className }: { className?: string }) {
       <ul className="grid grid-cols-[minmax(0,1fr)] gap-2.5">
         <li className="rounded-2xl border border-ink/10 bg-surface p-1.5">
           <button type="button" onClick={copyEmail} className={rowClass}>
-            <Tile className="bg-blue text-bg">
+            <Tile className="bg-pink text-bg">
               <Mail />
             </Tile>
             <span className="min-w-0 flex-1">
@@ -55,15 +55,15 @@ export function Contacts({ className }: { className?: string }) {
                 {profile.email}
               </span>
             </span>
-            <span className={cn("inline-flex shrink-0 items-center gap-1 font-mono text-xs lowercase", copy === "copied" ? "text-blue" : "text-ink/80")}>
+            <span className={cn("inline-flex shrink-0 items-center gap-1 font-mono text-xs lowercase", copy === "copied" ? "text-pink" : "text-ink/80")}>
               {copy === "copied" ? <Check aria-hidden="true" className="size-4" /> : <Copy aria-hidden="true" className="size-4" />}
               {copy === "copied" ? "Copied ✓" : "Copy"}
             </span>
           </button>
-          <p role="status" className={cn("px-3 text-sm", copy === "failed" ? "pt-1 pb-2 text-blue" : "sr-only")}>
+          <p role="status" className={cn("px-3 text-sm", copy === "failed" ? "pt-1 pb-2 text-pink" : "sr-only")}>
             {copy === "copied" ? "Email address copied." : copy === "failed" ? `Couldn't copy automatically. The address is selected: ${profile.email}` : ""}
           </p>
-          <a href={`mailto:${profile.email}`} className="ml-14 inline-flex min-h-10 items-center gap-1 rounded-lg px-2 text-sm text-ink/85 underline decoration-ink/30 underline-offset-4 hover:text-blue hover:decoration-blue">
+          <a href={`mailto:${profile.email}`} className="ml-14 inline-flex min-h-10 items-center gap-1 rounded-lg px-2 text-sm text-ink/85 underline decoration-ink/30 underline-offset-4 hover:text-pink hover:decoration-pink">
             Open in your mail app
           </a>
         </li>
@@ -84,7 +84,7 @@ export function Contacts({ className }: { className?: string }) {
 
         <li className="rounded-2xl border border-ink/10 bg-surface p-1.5">
           <a href={profile.cvPdf} download className={rowClass}>
-            <Tile className="bg-blue text-bg">
+            <Tile className="bg-pink text-bg">
               <Download />
             </Tile>
             <span className="min-w-0 flex-1">
@@ -95,7 +95,7 @@ export function Contacts({ className }: { className?: string }) {
           <Link
             href="/cv"
             onClick={() => closePhone()}
-            className="ml-14 inline-flex min-h-10 items-center gap-1.5 rounded-lg px-2 text-sm text-ink/85 underline decoration-ink/30 underline-offset-4 hover:text-blue hover:decoration-blue"
+            className="ml-14 inline-flex min-h-10 items-center gap-1.5 rounded-lg px-2 text-sm text-ink/85 underline decoration-ink/30 underline-offset-4 hover:text-pink hover:decoration-pink"
           >
             <FileText aria-hidden="true" className="size-3.5" />
             Read it online

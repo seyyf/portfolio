@@ -53,10 +53,10 @@ function usedOn(tab: StatTab) {
 }
 
 const STATUS_COLOR: Record<SkillStatus, string> = {
-  "Daily use": "text-blue",
+  "Daily use": "text-pink",
   Production: "text-orange",
   Experienced: "text-ink",
-  Native: "text-blue",
+  Native: "text-pink",
   C1: "text-orange",
   B2: "text-ink",
 }
@@ -154,14 +154,14 @@ export function SkillsWheel() {
             <div>
               <p className="font-mono text-xs text-muted lowercase">Hold Q · ← → to switch · Esc to close</p>
               <h2 id="wheel-title" className="mt-1 font-display text-4xl text-ink lg:text-5xl">
-                <span className="text-blue">Skills wheel</span>
+                <span className="text-pink">Skills wheel</span>
               </h2>
             </div>
             <button
               type="button"
               onClick={() => closeWheel()}
               aria-label="Close the skills wheel"
-              className="hud-panel inline-flex size-11 shrink-0 items-center justify-center rounded-xl hover:border-blue hover:text-blue"
+              className="hud-panel inline-flex size-11 shrink-0 items-center justify-center rounded-xl hover:border-pink hover:text-pink"
             >
               <X aria-hidden="true" className="size-5" />
             </button>
@@ -175,7 +175,7 @@ export function SkillsWheel() {
                   key={t.id}
                   d={slicePath(i)}
                   onClick={() => select(i, { focus: true })}
-                  className={cn("cursor-pointer transition-[fill,opacity] duration-150", i === sel ? "fill-blue" : "fill-[#1c2027]/90 stroke-ink/15 hover:fill-[#242933]")}
+                  className={cn("cursor-pointer transition-[fill,opacity] duration-150", i === sel ? "fill-pink" : "fill-[#15263a]/90 stroke-ink/15 hover:fill-[#1c3048]")}
                   strokeWidth="0.6"
                 />
               ))}
@@ -212,7 +212,7 @@ export function SkillsWheel() {
 
             {/* The hub: what's selected. */}
             <div aria-hidden="true" className="pointer-events-none absolute top-1/2 left-1/2 flex w-[36%] -translate-1/2 flex-col items-center text-center">
-              <span className="font-mono text-[0.625rem] text-blue lowercase sm:text-xs">Equipped</span>
+              <span className="font-mono text-[0.625rem] text-pink lowercase sm:text-xs">Equipped</span>
               <span className="mt-1 font-display text-2xl leading-none text-ink sm:text-4xl">
                 <span>{tab.label}</span>
               </span>
@@ -221,7 +221,7 @@ export function SkillsWheel() {
 
           {/* Details for the selected category. */}
           <section aria-live="polite" aria-label={`${tab.label} skills`} className="hud-panel cut-br w-full max-w-[32rem] rounded-t-2xl !bg-bg/95 px-5 pt-4 pb-7 lg:self-center">
-            <h3 className="font-mono text-xs text-blue lowercase">{tab.label}</h3>
+            <h3 className="font-mono text-xs text-pink lowercase">{tab.label}</h3>
             <ul className="mt-3 grid gap-2">
               {tab.skills.map((s) => (
                 <li key={s.name} className="flex items-center justify-between gap-3">
@@ -229,7 +229,7 @@ export function SkillsWheel() {
                   <span className="flex shrink-0 items-center gap-2">
                     <span aria-hidden="true" className="flex gap-0.5">
                       {Array.from({ length: 5 }, (_, k) => (
-                        <span key={k} className={cn("h-2 w-2.5 -skew-x-[20deg]", k < segmentsFor[s.status] ? "bg-blue" : "bg-ink/15")} />
+                        <span key={k} className={cn("h-2 w-2.5 -skew-x-[20deg]", k < segmentsFor[s.status] ? "bg-pink" : "bg-ink/15")} />
                       ))}
                     </span>
                     <span className={cn("w-[5.5rem] text-right font-mono text-[0.6875rem] lowercase", STATUS_COLOR[s.status])}>{s.status}</span>
@@ -245,9 +245,9 @@ export function SkillsWheel() {
                     <li key={m.slug}>
                       <Link
                         href={`/missions/${m.slug}`}
-                        className="inline-flex h-9 items-center rounded-lg border border-ink/15 px-2.5 text-sm font-semibold text-ink hover:border-orange hover:text-blue"
+                        className="inline-flex h-9 items-center rounded-lg border border-ink/15 px-2.5 text-sm font-semibold text-ink hover:border-orange hover:text-pink"
                       >
-                        <span className="mr-1.5 font-mono text-xs text-blue">{m.number}</span>
+                        <span className="mr-1.5 font-mono text-xs text-pink">{m.number}</span>
                         {m.codename}
                       </Link>
                     </li>

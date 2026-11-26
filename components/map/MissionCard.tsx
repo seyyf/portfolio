@@ -9,13 +9,13 @@ export function StatusBadge({ status, className }: { status: "COMPLETED" | "IN P
     <span
       className={cn(
         "inline-flex items-center gap-1.5 rounded-md border px-1.5 py-0.5 font-mono text-[0.6875rem] leading-4 lowercase",
-        status === "IN PROGRESS" && "border-yellow/50 text-yellow",
+        status === "IN PROGRESS" && "border-gold/50 text-gold",
         status === "COMPLETED" && "border-ink/20 text-ink/75",
         status === "LOCKED" && "border-dashed border-ink/30 text-ink/75",
         className
       )}
     >
-      {status === "IN PROGRESS" && <span aria-hidden="true" className="size-1.5 rounded-full bg-yellow" />}
+      {status === "IN PROGRESS" && <span aria-hidden="true" className="size-1.5 rounded-full bg-gold" />}
       {status === "LOCKED" && <Lock aria-hidden="true" className="size-3" />}
       {status}
     </span>
@@ -44,7 +44,7 @@ export function MissionCard({ m, placement }: { m: MarkerItem; placement: CardPl
         <>
           <p className="font-display text-xl leading-tight text-ink">
             <span>
-              <span className="text-blue">Mission {m.data.number}</span> — {m.data.codename}
+              <span className="text-pink">Mission {m.data.number}</span> — {m.data.codename}
             </span>
           </p>
           <p className="mt-1.5 text-sm font-semibold text-ink">{m.data.company}</p>
@@ -63,7 +63,7 @@ export function MissionCard({ m, placement }: { m: MarkerItem; placement: CardPl
       )}
       {m.kind === "side" && (
         <>
-          <p className="font-mono text-[0.6875rem] text-blue lowercase">Side mission · {m.data.client}</p>
+          <p className="font-mono text-[0.6875rem] text-pink lowercase">Side mission · {m.data.client}</p>
           <p className="mt-0.5 font-display text-xl leading-tight text-ink">
             <span>{m.data.name}</span>
           </p>
@@ -72,7 +72,7 @@ export function MissionCard({ m, placement }: { m: MarkerItem; placement: CardPl
       )}
       {m.kind === "tutorial" && (
         <>
-          <p className="flex items-center gap-1.5 font-mono text-[0.6875rem] text-[#b4dca3] lowercase">
+          <p className="flex items-center gap-1.5 font-mono text-[0.6875rem] text-[#8adccb] lowercase">
             <GraduationCap aria-hidden="true" className="size-3.5" /> Tutorial {m.data.number}
           </p>
           <p className="mt-1 text-[0.9375rem] leading-snug font-semibold text-ink">{m.data.degree}</p>

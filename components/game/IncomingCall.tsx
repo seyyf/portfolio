@@ -75,7 +75,7 @@ export function IncomingCall() {
               <Image src={profile.portrait.src} alt="" width={48} height={48} className="relative size-12 rounded-full object-cover ring-2 ring-orange" />
             </span>
             <span className="min-w-0">
-              <span className="block font-mono text-[0.6875rem] text-blue lowercase">Incoming call</span>
+              <span className="block font-mono text-[0.6875rem] text-pink lowercase">Incoming call</span>
               <span className="block truncate font-semibold text-ink">{profile.name}</span>
               <span className="block truncate text-sm text-ink/75">{call.label}</span>
             </span>
@@ -88,7 +88,7 @@ export function IncomingCall() {
                 play("tap")
                 toast("Call declined", "Replay it any time from the phone")
               }}
-              className="inline-flex h-11 items-center justify-center gap-1.5 rounded-xl border border-ink/20 text-sm font-semibold text-ink hover:border-red hover:text-[#ff9d94]"
+              className="inline-flex h-11 items-center justify-center gap-1.5 rounded-xl border border-ink/20 text-sm font-semibold text-ink hover:border-red hover:text-[#ff9a9a]"
             >
               <PhoneOff aria-hidden="true" className="size-4" />
               Decline
@@ -99,7 +99,7 @@ export function IncomingCall() {
                 startCall(call.id)
                 openPhone("call")
               }}
-              className="bg-blue inline-flex h-11 items-center justify-center gap-1.5 rounded-xl text-sm font-semibold text-bg hover:shadow-[var(--glow)]"
+              className="bg-pink inline-flex h-11 items-center justify-center gap-1.5 rounded-xl text-sm font-semibold text-bg hover:shadow-[var(--glow)]"
             >
               <Phone aria-hidden="true" className="size-4" />
               Answer

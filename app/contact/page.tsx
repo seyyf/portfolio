@@ -41,7 +41,7 @@ export default function ContactPage() {
             </h2>
             <div className="mt-5 overflow-hidden rounded-3xl border border-ink/12 bg-bg shadow-[0_30px_80px_-40px_rgb(0_0_0/0.5)]">
               <div className="flex items-center gap-3 border-b border-ink/10 bg-surface px-4 py-3">
-                <span aria-hidden="true" className="bg-blue flex size-9 items-center justify-center rounded-full font-display text-sm text-bg">
+                <span aria-hidden="true" className="bg-pink flex size-9 items-center justify-center rounded-full font-display text-sm text-bg">
                   S
                 </span>
                 <span>

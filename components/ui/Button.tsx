@@ -9,9 +9,9 @@ type Size = "md" | "sm" | "lg"
 const base =
   "inline-flex shrink-0 items-center justify-center gap-2 font-semibold whitespace-nowrap transition-[box-shadow,background-color,border-color,color,transform] duration-200 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-60"
 const variants: Record<Variant, string> = {
-  // Dark text on the flat blue: 8.4:1.
-  primary: "bg-blue text-bg hover:bg-blue-hover",
-  outline: "border border-ink/25 bg-bg/40 text-ink backdrop-blur-sm hover:border-blue hover:text-blue",
+  // Dark text on the pink: 6:1.
+  primary: "bg-pink text-bg hover:bg-pink-hover hover:shadow-[var(--glow)]",
+  outline: "border border-ink/25 bg-bg/40 text-ink backdrop-blur-sm hover:border-pink hover:text-pink",
   ghost: "text-ink hover:bg-ink/[0.08]",
 }
 const sizes: Record<Size, string> = {

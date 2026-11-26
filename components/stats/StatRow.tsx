@@ -6,10 +6,10 @@ import { segmentsFor, type Skill, type SkillStatus } from "@/data/skills"
 import { cn } from "@/lib/utils"
 
 const STATUS_COLOR: Record<SkillStatus, string> = {
-  "Daily use": "text-blue",
+  "Daily use": "text-pink",
   Production: "text-orange",
   Experienced: "text-ink/80",
-  Native: "text-blue",
+  Native: "text-pink",
   C1: "text-orange",
   B2: "text-ink/80",
 }
@@ -24,7 +24,7 @@ export function StatRow({ skill, index, active, reduced }: { skill: Skill; index
   const lit = segmentsFor[skill.status]
   return (
     <div className="group relative grid gap-x-6 gap-y-2 px-3 py-3.5 transition-colors hover:bg-surface md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:px-4">
-      <span aria-hidden="true" className="bg-blue absolute inset-y-2 left-0 w-1 rounded-full opacity-0 transition-opacity group-hover:opacity-100" />
+      <span aria-hidden="true" className="bg-pink absolute inset-y-2 left-0 w-1 rounded-full opacity-0 transition-opacity group-hover:opacity-100" />
       <dt className="min-w-0 font-semibold text-ink">{skill.name}</dt>
       <dd className="flex items-center justify-between gap-4 md:justify-end">
         <span className={cn("w-28 font-mono text-[0.8125rem] lowercase md:text-right", STATUS_COLOR[skill.status])}>{skill.status}</span>
@@ -35,7 +35,7 @@ export function StatRow({ skill, index, active, reduced }: { skill: Skill; index
               <span key={i} className="relative h-3 flex-1 -skew-x-[18deg] overflow-hidden rounded-[2px] bg-ink/12">
                 {on && (
                   <m.span
-                    className="absolute inset-0 origin-left bg-blue"
+                    className="absolute inset-0 origin-left bg-pink"
                     initial="off"
                     animate={active ? "on" : "off"}
                     variants={{

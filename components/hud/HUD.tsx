@@ -39,7 +39,7 @@ export function HUD() {
         aria-label="Open the menu (Esc)"
         aria-keyshortcuts="Escape"
         className={cn(
-          "hud-panel fixed z-50 inline-flex items-center gap-2 rounded-full font-mono text-xs text-ink lowercase transition-colors hover:border-blue hover:text-blue",
+          "hud-panel fixed z-50 inline-flex items-center gap-2 rounded-full font-mono text-xs text-ink lowercase transition-colors hover:border-pink hover:text-pink",
           "bottom-4 left-1/2 h-12 -translate-x-1/2 px-5",
           "lg:top-4 lg:bottom-auto lg:left-[10.25rem] lg:h-11 lg:translate-x-0 lg:rounded-lg lg:px-3.5"
         )}

@@ -16,7 +16,7 @@ export function Tips({ tips, className }: { tips: readonly string[]; className?:
             className={cn("ow-tip col-start-1 row-start-1 max-w-[46ch] text-[0.8125rem] leading-snug font-semibold text-ink lg:text-sm", i === tips.length - 1 && "ow-tip-last")}
             style={{ "--d": `${each}s`, "--delay": `${0.15 + i * each}s` } as CSSProperties}
           >
-            {label && <span className="mr-2 font-mono text-blue">{label.replace(":", "")}</span>}
+            {label && <span className="mr-2 font-mono text-pink">{label.replace(":", "")}</span>}
             {rest}
           </p>
         )

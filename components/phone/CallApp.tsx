@@ -57,7 +57,7 @@ function CallScreen({ id }: { id: keyof typeof calls }) {
         <p className="mt-3 font-display text-3xl text-ink">
           <span>{profile.name}</span>
         </p>
-        <p className="mt-1 font-mono text-xs text-blue lowercase tabular-nums">
+        <p className="mt-1 font-mono text-xs text-pink lowercase tabular-nums">
           {call.label} · {done ? "call ended" : clock}
         </p>
       </div>
@@ -73,18 +73,18 @@ function CallScreen({ id }: { id: keyof typeof calls }) {
       <div className="mt-auto grid gap-2 pt-6">
         {done && id === "wanted" && (
           <>
-            <button type="button" onClick={() => { play("tap"); setPhoneApp("messages") }} className="bg-blue inline-flex h-12 items-center justify-center gap-2 rounded-xl font-semibold text-bg">
+            <button type="button" onClick={() => { play("tap"); setPhoneApp("messages") }} className="bg-pink inline-flex h-12 items-center justify-center gap-2 rounded-xl font-semibold text-bg">
               <MessageSquare aria-hidden="true" className="size-4" />
               Send Seyf a message
             </button>
-            <Link href="/cv" className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-ink/20 font-semibold text-ink hover:border-orange hover:text-blue">
+            <Link href="/cv" className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-ink/20 font-semibold text-ink hover:border-orange hover:text-pink">
               <FileText aria-hidden="true" className="size-4" />
               Open the CV
             </Link>
           </>
         )}
         {done && id === "intro" && (
-          <Link href="/#map" onClick={() => closePhone()} className="bg-blue inline-flex h-12 items-center justify-center gap-2 rounded-xl font-semibold text-bg">
+          <Link href="/#map" onClick={() => closePhone()} className="bg-pink inline-flex h-12 items-center justify-center gap-2 rounded-xl font-semibold text-bg">
             <MapIcon aria-hidden="true" className="size-4" />
             Open the map
           </Link>
@@ -95,7 +95,7 @@ function CallScreen({ id }: { id: keyof typeof calls }) {
             play("tap")
             setPhoneApp("home")
           }}
-          className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-red/40 font-semibold text-[#ff9d94] hover:bg-red/10"
+          className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-red/40 font-semibold text-[#ff9a9a] hover:bg-red/10"
         >
           <PhoneOff aria-hidden="true" className="size-4" />
           {done ? "Back to Home" : "Hang up"}

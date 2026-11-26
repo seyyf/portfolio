@@ -8,7 +8,7 @@ export function RecruiterButton() {
   return (
     <Link
       href="/cv"
-      className="hud-panel fixed top-3 left-3 z-[90] inline-flex h-10 items-center gap-1.5 rounded-lg px-3 text-sm font-semibold text-ink transition-colors hover:border-blue hover:text-blue lg:top-4 lg:left-4 lg:h-11 lg:px-4"
+      className="hud-panel fixed top-3 left-3 z-[90] inline-flex h-10 items-center gap-1.5 rounded-lg px-3 text-sm font-semibold text-ink transition-colors hover:border-pink hover:text-pink lg:top-4 lg:left-4 lg:h-11 lg:px-4"
     >
       Skip to CV <span aria-hidden="true">→</span>
     </Link>

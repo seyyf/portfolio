@@ -179,17 +179,17 @@ function Item({
       transition={{ delay: reduced ? 0 : 0.05 + index * 0.04, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
       className={cn(
         "group flex w-full items-center gap-4 rounded-xl border border-transparent px-4 py-3 text-left transition-colors",
-        "hover:border-ink/15 hover:bg-surface focus-visible:border-blue focus-visible:bg-surface focus-visible:outline-none"
+        "hover:border-ink/15 hover:bg-surface focus-visible:border-pink focus-visible:bg-surface focus-visible:outline-none"
       )}
     >
-      <span aria-hidden="true" className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-surface-2 text-muted transition-colors group-hover:text-blue group-focus-visible:text-blue [&>svg]:size-5">
+      <span aria-hidden="true" className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-surface-2 text-muted transition-colors group-hover:text-pink group-focus-visible:text-pink [&>svg]:size-5">
         {icon}
       </span>
       <span className="min-w-0 flex-1">
-        <span className={cn("block font-display text-3xl leading-none lg:text-4xl", accent ? "text-blue" : "text-ink")}>{label}</span>
+        <span className={cn("block font-display text-3xl leading-none lg:text-4xl", accent ? "text-pink" : "text-ink")}>{label}</span>
         <span className="mt-1 block text-sm text-muted">{hint}</span>
       </span>
-      <span aria-hidden="true" className="h-8 w-1 rounded-full bg-blue opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" />
+      <span aria-hidden="true" className="h-8 w-1 rounded-full bg-pink opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" />
     </m.button>
   )
   return asLi ? <li>{button}</li> : button
@@ -212,7 +212,7 @@ function Toggle({ label, detail, on, onChange }: { label: string; detail: string
         <span className="block font-semibold">{label}</span>
         <span className="block text-sm text-muted">{detail}</span>
       </span>
-      <span aria-hidden="true" className={cn("relative h-7 w-12 shrink-0 rounded-full transition-colors", on ? "bg-blue" : "bg-ink/20")}>
+      <span aria-hidden="true" className={cn("relative h-7 w-12 shrink-0 rounded-full transition-colors", on ? "bg-pink" : "bg-ink/20")}>
         <span className={cn("absolute top-1 left-1 size-5 rounded-full bg-ink transition-transform", on && "translate-x-5 bg-bg")} />
       </span>
     </button>

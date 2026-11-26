@@ -18,15 +18,15 @@ export function Metrics({ metrics }: { metrics: Metric[] }) {
       {shown.map((m) =>
         m.value !== undefined ? (
           <li key={m.label} className="cut-br relative overflow-hidden rounded-xl border border-ink/12 bg-surface p-5">
-            <span aria-hidden="true" className="absolute inset-x-0 top-0 h-0.5 bg-blue" />
+            <span aria-hidden="true" className="absolute inset-x-0 top-0 h-0.5 bg-pink" />
             <p className="font-display text-[2.75rem] text-ink md:text-[3.25rem]">
-              <span className="text-blue">{m.value}</span>
+              <span className="text-pink">{m.value}</span>
             </p>
             <p className="mt-2 text-[0.9375rem] leading-snug text-muted">{m.label}</p>
           </li>
         ) : (
-          <li key={m.label} className="rounded-xl border-2 border-dashed border-blue/60 p-5 font-mono text-sm">
-            <p className="font-semibold text-blue">TODO: add metric</p>
+          <li key={m.label} className="rounded-xl border-2 border-dashed border-pink/60 p-5 font-mono text-sm">
+            <p className="font-semibold text-pink">TODO: add metric</p>
             <p className="mt-1 text-ink/80">{m.label}</p>
           </li>
         )

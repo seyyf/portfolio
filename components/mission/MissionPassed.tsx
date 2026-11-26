@@ -391,7 +391,7 @@ export function MissionPassed({
       <div
         ref={dim}
         aria-hidden="true"
-        className={cn("fixed inset-0 bg-bg/80 bg-[radial-gradient(ellipse_at_center,transparent_25%,rgb(20_23_28/0.75)_100%)]", anim && "opacity-0")}
+        className={cn("fixed inset-0 bg-bg/80 bg-[radial-gradient(ellipse_at_center,transparent_25%,rgb(14_27_43/0.75)_100%)]", anim && "opacity-0")}
       />
 
       <div ref={stage} className={cn("relative flex min-h-full items-center justify-center px-4 pt-20 pb-28 md:py-24", anim && "invisible")}>
@@ -399,14 +399,14 @@ export function MissionPassed({
           {/* The diagonal band behind the card: body + bottom edge, and a separate top edge. */}
           <div aria-hidden="true" className="pointer-events-none absolute -inset-y-10 left-1/2 w-[140vw] -translate-x-1/2 md:-inset-y-14">
             <div ref={band} className="absolute inset-0">
-              <div className="absolute inset-0 -skew-y-5 overflow-hidden bg-[linear-gradient(90deg,rgb(28_32_39/0.97),rgb(30_51_38/0.95)_50%,rgb(28_32_39/0.97))] shadow-[0_30px_80px_-20px_rgb(0_0_0/0.85)]">
-                <div ref={gleam} className="absolute inset-y-0 left-0 w-1/5 bg-[linear-gradient(100deg,transparent,rgb(230_194_122/0.16),transparent)] opacity-0" />
-                <div className="absolute inset-x-0 bottom-0 h-0.75 bg-blue" />
+              <div className="absolute inset-0 -skew-y-5 overflow-hidden bg-[linear-gradient(90deg,rgb(21_38_58/0.97),rgb(18_58_58/0.95)_50%,rgb(21_38_58/0.97))] shadow-[0_30px_80px_-20px_rgb(0_0_0/0.85)]">
+                <div ref={gleam} className="absolute inset-y-0 left-0 w-1/5 bg-[linear-gradient(100deg,transparent,rgb(242_181_68/0.16),transparent)] opacity-0" />
+                <div className="absolute inset-x-0 bottom-0 h-0.75 bg-pink" />
               </div>
             </div>
             <div ref={edge} className="absolute inset-0">
               <div className="absolute inset-0 -skew-y-5">
-                <div className="absolute inset-x-0 top-0 h-0.75 bg-blue" />
+                <div className="absolute inset-x-0 top-0 h-0.75 bg-pink" />
               </div>
             </div>
           </div>
@@ -417,22 +417,22 @@ export function MissionPassed({
           <h2
             ref={title}
             id={titleId}
-            className="relative mt-3 font-display text-[clamp(2.75rem,12.5vw,6.5rem)] leading-[0.92] text-ink [filter:drop-shadow(0_0.05em_0_rgb(20_23_28/0.9))]"
+            className="relative mt-3 font-display text-[clamp(2.75rem,12.5vw,6.5rem)] leading-[0.92] text-ink [filter:drop-shadow(0_0.05em_0_rgb(14_27_43/0.9))]"
           >
             <span ref={titleText} className="px-[0.06em] text-green">
               {TITLES[variant]}
             </span>
           </h2>
-          <div ref={rule} aria-hidden="true" className="relative mx-auto mt-4 h-1.5 w-[min(78%,30rem)] -skew-x-[30deg] bg-blue md:h-2" />
+          <div ref={rule} aria-hidden="true" className="relative mx-auto mt-4 h-1.5 w-[min(78%,30rem)] -skew-x-[30deg] bg-pink md:h-2" />
 
           <div id={descId} className="relative mt-7">
-            <p ref={label} className="font-mono text-sm text-blue lowercase">
+            <p ref={label} className="font-mono text-sm text-pink lowercase">
               {skillsLabel}
             </p>
             <ul ref={list} className="mx-auto mt-3 flex max-w-[40rem] flex-wrap justify-center gap-2">
               {skills.map((s) => (
-                <li key={s} className="rounded-md border border-blue/35 bg-bg/70 px-3 py-1.5 text-[0.9375rem] leading-6 font-semibold text-ink">
-                  <span aria-hidden="true" className="mr-1 text-blue">
+                <li key={s} className="rounded-md border border-pink/35 bg-bg/70 px-3 py-1.5 text-[0.9375rem] leading-6 font-semibold text-ink">
+                  <span aria-hidden="true" className="mr-1 text-pink">
                     +
                   </span>
                   {s}
@@ -474,7 +474,7 @@ export function MissionPassed({
           ref={skipBtn}
           type="button"
           onClick={finish}
-          className="hud-panel fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] inline-flex h-11 items-center gap-2 rounded-lg px-4 font-mono text-xs text-ink lowercase transition-colors hover:border-blue hover:text-blue lg:right-6 lg:bottom-6"
+          className="hud-panel fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] inline-flex h-11 items-center gap-2 rounded-lg px-4 font-mono text-xs text-ink lowercase transition-colors hover:border-pink hover:text-pink lg:right-6 lg:bottom-6"
         >
           Skip
           <kbd aria-hidden="true" className="hidden rounded border border-ink/25 px-1 text-[0.625rem] normal-case sm:inline">

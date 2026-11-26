@@ -64,12 +64,12 @@ export function BeforeAfter({ before, after, beforeLabel, afterLabel }: { before
           <span className="block text-muted">Before</span>
           {beforeLabel}
         </span>
-        <span className="pointer-events-none absolute top-3 right-3 max-w-[45%] rounded-md bg-bg/85 px-2 py-1.5 text-right font-mono text-[0.6875rem] leading-tight text-blue lowercase md:text-xs">
+        <span className="pointer-events-none absolute top-3 right-3 max-w-[45%] rounded-md bg-bg/85 px-2 py-1.5 text-right font-mono text-[0.6875rem] leading-tight text-pink lowercase md:text-xs">
           <span className="block text-muted">After</span>
           {afterLabel}
         </span>
 
-        <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 w-0.75 -translate-x-1/2 bg-blue" style={{ left: `${pos}%` }} />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 w-0.75 -translate-x-1/2 bg-pink" style={{ left: `${pos}%` }} />
         <div
           role="slider"
           tabIndex={0}
@@ -80,7 +80,7 @@ export function BeforeAfter({ before, after, beforeLabel, afterLabel }: { before
           aria-valuetext={`${p}% ${beforeLabel}, ${100 - p}% ${afterLabel}`}
           aria-orientation="horizontal"
           onKeyDown={onKeyDown}
-          className="absolute top-1/2 flex size-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-blue bg-bg text-blue shadow-(--glow)"
+          className="absolute top-1/2 flex size-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-pink bg-bg text-pink shadow-(--glow)"
           style={{ left: `${pos}%` }}
         >
           <ChevronsLeftRight aria-hidden="true" className="size-5" />

@@ -56,7 +56,7 @@ function Switch({ label, detail, on, onChange }: { label: string; detail: string
         <span className="block font-semibold">{label}</span>
         <span className="block text-sm leading-snug text-muted">{detail}</span>
       </span>
-      <span aria-hidden="true" className={cn("relative h-7 w-12 shrink-0 rounded-full transition-colors", on ? "bg-blue" : "bg-ink/20")}>
+      <span aria-hidden="true" className={cn("relative h-7 w-12 shrink-0 rounded-full transition-colors", on ? "bg-pink" : "bg-ink/20")}>
         <span className={cn("absolute top-1 left-1 size-5 rounded-full transition-transform", on ? "translate-x-5 bg-bg" : "bg-ink")} />
       </span>
     </button>

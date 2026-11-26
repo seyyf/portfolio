@@ -38,15 +38,15 @@ export function Progress() {
       <div className="hud-panel cut-br mt-6 rounded-t-2xl px-5 pt-5 pb-8 sm:px-7">
         <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
           <div>
-            <p className="font-mono text-xs text-blue lowercase">Completion</p>
+            <p className="font-mono text-xs text-pink lowercase">Completion</p>
             <p className="mt-1 font-mono text-6xl leading-none font-semibold text-ink tabular-nums lg:text-7xl">
               {percent}
               <span className="text-3xl text-muted">%</span>
             </p>
           </div>
           <div>
-            <p className="font-mono text-xs text-blue lowercase">Interest level</p>
-            <p className="mt-1 font-mono text-2xl text-blue" aria-label={`${stars} of 5 stars`}>
+            <p className="font-mono text-xs text-pink lowercase">Interest level</p>
+            <p className="mt-1 font-mono text-2xl text-pink" aria-label={`${stars} of 5 stars`}>
               {"★".repeat(stars)}
               <span className="text-ink/25">{"★".repeat(5 - stars)}</span>
             </p>
@@ -60,7 +60,7 @@ export function Progress() {
           aria-valuemax={100}
           className="mt-4 h-2.5 overflow-hidden rounded-full bg-ink/10"
         >
-          <div className="bg-blue h-full rounded-full transition-[width] duration-700" style={{ width: `${percent}%` }} />
+          <div className="bg-pink h-full rounded-full transition-[width] duration-700" style={{ width: `${percent}%` }} />
         </div>
 
         <div className="mt-8 grid gap-8 md:grid-cols-3">
@@ -92,7 +92,7 @@ export function Progress() {
                   <li key={c.id} className="text-[0.9375rem] leading-snug">
                     {found ? (
                       <>
-                        <span className="font-mono font-semibold text-blue">{c.code}</span>
+                        <span className="font-mono font-semibold text-pink">{c.code}</span>
                         <span className="block text-sm text-ink/80">{c.effect}</span>
                       </>
                     ) : (
@@ -117,8 +117,8 @@ export function Progress() {
                 const seen = save.heat.includes(`visit:${m.slug}`)
                 return (
                   <li key={m.slug} className={cn("flex items-center gap-2 text-[0.9375rem]", seen ? "text-ink" : "text-muted")}>
-                    <span aria-hidden="true" className={cn("size-2 shrink-0 rounded-full", seen ? "bg-blue" : "bg-ink/20")} />
-                    <Link href={`/missions/${m.slug}`} className="underline-offset-4 hover:text-blue hover:underline">
+                    <span aria-hidden="true" className={cn("size-2 shrink-0 rounded-full", seen ? "bg-pink" : "bg-ink/20")} />
+                    <Link href={`/missions/${m.slug}`} className="underline-offset-4 hover:text-pink hover:underline">
                       {m.kind === "mission" ? `${m.number} · ${m.codename}` : m.name}
                     </Link>
                     <span className="sr-only">{seen ? "(visited)" : "(not visited yet)"}</span>
@@ -130,11 +130,11 @@ export function Progress() {
         </div>
 
         {percent === 100 && (
-          <div className="mt-8 flex flex-col gap-4 rounded-xl border border-blue/40 bg-blue/[0.07] p-5 sm:flex-row sm:items-center">
-            <Trophy aria-hidden="true" className="size-10 shrink-0 text-blue" />
+          <div className="mt-8 flex flex-col gap-4 rounded-xl border border-pink/40 bg-pink/[0.07] p-5 sm:flex-row sm:items-center">
+            <Trophy aria-hidden="true" className="size-10 shrink-0 text-pink" />
             <div className="flex-1">
               <p className="font-display text-2xl text-ink">
-                <span className="text-blue">100% complete</span>
+                <span className="text-pink">100% complete</span>
               </p>
               <p className="mt-1 text-ink/85">You found everything. That kind of thoroughness is exactly what I look for in a team. Let&apos;s talk.</p>
             </div>

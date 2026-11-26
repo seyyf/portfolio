@@ -13,11 +13,11 @@ export function MapApp() {
       <div className="overflow-hidden rounded-2xl border border-ink/10 bg-surface">
         {/* An abstract, original sketch of the gulf: sea, coast, the lake and a few mission pins. */}
         <svg viewBox="0 0 320 180" aria-hidden="true" className="block h-auto w-full">
-          <rect width="320" height="180" fill="#121c27" />
-          <path d="M0 0h200c-10 22-4 40 12 52 14 10 18 26 10 42-10 20-6 44 14 60 10 8 14 18 12 26H0Z" fill="#1c2027" />
-          <path d="M120 70c14-8 34-6 44 4 8 8 4 22-10 26-16 4-36 0-40-12-2-8 0-14 6-18Z" fill="#121c27" stroke="#2f6db5" strokeOpacity="0.5" />
-          <path d="M200 0c-10 22-4 40 12 52 14 10 18 26 10 42-10 20-6 44 14 60 10 8 14 18 12 26" fill="none" stroke="#e6c27a" strokeOpacity="0.35" strokeWidth="1.5" />
-          <g fill="none" stroke="#dde2ea" strokeOpacity="0.08">
+          <rect width="320" height="180" fill="#0a1522" />
+          <path d="M0 0h200c-10 22-4 40 12 52 14 10 18 26 10 42-10 20-6 44 14 60 10 8 14 18 12 26H0Z" fill="#15263a" />
+          <path d="M120 70c14-8 34-6 44 4 8 8 4 22-10 26-16 4-36 0-40-12-2-8 0-14 6-18Z" fill="#0a1522" stroke="#2f6db5" strokeOpacity="0.5" />
+          <path d="M200 0c-10 22-4 40 12 52 14 10 18 26 10 42-10 20-6 44 14 60 10 8 14 18 12 26" fill="none" stroke="#f2b544" strokeOpacity="0.35" strokeWidth="1.5" />
+          <g fill="none" stroke="#eef2f5" strokeOpacity="0.08">
             <path d="M0 45h200M0 90h220M0 135h230M60 0v180M120 0v180" />
           </g>
           {[
@@ -28,8 +28,8 @@ export function MapApp() {
             [214, 96],
           ].map(([x, y], i) => (
             <g key={i}>
-              <circle cx={x} cy={y} r="9" fill="#f47b72" fillOpacity="0.18" />
-              <circle cx={x} cy={y} r="4.5" fill={i === 4 ? "#e6c27a" : "#f0965a"} stroke="#14171c" strokeWidth="1.5" />
+              <circle cx={x} cy={y} r="9" fill="#ff6b6b" fillOpacity="0.18" />
+              <circle cx={x} cy={y} r="4.5" fill={i === 4 ? "#f2b544" : "#ff9a5c"} stroke="#0e1b2b" strokeWidth="1.5" />
             </g>
           ))}
         </svg>

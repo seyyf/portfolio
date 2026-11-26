@@ -15,9 +15,9 @@ export function LockedNext({ number, codename, teaser }: { number: string; coden
         openPhone("messages")
       }}
       aria-haspopup="dialog"
-      className="glow-hover cut-br group relative flex min-h-28 flex-col justify-center gap-1 overflow-hidden rounded-xl border border-dashed border-blue/50 bg-[repeating-linear-gradient(-55deg,rgb(230_194_122/0.05)_0_10px,transparent_10px_20px)] px-5 py-4 text-left transition-colors hover:border-blue sm:items-end sm:text-right"
+      className="glow-hover cut-br group relative flex min-h-28 flex-col justify-center gap-1 overflow-hidden rounded-xl border border-dashed border-pink/50 bg-[repeating-linear-gradient(-55deg,rgb(242_181_68/0.05)_0_10px,transparent_10px_20px)] px-5 py-4 text-left transition-colors hover:border-pink sm:items-end sm:text-right"
     >
-      <span className="flex items-center gap-2 font-mono text-xs text-blue lowercase">
+      <span className="flex items-center gap-2 font-mono text-xs text-pink lowercase">
         <Lock aria-hidden="true" className="size-4 transition-transform group-hover:-rotate-12" />
         Next · Mission {number} · Locked
       </span>

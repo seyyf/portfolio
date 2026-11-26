@@ -44,7 +44,7 @@ export function Respawn() {
       {going && (
         <div role="status" className="respawn fixed inset-0 z-[95] flex items-center justify-center bg-bg">
           <p className="font-display text-5xl text-ink lg:text-7xl">
-            <span className="text-blue">Respawning…</span>
+            <span className="text-pink">Respawning…</span>
           </p>
         </div>
       )}

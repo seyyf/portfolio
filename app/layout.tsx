@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
-export const viewport: Viewport = { themeColor: "#14171c", colorScheme: "dark", interactiveWidget: "resizes-content" }
+export const viewport: Viewport = { themeColor: "#0e1b2b", colorScheme: "dark", interactiveWidget: "resizes-content" }
 
 const personJsonLd = {
   "@context": "https://schema.org",
@@ -59,7 +59,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body>
         <Providers>
-          <a href="#main" className="sr-only z-[95] rounded-lg bg-blue px-4 py-2 font-semibold text-bg focus:not-sr-only focus:fixed focus:top-16 focus:left-3">
+          <a href="#main" className="sr-only z-[95] rounded-lg bg-pink px-4 py-2 font-semibold text-bg focus:not-sr-only focus:fixed focus:top-16 focus:left-3">
             Skip to content
           </a>
           <main id="main" tabIndex={-1} className="outline-none">

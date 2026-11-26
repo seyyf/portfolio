@@ -5,25 +5,25 @@
   --font-sans: var(--font-plex), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-martian), ui-monospace, Menlo, monospace;
 
-  /* An editor colour theme: graphite ground, flat syntax colours, no gradients.
-     blue = keyword (primary: links, buttons, focus), green = string (education, success),
-     yellow = function (stars, highlights), orange = constant, red = tag (alerts, unread). */
-  --color-bg: #14171c;
-  --color-surface: #1c2027;
-  --color-surface-2: #242933;
-  --color-ink: #dde2ea;
-  --color-muted: #8f98a8; /* comments */
-  --color-line: rgb(221 226 234 / 0.1);
-  --color-blue: #6cb6ff;
-  --color-blue-hover: #8ec7ff;
-  --color-green: #9fd28b;
-  --color-yellow: #e6c27a;
-  --color-orange: #f0965a;
-  --color-red: #f47b72;
-  --color-violet: #4a3f75; /* locked missions */
-  --color-teal: #1e3326; /* tutorial (education) panels, dark green */
-  --color-sea: #121c27;
-  --color-land: #1c2027;
+  /* Harbour night: Sidi Bou Said after dark. Deep harbour blue, whitewash text,
+     bougainvillea pink as the one primary (links, buttons, focus, titles), jasmine gold second
+     (stars, side missions, in progress), sea green for done and education, orange for numbers. */
+  --color-bg: #0e1b2b;
+  --color-surface: #15263a;
+  --color-surface-2: #1c3048;
+  --color-ink: #eef2f5;
+  --color-muted: #93a4b8;
+  --color-line: rgb(238 242 245 / 0.1);
+  --color-pink: #ff5c93;
+  --color-pink-hover: #ff7aa8;
+  --color-gold: #f2b544;
+  --color-green: #5ccdb5;
+  --color-orange: #ff9a5c;
+  --color-red: #ff6b6b;
+  --color-violet: #3b3466; /* locked missions */
+  --color-teal: #123a3a; /* tutorial (education) panels */
+  --color-sea: #0a1522;
+  --color-land: #15263a;
   --color-sbs: #2f6db5; /* Sidi Bou Said blue, for doors and map water accents */
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -31,8 +31,8 @@
 }
 
 :root {
-  /* Hover/focus ring for interactive cards: a crisp 1px keyword-blue line, no neon. */
-  --glow: 0 0 0 1px rgb(108 182 255 / 0.55);
+  /* Hover/focus glow for interactive cards: a pink line with a soft neon bloom. */
+  --glow: 0 0 0 1px rgb(255 92 147 / 0.55), 0 8px 28px -10px rgb(255 92 147 / 0.5);
   --hud-top: 4.25rem; /* space kept free under the top HUD on content pages */
   --hud-bottom: 6rem;
   color-scheme: dark;
@@ -47,13 +47,13 @@
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
-    background: #14171c;
+    background: #0e1b2b;
     scroll-padding-top: var(--hud-top);
     scrollbar-gutter: stable;
   }
   body {
-    background: #14171c;
-    color: #dde2ea;
+    background: #0e1b2b;
+    color: #eef2f5;
     font-family: var(--font-sans);
     font-size: 1.0625rem; /* 17px minimum on mobile */
     line-height: 1.65;
@@ -70,13 +70,13 @@
     text-wrap: balance;
   }
   :focus-visible {
-    outline: 2px solid #6cb6ff;
+    outline: 2px solid #ff5c93;
     outline-offset: 3px;
     border-radius: 6px;
   }
   ::selection {
-    background: rgb(108 182 255 / 0.35);
-    color: #dde2ea;
+    background: rgb(255 92 147 / 0.35);
+    color: #eef2f5;
   }
   a,
   button {
@@ -120,8 +120,8 @@
 
 /* HUD panels: dark glass with a hairline. */
 .hud-panel {
-  background: rgb(20 23 28 / 0.8);
-  border: 1px solid rgb(221 226 234 / 0.12);
+  background: rgb(14 27 43 / 0.8);
+  border: 1px solid rgb(238 242 245 / 0.12);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
@@ -207,7 +207,7 @@ html.intro-pending .loading-screen {
 }
 html.phone-ringing [data-phone-button] {
   animation: phone-ring 1.6s ease-in-out infinite;
-  border-color: #6cb6ff;
+  border-color: #ff5c93;
   box-shadow: var(--glow);
 }
 
@@ -225,7 +225,7 @@ html.phone-ringing [data-phone-button] {
 }
 @keyframes star-max {
   50% {
-    filter: drop-shadow(0 0 6px #e6c27a);
+    filter: drop-shadow(0 0 6px #f2b544);
   }
 }
 .star-max {
@@ -264,7 +264,7 @@ html.phone-ringing [data-phone-button] {
   }
 }
 .busted-lights {
-  background: linear-gradient(100deg, rgb(244 123 114 / 0.16), transparent 30%, transparent 70%, rgb(47 109 181 / 0.22));
+  background: linear-gradient(100deg, rgb(255 107 107 / 0.16), transparent 30%, transparent 70%, rgb(47 109 181 / 0.22));
   background-size: 200% 100%;
   animation: busted-lights 3.2s ease-in-out infinite;
 }
@@ -287,13 +287,13 @@ html.cheat-nightride #main::after {
   pointer-events: none;
   background:
     repeating-linear-gradient(180deg, rgb(0 0 0 / 0.14) 0 1px, transparent 1px 3px),
-    radial-gradient(120% 90% at 50% 110%, rgb(108 182 255 / 0.22), transparent 60%),
-    linear-gradient(180deg, rgb(40 20 110 / 0.35), rgb(20 23 28 / 0.15));
+    radial-gradient(120% 90% at 50% 110%, rgb(255 92 147 / 0.22), transparent 60%),
+    linear-gradient(180deg, rgb(40 20 110 / 0.35), rgb(14 27 43 / 0.15));
   backdrop-filter: hue-rotate(-28deg) saturate(1.6) contrast(1.06);
   -webkit-backdrop-filter: hue-rotate(-28deg) saturate(1.6) contrast(1.06);
 }
 html.cheat-xray main * {
-  outline: 1px dashed rgb(159 210 139 / 0.45) !important;
+  outline: 1px dashed rgb(92 205 181 / 0.45) !important;
   outline-offset: -1px;
 }
 [data-hud-name] {

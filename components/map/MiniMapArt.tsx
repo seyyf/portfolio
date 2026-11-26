@@ -5,7 +5,7 @@ import { coastPath, lakePath, landPath, roads, sebkhaArianaPath, sebkhaSijoumiPa
 
 export type MiniDot = { id: string; x: number; y: number; tone: "mission" | "side" | "tutorial" | "locked" }
 
-const dotFill: Record<MiniDot["tone"], string> = { mission: "#6cb6ff", side: "#e6c27a", tutorial: "#9fd28b", locked: "#8a93a3" }
+const dotFill: Record<MiniDot["tone"], string> = { mission: "#ff5c93", side: "#f2b544", tutorial: "#5ccdb5", locked: "#93a4b8" }
 
 export function MiniMapArt({
   viewBox,
@@ -22,26 +22,26 @@ export function MiniMapArt({
 }) {
   return (
     <svg viewBox={viewBox} aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid slice" className={className}>
-      <rect x={WORLD.x} y={WORLD.y} width={WORLD.w} height={WORLD.h} fill="#121c27" />
-      <path d={landPath} fill="#21252d" />
-      <g fill="none" stroke="#dde2ea" strokeOpacity="0.2" strokeLinecap="round">
+      <rect x={WORLD.x} y={WORLD.y} width={WORLD.w} height={WORLD.h} fill="#0a1522" />
+      <path d={landPath} fill="#192c42" />
+      <g fill="none" stroke="#eef2f5" strokeOpacity="0.2" strokeLinecap="round">
         {roads
           .filter((r) => r.major)
           .map((r) => (
             <path key={r.d} d={r.d} strokeWidth="10" />
           ))}
       </g>
-      <path d={coastPath} fill="none" stroke="#6cb6ff" strokeOpacity="0.8" strokeWidth="8" />
-      <path d={lakePath} fill="#1f3d55" />
-      <path d={sebkhaArianaPath} fill="#1d2a37" />
-      <path d={sebkhaSijoumiPath} fill="#1d2a37" />
+      <path d={coastPath} fill="none" stroke="#ff5c93" strokeOpacity="0.8" strokeWidth="8" />
+      <path d={lakePath} fill="#1d4a66" />
+      <path d={sebkhaArianaPath} fill="#1a3046" />
+      <path d={sebkhaSijoumiPath} fill="#1a3046" />
       {dots.map((d) => (
-        <circle key={d.id} cx={d.x} cy={d.y} r={d.tone === "mission" ? dotRadius : dotRadius * 0.75} fill={dotFill[d.tone]} stroke="#14171c" strokeWidth={dotRadius * 0.3} />
+        <circle key={d.id} cx={d.x} cy={d.y} r={d.tone === "mission" ? dotRadius : dotRadius * 0.75} fill={dotFill[d.tone]} stroke="#0e1b2b" strokeWidth={dotRadius * 0.3} />
       ))}
       {here && (
         <g>
-          <circle cx={here.x} cy={here.y} r={here.r * 2.2} fill="#f47b72" fillOpacity="0.22" />
-          <circle cx={here.x} cy={here.y} r={here.r} fill="#f47b72" stroke="#dde2ea" strokeWidth={here.r * 0.35} />
+          <circle cx={here.x} cy={here.y} r={here.r * 2.2} fill="#ff6b6b" fillOpacity="0.22" />
+          <circle cx={here.x} cy={here.y} r={here.r} fill="#ff6b6b" stroke="#eef2f5" strokeWidth={here.r * 0.35} />
         </g>
       )}
     </svg>

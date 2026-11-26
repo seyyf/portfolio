@@ -31,7 +31,7 @@ export default function StatsPage() {
 
         <section aria-labelledby="career-stats" className="hud-panel cut-br relative mt-8 rounded-t-2xl px-5 pt-5 pb-8 sm:px-7">
           <Door id="stats" className="absolute top-2 right-2" />
-          <h2 id="career-stats" className="font-mono text-xs text-blue lowercase">
+          <h2 id="career-stats" className="font-mono text-xs text-pink lowercase">
             Career stats
           </h2>
           <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-5 md:grid-cols-4">
@@ -49,7 +49,7 @@ export default function StatsPage() {
             <span>Skills</span>
           </h2>
           <p className="mt-3 mb-6 max-w-[68ch] text-[0.9375rem] leading-relaxed text-muted">
-            <strong className="font-semibold text-blue">Daily use</strong>: in my current job · <strong className="font-semibold text-orange">Production</strong>: shipped in an
+            <strong className="font-semibold text-pink">Daily use</strong>: in my current job · <strong className="font-semibold text-orange">Production</strong>: shipped in an
             earlier job · <strong className="font-semibold text-ink">Experienced</strong>: in my toolbox. Languages use CEFR levels.
           </p>
           <StatsMenu tabs={statTabs} />

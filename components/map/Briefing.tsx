@@ -32,7 +32,7 @@ export function Briefing({ m, onClose }: { m: Exclude<MarkerItem, { kind: "locke
           onClose()
         }}
         aria-label="Close briefing (Esc)"
-        className="absolute -top-1 -right-1 grid size-11 cursor-pointer place-items-center rounded-lg text-ink/80 transition-colors hover:bg-ink/10 hover:text-pink"
+        className="absolute -top-1 -right-1 grid size-11 cursor-pointer place-items-center rounded-lg text-ink/80 transition-colors hover:bg-ink/10 hover:text-gold"
       >
         <X aria-hidden="true" className="size-5" />
       </button>
@@ -40,7 +40,7 @@ export function Briefing({ m, onClose }: { m: Exclude<MarkerItem, { kind: "locke
       {m.kind === "mission" && (
         <>
           <p className={`${eyebrow} flex flex-wrap items-center gap-2 pr-12 text-muted`}>
-            <span className="text-pink font-bold">Mission {m.data.number}</span>
+            <span className="text-sunset font-bold">Mission {m.data.number}</span>
             <StatusBadge status={m.data.status} />
           </p>
           <h2 id={titleId} ref={title} tabIndex={-1} className="mt-2 font-display text-[2.5rem] text-ink outline-none">
@@ -57,7 +57,7 @@ export function Briefing({ m, onClose }: { m: Exclude<MarkerItem, { kind: "locke
               {m.districtName}
             </span>
           </p>
-          <h3 className={`${eyebrow} mt-5 text-pink`}>Objective</h3>
+          <h3 className={`${eyebrow} mt-5 text-gold`}>Objective</h3>
           <p className="mt-1.5 text-base leading-relaxed text-ink/90">{m.data.objective}</p>
           <ChipList items={m.data.gear.slice(0, 6)} label="Gear" className="mt-4" />
           <ButtonLink href={`/missions/${m.data.slug}`} onClick={() => play("click")} size="lg" className="mt-6 w-full">
@@ -69,11 +69,11 @@ export function Briefing({ m, onClose }: { m: Exclude<MarkerItem, { kind: "locke
 
       {m.kind === "side" && (
         <>
-          <p className={`${eyebrow} pr-12 text-pink`}>Side mission · {m.data.client}</p>
+          <p className={`${eyebrow} pr-12 text-gold`}>Side mission · {m.data.client}</p>
           <h2 id={titleId} ref={title} tabIndex={-1} className="mt-2 font-display text-[2.5rem] text-ink outline-none">
             <span>{m.data.name}</span>
           </h2>
-          <h3 className={`${eyebrow} mt-5 text-pink`}>Objective</h3>
+          <h3 className={`${eyebrow} mt-5 text-gold`}>Objective</h3>
           <p className="mt-1.5 text-base leading-relaxed text-ink/90">{m.data.objective}</p>
           <p className="mt-2 text-base leading-relaxed text-muted">{m.data.description}</p>
           <ChipList items={m.data.tags} label="Tags" className="mt-4" />
@@ -86,7 +86,7 @@ export function Briefing({ m, onClose }: { m: Exclude<MarkerItem, { kind: "locke
 
       {m.kind === "tutorial" && (
         <>
-          <p className={`${eyebrow} flex items-center gap-1.5 pr-12 text-[#8adccb]`}>
+          <p className={`${eyebrow} flex items-center gap-1.5 pr-12 text-[#7fd3dc]`}>
             <GraduationCap aria-hidden="true" className="size-4" /> Tutorial {m.data.number} · Education
           </p>
           <h2 id={titleId} ref={title} tabIndex={-1} className="mt-3 text-2xl leading-snug font-semibold text-ink outline-none">

@@ -68,14 +68,14 @@ export function IncomingCall() {
   return (
     <div aria-live="polite" className="fixed right-4 bottom-[5.25rem] z-[55] w-[min(20rem,calc(100vw-2rem))] lg:right-6 lg:bottom-[6.5rem]">
       {call && (
-        <section aria-label={`Incoming call from ${profile.name}`} className="game-call hud-panel rounded-2xl !bg-bg/95 p-3 shadow-[0_24px_60px_-20px_rgb(0_0_0/0.6)]">
+        <section aria-label={`Incoming call from ${profile.name}`} className="game-call hud-panel rounded-2xl !bg-bg/95 p-3 shadow-[0_24px_60px_-20px_rgb(255_79_163/0.6)]">
           <div className="flex items-center gap-3">
             <span className="relative shrink-0">
-              <span aria-hidden="true" className="call-pulse absolute inset-0 rounded-full bg-red/50" />
+              <span aria-hidden="true" className="call-pulse absolute inset-0 rounded-full bg-pink/50" />
               <Image src={profile.portrait.src} alt="" width={48} height={48} className="relative size-12 rounded-full object-cover ring-2 ring-orange" />
             </span>
             <span className="min-w-0">
-              <span className="block font-mono text-[0.6875rem] text-pink lowercase">Incoming call</span>
+              <span className="block font-mono text-[0.6875rem] text-gold lowercase">Incoming call</span>
               <span className="block truncate font-semibold text-ink">{profile.name}</span>
               <span className="block truncate text-sm text-ink/75">{call.label}</span>
             </span>
@@ -88,7 +88,7 @@ export function IncomingCall() {
                 play("tap")
                 toast("Call declined", "Replay it any time from the phone")
               }}
-              className="inline-flex h-11 items-center justify-center gap-1.5 rounded-xl border border-ink/20 text-sm font-semibold text-ink hover:border-red hover:text-[#ff9a9a]"
+              className="inline-flex h-11 items-center justify-center gap-1.5 rounded-xl border border-ink/20 text-sm font-semibold text-ink hover:border-pink hover:text-[#ff8cc4]"
             >
               <PhoneOff aria-hidden="true" className="size-4" />
               Decline
@@ -99,7 +99,7 @@ export function IncomingCall() {
                 startCall(call.id)
                 openPhone("call")
               }}
-              className="bg-pink inline-flex h-11 items-center justify-center gap-1.5 rounded-xl text-sm font-semibold text-bg hover:shadow-[var(--glow)]"
+              className="bg-sunset inline-flex h-11 items-center justify-center gap-1.5 rounded-xl text-sm font-semibold text-bg hover:shadow-[var(--glow)]"
             >
               <Phone aria-hidden="true" className="size-4" />
               Answer

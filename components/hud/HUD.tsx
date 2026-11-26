@@ -39,7 +39,7 @@ export function HUD() {
         aria-label="Open the menu (Esc)"
         aria-keyshortcuts="Escape"
         className={cn(
-          "hud-panel fixed z-50 inline-flex items-center gap-2 rounded-full font-mono text-xs text-ink lowercase transition-colors hover:border-pink hover:text-pink",
+          "hud-panel fixed z-50 inline-flex items-center gap-2 rounded-full font-mono text-xs text-ink lowercase transition-colors hover:border-gold hover:text-gold",
           "bottom-4 left-1/2 h-12 -translate-x-1/2 px-5",
           "lg:top-4 lg:bottom-auto lg:left-[10.25rem] lg:h-11 lg:translate-x-0 lg:rounded-lg lg:px-3.5"
         )}
@@ -69,7 +69,7 @@ export function HUD() {
         className="hud-panel group fixed right-4 bottom-4 z-50 flex size-14 items-center justify-center rounded-2xl text-ink transition-[border-color,box-shadow] hover:border-orange hover:shadow-[var(--glow)] lg:right-6 lg:bottom-6 lg:size-16"
       >
         <Smartphone aria-hidden="true" className="size-6 transition-transform group-hover:-rotate-6 lg:size-7" />
-        <span aria-hidden="true" className="absolute -top-1 -right-1 size-3 rounded-full bg-red ring-2 ring-bg" />
+        <span aria-hidden="true" className="absolute -top-1 -right-1 size-3 rounded-full bg-pink ring-2 ring-bg" />
       </button>
 
       <Phone />

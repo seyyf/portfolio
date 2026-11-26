@@ -17,5 +17,5 @@ export const mapCss = `
 .ow-ping{animation:ow-ping 2.6s cubic-bezier(0,0,.2,1) infinite}
 @keyframes ow-ping{0%{transform:scale(1);opacity:.6}75%,100%{transform:scale(2.1);opacity:0}}
 [data-cell]{transition:fill .4s}
-${highlight}{fill:#24405e}
+${highlight}{fill:#3a2560}
 `

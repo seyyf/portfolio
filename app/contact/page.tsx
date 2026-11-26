@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import { Door } from "@/components/game/Door"
 import { Contacts } from "@/components/phone/Contacts"
 import { Messages } from "@/components/phone/Messages"
-import { DisplayTitle } from "@/components/ui/DisplayTitle"
+import { DisplayTitle } from "@/components/ui/Gradient"
 import { profile } from "@/data/profile"
 import { pageMeta } from "@/lib/site"
 
@@ -39,9 +39,9 @@ export default function ContactPage() {
             <h2 id="contact-message" className="font-display text-3xl text-ink lg:text-4xl">
               <span>Messages</span>
             </h2>
-            <div className="mt-5 overflow-hidden rounded-3xl border border-ink/12 bg-bg shadow-[0_30px_80px_-40px_rgb(0_0_0/0.5)]">
+            <div className="mt-5 overflow-hidden rounded-3xl border border-ink/12 bg-bg shadow-[0_30px_80px_-40px_rgb(255_79_163/0.5)]">
               <div className="flex items-center gap-3 border-b border-ink/10 bg-surface px-4 py-3">
-                <span aria-hidden="true" className="bg-pink flex size-9 items-center justify-center rounded-full font-display text-sm text-bg">
+                <span aria-hidden="true" className="bg-sunset flex size-9 items-center justify-center rounded-full font-display text-sm text-bg">
                   S
                 </span>
                 <span>

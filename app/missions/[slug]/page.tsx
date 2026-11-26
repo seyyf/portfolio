@@ -107,7 +107,7 @@ function MainMission({ mission: m }: { mission: Mission }) {
 
         <Section id={id("reward")} index={next()} title={inProgress ? "Checkpoint" : "Reward"}>
           {inProgress && <p className="mb-5 max-w-[60ch] text-muted">Mission {m.number} is still in progress: it&apos;s Seyf&apos;s current role.</p>}
-          <p className="font-mono text-sm text-pink lowercase">Skills unlocked</p>
+          <p className="font-mono text-sm text-gold lowercase">Skills unlocked</p>
           <ChipList items={m.skillsUnlocked} label="Skills unlocked" className="mt-3" />
           <DoorSpot slug={m.slug} at="reward" />
           <div className="mt-8">
@@ -155,7 +155,7 @@ function SideMissionPage({ mission: s }: { mission: SideMission }) {
         )}
 
         <Section id={id("reward")} index={next()} title="Reward">
-          <p className="font-mono text-sm text-pink lowercase">Unlocked</p>
+          <p className="font-mono text-sm text-gold lowercase">Unlocked</p>
           <ChipList items={s.tags} label="Unlocked" className="mt-3" />
           <div className="mt-8">
             <MissionPassed key={s.slug} variant="side" kicker={`Side mission · ${s.name}`} skills={s.tags} skillsLabel="Unlocked:" triggerLabel="Complete side mission" action={action} />

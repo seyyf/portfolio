@@ -24,7 +24,7 @@ const ITEMS: Item[] = [
         <rect x="74" y="96" width="18" height="14" rx="2" fill="#3f6f9f" />
         <rect x="108" y="96" width="18" height="14" rx="2" fill="#3f6f9f" />
         {[78, 104, 130, 156].map((y) => (
-          <circle key={y} cx="106" cy={y} r="2.6" fill="#f2b544" />
+          <circle key={y} cx="106" cy={y} r="2.6" fill="#ffc94a" />
         ))}
       </g>
     ),
@@ -42,9 +42,9 @@ const ITEMS: Item[] = [
           </clipPath>
         </defs>
         <g clipPath="url(#swipe-tee)">
-          <rect x="30" y="30" width="140" height="145" fill="#eef2f5" />
+          <rect x="30" y="30" width="140" height="145" fill="#fff1e6" />
           {[50, 72, 94, 116, 138, 160].map((y) => (
-            <rect key={y} x="30" y={y} width="140" height="10" fill="#ff6b6b" />
+            <rect key={y} x="30" y={y} width="140" height="10" fill="#ff4fa3" />
           ))}
         </g>
       </g>
@@ -54,13 +54,13 @@ const ITEMS: Item[] = [
     id: "sweater",
     name: "Knit sweater",
     meta: "Size L · demo item",
-    bg: "#123a3a",
+    bg: "#0e3b43",
     art: (
       <g>
-        <path d="M62 44 L86 34 Q100 44 114 34 L138 44 L164 140 L146 146 L134 96 L134 166 L66 166 L66 96 L54 146 L36 140 Z" fill="#ff9a5c" />
-        <path d="M66 156 H134 V168 H66 Z M36 136 L54 142 L52 150 L34 144 Z M164 136 L146 142 L148 150 L166 144 Z" fill="#c47a45" />
-        <path d="M70 100 l10 10 l10 -10 l10 10 l10 -10 l10 10 l10 -10" stroke="#f2b544" strokeWidth="4" fill="none" strokeLinejoin="round" />
-        <path d="M70 124 l10 10 l10 -10 l10 10 l10 -10 l10 10 l10 -10" stroke="#f2b544" strokeWidth="4" fill="none" strokeLinejoin="round" />
+        <path d="M62 44 L86 34 Q100 44 114 34 L138 44 L164 140 L146 146 L134 96 L134 166 L66 166 L66 96 L54 146 L36 140 Z" fill="#ff8a3d" />
+        <path d="M66 156 H134 V168 H66 Z M36 136 L54 142 L52 150 L34 144 Z M164 136 L146 142 L148 150 L166 144 Z" fill="#c9622a" />
+        <path d="M70 100 l10 10 l10 -10 l10 10 l10 -10 l10 10 l10 -10" stroke="#ffc94a" strokeWidth="4" fill="none" strokeLinejoin="round" />
+        <path d="M70 124 l10 10 l10 -10 l10 10 l10 -10 l10 10 l10 -10" stroke="#ffc94a" strokeWidth="4" fill="none" strokeLinejoin="round" />
       </g>
     ),
   },
@@ -71,9 +71,9 @@ const ITEMS: Item[] = [
     bg: "#4a2a14",
     art: (
       <g>
-        <ellipse cx="100" cy="132" rx="70" ry="18" fill="#f2b544" />
-        <path d="M58 130 Q60 70 100 68 Q140 70 142 130 Z" fill="#f7cd7a" />
-        <rect x="59" y="108" width="82" height="10" fill="#ff9a5c" />
+        <ellipse cx="100" cy="132" rx="70" ry="18" fill="#ffc94a" />
+        <path d="M58 130 Q60 70 100 68 Q140 70 142 130 Z" fill="#ffd77a" />
+        <rect x="59" y="108" width="82" height="10" fill="#ff8a3d" />
       </g>
     ),
   },
@@ -81,10 +81,10 @@ const ITEMS: Item[] = [
     id: "trousers",
     name: "Wide-leg trousers",
     meta: "Size 38 · demo item",
-    bg: "#1c3048",
+    bg: "#281a3d",
     art: (
       <g>
-        <path d="M68 36 H132 L146 172 H108 L100 84 L92 172 H54 Z" fill="#93a4b8" />
+        <path d="M68 36 H132 L146 172 H108 L100 84 L92 172 H54 Z" fill="#b4a3c4" />
         <rect x="68" y="36" width="64" height="12" fill="#6f7891" />
         <path d="M100 48 V80" stroke="#6f7891" strokeWidth="3" />
       </g>
@@ -130,10 +130,10 @@ function Card({ item, depth, onDecide }: { item: Item; depth: number; onDecide: 
         <p className="font-semibold text-ink">{item.name}</p>
         <p className="font-mono text-xs text-muted">{item.meta}</p>
       </div>
-      <m.span style={{ opacity: keep }} className="pointer-events-none absolute top-4 left-4 -rotate-12 rounded-md border-2 border-pink px-2 font-display text-2xl text-pink">
+      <m.span style={{ opacity: keep }} className="pointer-events-none absolute top-4 left-4 -rotate-12 rounded-md border-2 border-gold px-2 font-display text-2xl text-gold">
         Keep
       </m.span>
-      <m.span style={{ opacity: pass }} className="pointer-events-none absolute top-4 right-4 rotate-12 rounded-md border-2 border-red px-2 font-display text-2xl text-red">
+      <m.span style={{ opacity: pass }} className="pointer-events-none absolute top-4 right-4 rotate-12 rounded-md border-2 border-pink px-2 font-display text-2xl text-pink">
         Pass
       </m.span>
     </m.div>
@@ -218,7 +218,7 @@ function SwipeDemoInner() {
 
   return (
     <div className="max-w-md">
-      <p className="mb-3 inline-flex items-center gap-2 rounded-md border border-dashed border-pink/50 px-2 py-1 font-mono text-xs text-pink lowercase">Demo · placeholder items</p>
+      <p className="mb-3 inline-flex items-center gap-2 rounded-md border border-dashed border-gold/50 px-2 py-1 font-mono text-xs text-gold lowercase">Demo · placeholder items</p>
       <div
         ref={root}
         role="group"
@@ -243,7 +243,7 @@ function SwipeDemoInner() {
                 ref={resetBtn}
                 type="button"
                 onClick={reset}
-                className="inline-flex h-11 items-center gap-2 rounded-xl border border-ink/25 px-4 font-semibold text-ink transition-colors hover:border-orange hover:text-pink"
+                className="inline-flex h-11 items-center gap-2 rounded-xl border border-ink/25 px-4 font-semibold text-ink transition-colors hover:border-orange hover:text-gold"
               >
                 <RotateCcw aria-hidden="true" className="size-4" />
                 Reset the stack
@@ -258,9 +258,9 @@ function SwipeDemoInner() {
             onClick={() => decide(-1)}
             disabled={empty}
             aria-keyshortcuts="ArrowLeft"
-            className="inline-flex h-12 items-center gap-2 rounded-full border-2 border-red/70 px-5 font-semibold text-ink transition-colors hover:bg-red/10 disabled:opacity-40"
+            className="inline-flex h-12 items-center gap-2 rounded-full border-2 border-pink/70 px-5 font-semibold text-ink transition-colors hover:bg-pink/10 disabled:opacity-40"
           >
-            <X aria-hidden="true" className="size-5 text-red" />
+            <X aria-hidden="true" className="size-5 text-pink" />
             Pass
           </button>
           <button
@@ -268,9 +268,9 @@ function SwipeDemoInner() {
             onClick={() => decide(1)}
             disabled={empty}
             aria-keyshortcuts="ArrowRight"
-            className="inline-flex h-12 items-center gap-2 rounded-full border-2 border-pink/70 px-5 font-semibold text-ink transition-colors hover:bg-pink/10 disabled:opacity-40"
+            className="inline-flex h-12 items-center gap-2 rounded-full border-2 border-gold/70 px-5 font-semibold text-ink transition-colors hover:bg-gold/10 disabled:opacity-40"
           >
-            <Heart aria-hidden="true" className="size-5 text-pink" />
+            <Heart aria-hidden="true" className="size-5 text-gold" />
             Keep
           </button>
         </div>

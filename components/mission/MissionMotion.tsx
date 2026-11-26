@@ -13,7 +13,7 @@ type Ctx = { revert: () => void }
  *
  * - Header (scrubbed with the scroll): the striped sun sinks behind the horizon, the palms move at
  *   different depths and sway, the outlined mission number drifts, the title block lifts and dims.
- * - Objective: the pink bar draws, then the sentence rises word by word.
+ * - Objective: the sunset bar draws, then the sentence rises word by word.
  * - Sections: the index appears, the heading wipes in, then the content: briefing bullets slide in
  *   with their markers snapping open, chips pop in one by one, the before/after frame opens on a
  *   diagonal, other blocks rise.

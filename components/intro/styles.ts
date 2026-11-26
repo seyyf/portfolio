@@ -19,7 +19,7 @@ export const introCss = `
 #ow-intro{animation:ow-out .35s ${EASE_IN} 2.15s forwards}
 @keyframes ow-out{to{opacity:0;visibility:hidden;transform:scale(1.06)}}
 @keyframes ow-out-skip{to{opacity:0;visibility:hidden;transform:scale(1.04)}}
-.ow-glow{background:radial-gradient(120% 55% at 50% 112%,rgb(255 92 147/.32),transparent 62%),radial-gradient(70% 45% at 50% 105%,rgb(255 92 147/.22),transparent 70%),radial-gradient(60% 40% at 50% -10%,rgb(59 52 102/.35),transparent 70%)}
+.ow-glow{background:radial-gradient(120% 55% at 50% 112%,rgb(255 79 163/.32),transparent 62%),radial-gradient(70% 45% at 50% 105%,rgb(255 138 61/.22),transparent 70%),radial-gradient(60% 40% at 50% -10%,rgb(91 42 158/.35),transparent 70%)}
 
 .ow-panel{--skx:0deg;--sky:-4deg;transform:skew(var(--skx),var(--sky));animation:ow-panel-in .65s ${EASE_OUT} both}
 .ow-panel:nth-child(1){--fx:-70vw;--fy:-12vh;animation-delay:.05s}
@@ -35,7 +35,7 @@ export const introCss = `
 .ow-panel-art{transform:skew(calc(var(--skx) * -1),calc(var(--sky) * -1)) scale(1.04);animation:ow-drift 2.6s linear both}
 @keyframes ow-drift{from{transform:skew(calc(var(--skx) * -1),calc(var(--sky) * -1)) scale(1.16)}to{transform:skew(calc(var(--skx) * -1),calc(var(--sky) * -1)) scale(1.04)}}
 
-.ow-dim{background:linear-gradient(180deg,rgb(14 27 43/.35),rgb(14 27 43/.78));opacity:0;animation:ow-fade .45s 1.15s both}
+.ow-dim{background:linear-gradient(180deg,rgb(20 12 34/.35),rgb(20 12 34/.78));opacity:0;animation:ow-fade .45s 1.15s both}
 @keyframes ow-fade{to{opacity:1}}
 .ow-band{transform:skewY(-4deg) scaleX(0);transform-origin:left center;animation:ow-band .5s cubic-bezier(.76,0,.24,1) 1.15s both}
 @keyframes ow-band{to{transform:skewY(-4deg) scaleX(1)}}

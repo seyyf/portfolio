@@ -21,21 +21,21 @@ export function LoadingScreen() {
       <div aria-hidden="true" className="absolute inset-x-4 top-[4.25rem] bottom-[12rem] flex flex-col gap-3 lg:inset-x-12 sm:bottom-[9.5rem] lg:top-[5.5rem] lg:bottom-[10rem] lg:flex-row lg:gap-5">
         {/* sizes: on phones the panels are full width but decorative, so ~2x density is plenty ("70vw");
             on desktop the side panels are ~32vw and the middle one ~45vw. */}
-        <LoadingPanel src={profile.portrait.src} first sizes="(min-width: 1024px) 32vw, 70vw" position="50% 42%" tint="linear-gradient(#0e1b2b,#7a2a55)" />
-        <LoadingPanel src="/images/intro/sunset.webp" sizes="(min-width: 1024px) 45vw, 70vw" position="50% 62%" tint="linear-gradient(#0e1b2b,#7a2a55 70%,#0e1b2b)" className="lg:flex-[1.5]" />
-        <LoadingPanel src="/images/intro/sidi-bou-said.webp" sizes="(min-width: 1024px) 32vw, 70vw" position="50% 58%" tint="linear-gradient(#0e1b2b,#ff5c93 55%,#eef2f5 56%)" />
+        <LoadingPanel src={profile.portrait.src} first sizes="(min-width: 1024px) 32vw, 70vw" position="50% 42%" tint="linear-gradient(#2a1450,#c2337f)" />
+        <LoadingPanel src="/images/intro/sunset.webp" sizes="(min-width: 1024px) 45vw, 70vw" position="50% 62%" tint="linear-gradient(#5b2a9e,#ff8a3d 70%,#2c1a58)" className="lg:flex-[1.5]" />
+        <LoadingPanel src="/images/intro/sidi-bou-said.webp" sizes="(min-width: 1024px) 32vw, 70vw" position="50% 58%" tint="linear-gradient(#25124a,#e0468f 55%,#f5ece8 56%)" />
       </div>
       <div aria-hidden="true" className="ow-dim pointer-events-none absolute inset-0" />
 
       {/* Title card */}
       <div aria-hidden="true" className="ow-card pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2">
-        <div className="ow-band absolute -inset-x-[5%] -inset-y-6 bg-bg/85 shadow-[0_0_0_1px_rgb(0_0_0/0.25)] lg:-inset-y-9" />
+        <div className="ow-band absolute -inset-x-[5%] -inset-y-6 bg-bg/85 shadow-[0_0_0_1px_rgb(255_138_61/0.25)] lg:-inset-y-9" />
         <div className="relative px-4 text-center">
           <p className="ow-title-text font-display text-[clamp(3.5rem,16vw,10rem)]">
-            <span className="text-pink">{profile.name}</span>
+            <span className="text-sunset">{profile.name}</span>
           </p>
           <p className="ow-sub mt-3 font-mono text-xs text-ink lowercase sm:text-sm lg:mt-4">
-            {profile.title} <span className="text-pink">·</span> {profile.edition}
+            {profile.title} <span className="text-gold">·</span> {profile.edition}
           </p>
         </div>
       </div>
@@ -49,14 +49,14 @@ export function LoadingScreen() {
           <button
             type="button"
             data-intro-skip
-            className="h-11 shrink-0 self-end rounded-lg border border-ink/25 bg-bg/60 px-4 font-mono text-xs text-ink lowercase backdrop-blur-sm transition-colors hover:border-pink hover:text-pink"
+            className="h-11 shrink-0 self-end rounded-lg border border-ink/25 bg-bg/60 px-4 font-mono text-xs text-ink lowercase backdrop-blur-sm transition-colors hover:border-gold hover:text-gold"
           >
             <span className="ow-skip-key">Press any key to skip</span>
             <span className="ow-skip-touch">Tap to skip</span>
           </button>
         </div>
         <div aria-hidden="true" className="mt-4 h-1.5 overflow-hidden rounded-full bg-ink/10">
-          <div className="ow-bar bg-pink h-full rounded-full" />
+          <div className="ow-bar bg-sunset-h h-full rounded-full" />
         </div>
         <p aria-hidden="true" className="mt-2 flex justify-between font-mono text-[0.6875rem] text-muted lowercase">
           <span>Loading Greater Tunis</span>

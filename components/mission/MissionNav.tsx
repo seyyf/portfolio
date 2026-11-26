@@ -58,7 +58,7 @@ export function MissionNav({ page }: { page: Mission | SideMission }) {
       </div>
       <Link
         href="/#missions"
-        className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-lg font-mono text-sm text-ink/85 lowercase transition-colors hover:text-pink"
+        className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-lg font-mono text-sm text-ink/85 lowercase transition-colors hover:text-gold"
       >
         <MapIcon aria-hidden="true" className="size-4" />
         Back to the map

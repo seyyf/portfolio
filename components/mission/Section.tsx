@@ -26,8 +26,8 @@ export function Section({ id, index, title, children, className }: { id: string;
 export function Objective({ id, children }: { id: string; children: ReactNode }) {
   return (
     <section aria-labelledby={id} data-mm-objective className="relative py-8 pl-5 md:py-12 md:pl-7">
-      <span aria-hidden="true" data-mm-bar className="absolute top-8 bottom-8 left-0 w-1 -skew-y-[10deg] bg-pink md:top-12 md:bottom-12 md:w-1.5" />
-      <h2 id={id} className="font-mono text-xs text-pink lowercase">
+      <span aria-hidden="true" data-mm-bar className="absolute top-8 bottom-8 left-0 w-1 -skew-y-[10deg] bg-sunset md:top-12 md:bottom-12 md:w-1.5" />
+      <h2 id={id} className="font-mono text-xs text-gold lowercase">
         Objective
       </h2>
       <p data-mm-objtext className="mt-2 max-w-[40ch] text-[1.375rem] leading-snug font-semibold text-ink md:text-[1.875rem]">{children}</p>
@@ -35,13 +35,13 @@ export function Objective({ id, children }: { id: string; children: ReactNode })
   )
 }
 
-/** Briefing bullets with slanted pink markers. */
+/** Briefing bullets with slanted sunset markers. */
 export function Briefing({ items }: { items: string[] }) {
   return (
     <ul className="grid max-w-[68ch] gap-4">
       {items.map((b) => (
         <li key={b} data-mm-bullet className="relative pl-8">
-          <span aria-hidden="true" data-mm-marker className="absolute top-[0.6em] left-0 h-2 w-4 -skew-x-[24deg] bg-pink" />
+          <span aria-hidden="true" data-mm-marker className="absolute top-[0.6em] left-0 h-2 w-4 -skew-x-[24deg] bg-sunset" />
           {b}
         </li>
       ))}

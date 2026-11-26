@@ -44,7 +44,7 @@ function MapButton({ label, onClick, disabled, children }: { label: string; onCl
         play("click")
         onClick()
       }}
-      className="grid size-11 cursor-pointer place-items-center rounded-xl border border-ink/15 bg-bg/80 text-ink backdrop-blur-md transition-colors hover:border-orange hover:text-pink disabled:opacity-40"
+      className="grid size-11 cursor-pointer place-items-center rounded-xl border border-ink/15 bg-bg/80 text-ink backdrop-blur-md transition-colors hover:border-orange hover:text-gold disabled:opacity-40"
     >
       {children}
     </button>
@@ -283,7 +283,7 @@ export function WorldMap({ children }: { children: ReactNode }) {
           play("click")
           setFullMap(false)
         }}
-        className="absolute top-[4.5rem] left-4 z-10 inline-flex h-11 cursor-pointer items-center gap-2 rounded-xl border border-ink/15 bg-bg/85 px-4 text-sm font-semibold text-ink backdrop-blur-md transition-colors hover:border-orange hover:text-pink lg:hidden"
+        className="absolute top-[4.5rem] left-4 z-10 inline-flex h-11 cursor-pointer items-center gap-2 rounded-xl border border-ink/15 bg-bg/85 px-4 text-sm font-semibold text-ink backdrop-blur-md transition-colors hover:border-orange hover:text-gold lg:hidden"
       >
         <ArrowLeft aria-hidden="true" className="size-4" /> Mission list
       </button>
@@ -305,7 +305,7 @@ export function WorldMap({ children }: { children: ReactNode }) {
       <div className="pointer-events-none absolute top-[7.75rem] right-4 left-4 z-10 lg:top-auto lg:right-auto lg:bottom-6 lg:left-40">
         <ul className="inline-flex flex-wrap items-center gap-x-4 gap-y-1.5 rounded-lg border border-ink/12 bg-bg/80 px-3 py-2 font-mono text-[0.6875rem] text-ink/90 lowercase backdrop-blur-md">
           <li className="inline-flex items-center gap-1.5">
-            <span aria-hidden="true" className="bg-pink size-3 rounded-full p-[2px]">
+            <span aria-hidden="true" className="bg-sunset size-3 rounded-full p-[2px]">
               <span className="block size-full rounded-full bg-bg" />
             </span>
             Mission
@@ -315,7 +315,7 @@ export function WorldMap({ children }: { children: ReactNode }) {
             Side mission
           </li>
           <li className="inline-flex items-center gap-1.5">
-            <GraduationCap aria-hidden="true" className="size-3.5 text-[#8adccb]" />
+            <GraduationCap aria-hidden="true" className="size-3.5 text-[#7fd3dc]" />
             Education
           </li>
           <li className="inline-flex items-center gap-1.5">
@@ -341,7 +341,7 @@ export function WorldMap({ children }: { children: ReactNode }) {
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="fixed inset-x-0 bottom-0 z-[60] max-h-[72svh] overflow-y-auto overscroll-contain rounded-t-2xl border border-ink/12 bg-bg/95 p-5 pb-8 shadow-[0_-20px_60px_-20px_rgb(0_0_0/0.9)] backdrop-blur-md lg:absolute lg:inset-x-auto lg:top-[6.5rem] lg:right-6 lg:bottom-auto lg:z-20 lg:max-h-[calc(100%-14rem)] lg:w-[23rem] lg:rounded-2xl lg:p-6"
           >
-            <div aria-hidden="true" className="bg-pink absolute inset-x-0 top-0 h-1" />
+            <div aria-hidden="true" className="bg-sunset-h absolute inset-x-0 top-0 h-1" />
             <Briefing m={briefing} onClose={closeBriefing} />
           </m.div>
         )}

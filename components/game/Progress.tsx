@@ -97,7 +97,7 @@ export function Progress() {
                       </>
                     ) : (
                       <>
-                        <span className="font-mono text-muted">{"?".repeat(c.code.length)}</span>
+                        <span className="font-mono text-muted">{Array(c.code.length).fill("_").join(" ")}</span>
                         <span className="block text-sm text-muted">Hint: {c.hint}</span>
                       </>
                     )}

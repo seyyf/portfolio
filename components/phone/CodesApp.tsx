@@ -71,7 +71,7 @@ export function CodesApp() {
           return (
             <li key={c.id} className="rounded-xl border border-ink/10 bg-surface/70 px-3 py-2.5">
               <div className="flex items-center justify-between gap-2">
-                <span className={cn("font-mono font-semibold", found ? "text-gold" : "text-muted")}>{found ? c.code : "?".repeat(c.code.length)}</span>
+                <span className={cn("font-mono font-semibold", found ? "text-gold" : "text-muted")}>{found ? c.code : Array(c.code.length).fill("_").join(" ")}</span>
                 {found && c.toggle && (
                   <span className={cn("rounded px-1.5 font-mono text-[0.625rem] lowercase", on ? "bg-gold/15 text-gold" : "text-muted")}>{on ? "On" : "Off"}</span>
                 )}
